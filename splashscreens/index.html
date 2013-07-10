@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+<style>
+ 	* {
+ 		margin: 0;
+        padding: 0;
+ 	}
+    html{
+        position: relative;
+        min-height:100%;
+        color: white;
+    }
+    body{
+        height:100%;
+        background-color: black;
+    }
+    #splash {
+        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position:absolute;
+        top: 0px;
+        bottom:0px;
+        left:0px;
+        right:0px;
+        transition: opacity 3s ease-in-out;
+        opacity: 0;
+        background-color: blue;
+        z-index: 100;
+    }
+    #splash.show {
+        opacity: 1;
+    }
+    #main {
+        color: red;
+        display: block;
+        position:absolute;
+        top: 0px;
+        bottom:0px;
+        left:0px;
+        right:0px;
+        background-color: orange;
+    }
+    #main.hide {
+        display: none;
+    }
+</style>
+
+
+<section id="splash">
+    <div>
+    	<h1>Splash</h1>
+   	 	<p>...loading...</p>
+    </div>
+</section>
+
+<main id="main" class="hide">
+    <h1>other stuff</h1>
+</main>
+
+<script>
+(function () {
+    var splash = document.querySelector("#splash");
+    var main = document.querySelector("main");
+    window.addEventListener("DOMContentLoaded", showSplash);
+
+    function showSplash() {
+        splash.classList.add("show"); //show it
+        splash.addEventListener("transitionend", fadeOut);
+    }
+
+    function fadeOut() {
+        splash.removeEventListener("transitionend", fadeOut);
+        splash.classList.remove("show"); //hide it out
+        splash.addEventListener("transitionend", showContent);
+        main.classList.remove("hide");
+    }
+
+    function showContent() {
+        splash.parentNode.removeChild(splash);
+    }
+}());
+</script>
