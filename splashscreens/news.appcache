@@ -1,0 +1,10 @@
+CACHE MANIFEST
+#v1
+
+CACHE:
+index.html
+logo.png
+http://code.jquery.com/jquery-2.0.3.min.js
+
+NETWORK:
+*
