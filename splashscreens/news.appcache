@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#v1
+#v2
 
 CACHE:
 index.html
@@ -8,3 +8,4 @@ http://code.jquery.com/jquery-2.0.3.min.js
 
 NETWORK:
 *
+http://*

@@ -1,86 +1,3 @@
-<!doctype html>
-<html manifest="news.appcache">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-	margin: 0;
-    padding: 0;
-}
-html{
-    position: relative;
-    min-height:100%;
-    max-width: 100%;
-    color: white;
-}
-body{
-    height:100%;
-    background-color: black;
-}
-#splash {
-    display: block;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position:absolute;
-    top: 0px;
-    bottom:0px;
-    left:0px;
-    right:0px;
-    transition: opacity 2s ease-in-out;
-    opacity: 0;
-    background-color: blue;
-    z-index: 100;
-}
-#splash.show {
-    opacity: 1;
-}
-main {
-    display: block;
-    position:absolute;
-    top: 0px;
-    bottom:0px;
-    left:0px;
-    right:0px;
-}
-main.hide {
-    display: none;
-}
-header{
-    text-align: center;
-    color: white;
-    background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
-    border-bottom: 1px solid #333;
-    font-size: .8em;
-    padding: 1em;
-}
-img.thumb{
-    float: left;
-}
-article{
-    clear: both;
-}
-</style>
-
-
-<section id="splash">
-    <div>
-    	<h1>Splash</h1>
-   	 	<p><img src="logo.png" alt="...loading..."></p>
-    </div>
-</section>
-
-<main class="hide">
-    <header>
-       <h1>News Apps</h1>
-    </header>
-    <section>
-      <div id="newsItems"></div>
-    </section>
-</main>
-
-<script>
 (function() {
     var splash = document.querySelector('#splash'),
         main = document.querySelector('main');
@@ -132,7 +49,7 @@ article{
                 thumb = $(item).find('thumbnail').attr('url'),
                 link = $(item).find('link').text(),
                 content = '',
-                headline = '<h2><a href="' + link + '">' + title + '</a></h2>';
+                headline = "<h2><a href='" + link + "'>" + title + '</a></h2>';
 
             thumb = thumb ? "<img class='thumb' src='" + thumb + "'>" : '';
             desc = '<p>' + thumb + desc + '</p>';
@@ -145,5 +62,3 @@ article{
         $.ajax(ajaxOps).fail(loadFail).done(showNews);
     }
 }());
-</script>
-<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
