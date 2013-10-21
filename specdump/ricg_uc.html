@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html dir="ltr" typeof="bibo:Document w3p:NOTE" about="" property="dcterms:language" content="en" lang="en"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script>
+<html lang="en" dir="ltr" typeof="bibo:Document w3p:NOTE" about="" property="dcterms:language" content="en">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=.6">
     <title>
@@ -11,12 +11,12 @@
     @media all and (max-width: 960px){
                 html{
                                                 margin-left: -2.5em;
-                }       
+                }
     }
     @media print{
                 #participantslist{
-                                                display: none;  
-                }       
+                                                display: none;
+                }
                 a:link,a:visited{
                                                 text-decoration: none;
                                                 color: inherit;
@@ -25,7 +25,7 @@
     </style>
     
     
-  <style type="text/css"></style><style>/*****************************************************************
+  <style>/*****************************************************************
  * ReSpec 3 CSS
  * Robin Berjon - http://berjon.com/
  *****************************************************************/
@@ -166,28 +166,26 @@ aside.example div.example {
 aside.example div.example div.example-title {
     color: #999;
 }
-</style><link rel="stylesheet" href="ricg_uc_files/W3C-NOTE.css"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ui/save-html" src="ricg_uc_files/save-html.txt"></script></head>
-  <body style="" class="h-entry" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-NOTE"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ui/save-html" src="https://raw.github.com/darobin/respec/gh-pages/js/ui/save-html.js"></script></head>
+  <body class="h-entry" style="" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
   <p>
     
-      <a href="http://www.w3.org/"><img src="ricg_uc_files/w3c_home.png" alt="W3C" width="72" height="48"></a>
+      <a href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/Icons/w3c_home" alt="W3C"></a>
     
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Use Cases and Requirements for Standardizing Responsive Images</h1>
   
-    <h2 property="bibo:subtitle" id="subtitle">Living Document</h2>
-  
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2013-10-20T18:47:24.000Z" id="w3c-note-20-october-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Note <time class="dt-published" datetime="2013-10-20">20 October 2013</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2013-11-05T00:00:00.000Z" id="w3c-note-05-november-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Note <time class="dt-published" datetime="2013-11-05">05 November 2013</time></h2>
   <dl>
     
       <dt>This version:</dt>
-      <dd><a class="u-url" href="http://www.w3.org/TR/2013/NOTE-respimg-usecases-20131020/">http://www.w3.org/TR/2013/NOTE-respimg-usecases-20131020/</a></dd>
+      <dd><a class="u-url" href="http://www.w3.org/TR/2013/NOTE-respimg-usecases-20131105/">http://www.w3.org/TR/2013/NOTE-respimg-usecases-20131105/</a></dd>
       <dt>Latest published version:</dt>
       <dd><a href="http://www.w3.org/TR/respimg-usecases/">http://www.w3.org/TR/respimg-usecases/</a></dd>
     
     
       <dt>Latest editor's draft:</dt>
-      <dd><a href="http://usecases.responsiveimages.org/">http://usecases.responsiveimages.org</a></dd>
+      <dd><a href="http://usecases.responsiveimages.org">http://usecases.responsiveimages.org</a></dd>
     
     
     
@@ -198,7 +196,7 @@ aside.example div.example div.example-title {
     
     
     <dt>Editors:</dt>
-    <dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Marcos Cáceres" href="http://marcosc.com/">Marcos Cáceres</a>, <a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://mozilla.com/">Mozilla</a></span>
+    <dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Marcos Cáceres" href="http://marcosc.com/">Marcos Cáceres</a>, <a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://mozilla.com">Mozilla</a></span>
 </dd>
 <dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Mat Marquis" href="http://matmarquis.com/">Mat Marquis</a></span>
 </dd>
@@ -239,7 +237,7 @@ aside.example div.example div.example-title {
              
                 
                   <dd>
-                    <a href="http://w3c.responsiveimages.org/">
+                    <a href="http://w3c.responsiveimages.org">
                       Join the Responsive Images Community Group
                     </a>
                   </dd>
@@ -247,7 +245,7 @@ aside.example div.example div.example-title {
              
                 
                   <dd>
-                    <a href="file:///Users/marcosc/Downloads/Public%20mailing%20list">
+                    <a href="Public mailing list">
                       http://list.responsiveimages.org
                     </a>
                   </dd>
@@ -310,13 +308,13 @@ aside.example div.example div.example-title {
   <hr>
 </div>
     <p>
-      <a href="http://responsiveimages.org/"><img style="position: absolute; top: 1em; right: 1em;" src="ricg_uc_files/RICG_logo_small.png" alt="Responsive Images Community Group"></a>
+      <a href="http://responsiveimages.org"><img style="position: absolute; top: 1em; right: 1em;" src="images/RICG_logo_small.png" alt="Responsive Images Community Group"></a>
     </p>
     <section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_abstract">Abstract</h2>
       <p>
         This document captures the use cases and requirements for standardizing
         a solution for responsive images. The <a href="#dfn-use-cases" class="internalDFN">use cases</a> and
-        <a href="#dfn-requirements" class="internalDFN">requirements</a> were gathered with consultation with the <a href="http://w3c.org/">HTML Working Group</a> and <a href="http://whatwg.org/">WHATWG</a> participants, <a href="http://www.w3.org/community/respimg/"><abbr title="Responsive Images Community Group">RICG</abbr></a> group members, and
+        <a href="#dfn-requirements" class="internalDFN">requirements</a> were gathered with consultation with the <a href="http://w3c.org/">HTML Working Group</a> and <a href="http://whatwg.org">WHATWG</a> participants, <a href="http://www.w3.org/community/respimg/"><abbr title="Responsive Images Community Group">RICG</abbr></a> group members, and
         the general public.
       </p>
       <p id="welcome" class="now3c">
@@ -340,9 +338,9 @@ aside.example div.example div.example-title {
           
           
           If you wish to make comments regarding this document, please send them to 
-          <a href="mailto:public-html@w3.org@w3.org">public-html@w3.org@w3.org</a> 
-          (<a href="mailto:public-html@w3.org-request@w3.org?subject=subscribe">subscribe</a>,
-          <a href="http://lists.w3.org/Archives/Public/public-html@w3.org/">archives</a>).
+          <a href="mailto:public-html@w3.org">public-html@w3.org</a> 
+          (<a href="mailto:public-html-request@w3.org?subject=subscribe">subscribe</a>,
+          <a href="http://lists.w3.org/Archives/Public/public-html/">archives</a>).
           
           
           
@@ -454,8 +452,8 @@ aside.example div.example div.example-title {
         "<a href="http://css-tricks.com/which-responsive-images-solution-should-you-use/">Which
         responsive images solution should you use?</a>". These techniques have
         a number of limitations, discussed below, which serve as the motivation
-        to standardize a solution through the <a href="http://w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a>
-        and <a href="http://whatwg.org/">WHATWG</a>).
+        to standardize a solution through the <a href="http://w3.org"><abbr title="World Wide Web Consortium">W3C</abbr></a>
+        and <a href="http://whatwg.org">WHATWG</a>).
       </p>
       <p>
         In formulating the requirements, this document tries to be
@@ -472,9 +470,9 @@ aside.example div.example div.example-title {
           Proposed Solutions
         </h3>
         <p>
-          To date, three such specifications are currently under development,
-          described below. The three proposed solutions are not mutually
-          exclusive: together they address the set of <cite><a href="http://usecases.responsiveimages.org/">Use Cases and Requirements for
+          To date, four such specifications are currently under development,
+          described below. The four proposed solutions are not mutually
+          exclusive: together they address the set of <cite><a href="http://usecases.responsiveimages.org">Use Cases and Requirements for
           Responsive Images</a></cite>.
         </p>
         <dl>
@@ -495,7 +493,7 @@ aside.example div.example div.example-title {
             </p>
           </dd>
           <dt>
-            <cite><a href="http://picture.responsiveimages.org/">The `picture`
+            <cite><a href="http://picture.responsiveimages.org">The `picture`
             element</a></cite>
           </dt>
           <dd>
@@ -587,7 +585,7 @@ aside.example div.example div.example-title {
             years to optimize resource loading (e.g., WebKit's <a href="https://github.com/WebKit/webkit/blob/master/Source/WebCore/html/parser/HTMLPreloadScanner.cpp">
             HTMLPreloadScanner</a>). Unnecessarily bypassing things like the
             preload scanner can have measurable performance impact when loading
-            documents. See, for example, "<a href="file:///Users/marcosc/Downloads/gent.ilcore.com/2011/01/webkit-preloadscanner.html">The WebKit
+            documents. See, for example, "<a href="gent.ilcore.com/2011/01/webkit-preloadscanner.html">The WebKit
             PreloadScanner</a>" by Tony Gentilcore for a small study that
             demonstrates an up to 20% impact in load time when WebKit's
             PreloadScanner is disabled. More recent <a href="https://plus.google.com/+IlyaGrigorik/posts/8AwRUE7wqAE">performance
@@ -632,7 +630,7 @@ aside.example div.example div.example-title {
           and bandwidth downloading overly-large files.
         </p>
         <figure id="fig-figure-shows-screens-that-having-different-resolutions.-these-resolutions-can-be-either-physical-matching-physical-pixels-or-virtual-matching-css-pixels-.x">
-          <img src="ricg_uc_files/resolution_selection.jpg" alt="Screens have a range of resolutions. Both real and virtual." style="max-width: 415px" class="stretchy">
+          <img src="images/resolution_selection.jpg" alt="Screens have a range of resolutions. Both real and virtual." style="max-width: 415px" class="stretchy">
           <figcaption>Fig. <span class="figno">1</span> <span class="fig-title">
             
               Figure shows screens that having different resolutions. These
@@ -667,7 +665,7 @@ aside.example div.example div.example-title {
           different effective resolutions.
         </p>
         <figure id="fig-to-avoid-sending-excess-data-developers-will-send-images-that-more-closely-match-the-size-of-the-viewport.x">
-          <img src="ricg_uc_files/viewport_selection.jpg" alt="3 different viewport layouts, where the size of images differs based on the viewport." class="stretchy" style="max-width: 415px">
+          <img src="images/viewport_selection.jpg" alt="3 different viewport layouts, where the size of images differs based on the viewport." class="stretchy" style="max-width: 415px">
           <figcaption>Fig. <span class="figno">2</span> <span class="fig-title">
             
               To avoid sending excess data, developers will send images that
@@ -691,7 +689,7 @@ aside.example div.example div.example-title {
           sizes of iOS app icons</a></cite>, by Neven Mrgan).
         </p>
         <figure id="fig-on-a-device-with-a-device-pixel-ratio-greater-than-1-higher-image-resolutions-are-required-to-reduce-visual-artifacts-resulting-from-compression.x">
-          <img src="ricg_uc_files/dpr_selection.jpg" class="stretchy" style="max-width: 415px" alt="three devices, each having a unique device pixel ratio of 1x, 1.5, and 3x respectively.">
+          <img src="images/dpr_selection.jpg" class="stretchy" style="max-width: 415px" alt="three devices, each having a unique device pixel ratio of 1x, 1.5, and 3x respectively.">
           <figcaption>Fig. <span class="figno">3</span> <span class="fig-title">
             
               On a device with a device-pixel-ratio greater than 1, higher
@@ -729,7 +727,7 @@ aside.example div.example div.example-title {
           This is illustrated in the figure below.
         </p>
         <figure id="fig-using-different-images-that-have-been-cropped-to-fit-a-particular-screen-s-features-can-help-in-communicating-a-message-effectively.x">
-          <img src="ricg_uc_files/art_direction.jpg" style="max-width:400px" class="stretchy" alt="four devices showing art directed crops of a dog.">
+          <img src="images/art_direction.jpg" style="max-width:400px" class="stretchy" alt="four devices showing art directed crops of a dog.">
           <figcaption>Fig. <span class="figno">4</span> <span class="fig-title">
             
               Using different images that have been cropped to fit a particular
@@ -761,15 +759,15 @@ aside.example div.example div.example-title {
           the browser in the image.
         </p>
         <figure id="fig-video-showing-art-direction-used-on-nokia-s-meego-website.x">
-          <video controls="controls" poster="videos/screenrmx1.jpg" class="stretchy" style="max-width: 652px" onclick="if(/Android/.test(navigator.userAgent))this.play();">
-          <source src="ricg_uc_files/screenrmx1.m4v" type="video/mp4">
-          <source src="ricg_uc_files/screenrmx1.webm" type="video/webm">
-          <source src="ricg_uc_files/screenrmx1.ogv" type="video/ogg">
-          <source src="ricg_uc_files/screenrmx1.mp4"><object type="application/x-shockwave-flash" data="ricg_uc_files/flashfox.swf" style="position:relative;" width="652" height="389">
+          <video controls="" poster="videos/screenrmx1.jpg" class="stretchy" style="max-width: 652px" onclick="if(/Android/.test(navigator.userAgent))this.play();">
+          <source src="videos/screenrmx1.m4v" type="video/mp4">
+          <source src="videos/screenrmx1.webm" type="video/webm">
+          <source src="videos/screenrmx1.ogv" type="video/ogg">
+          <source src="videos/screenrmx1.mp4"><object type="application/x-shockwave-flash" data="videos/flashfox.swf" width="652" height="389" style="position:relative;">
             <param name="movie" value="videos/flashfox.swf">
             <param name="allowFullScreen" value="true">
             <param name="flashVars" value="autoplay=false&amp;controls=true&amp;fullScreenEnabled=true&amp;loop=false&amp;poster=videos/screenrmx1.jpg&amp;src=screenrmx1.m4v">
-            <embed src="ricg_uc_files/flashfox.swf" style="position:relative;" flashvars="autoplay=false&amp;controls=true&amp;fullScreenEnabled=true&amp;loop=false&amp;poster=videos/screenrmx1.jpg&amp;src=screenrmx1.m4v" allowfullscreen="true" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_en" width="652" height="389"> <img alt="Responsive images on Meego website" src="ricg_uc_files/screenrmx1.jpg" style="position:absolute;left:0;" title="Video playback is not supported by your browser" width="652" height="389">
+            <embed src="videos/flashfox.swf" width="652" height="389" style="position:relative;" flashvars="autoplay=false&amp;controls=true&amp;fullScreenEnabled=true&amp;loop=false&amp;poster=videos/screenrmx1.jpg&amp;src=screenrmx1.m4v" allowfullscreen="true" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_en"> <img alt="Responsive images on Meego website" src="videos/screenrmx1.jpg" style="position:absolute;left:0;" width="652" height="389" title="Video playback is not supported by your browser">
           </object></video>
           <figcaption>Fig. <span class="figno">5</span> <span class="fig-title">
             
@@ -839,7 +837,7 @@ aside.example div.example div.example-title {
           blurry and low-quality when compared to text.
         </p>
         <figure id="fig-example-of-a-48px-by-48px-image-and-text-printed-at-1-200-dpi.-because-of-the-lack-of-image-data-the-printer-compensates-by-using-the-halftone-reprographic-technique.-note-that-the-text-stays-crisp-and-is-printed-at-the-full-1-200-dpi.x">
-          <img src="ricg_uc_files/printed_image.jpg" class="stretchy" style="max-width:403px" alt="image comparison between screen and print.">
+          <img src="images/printed_image.jpg" class="stretchy" style="max-width:403px" alt="image comparison between screen and print.">
           <figcaption>Fig. <span class="figno">6</span> <span class="fig-title">
             
               Example of a 48px by 48px image and text printed at 1,200 DPI.
@@ -866,7 +864,7 @@ aside.example div.example div.example-title {
           labels.
         </p>
         <figure id="fig-two-pie-charts-one-in-color-and-one-in-black-and-white-which-demonstrate-the-problem-with-switching-from-color-to-monochrome-media.-in-the-black-and-white-graph-it-is-extremely-difficult-to-know-which-slice-relates-to-which-label-except-in-the-case-of-commute-which-is-a-lighter-shade-.x">
-          <img class="stretchy" src="ricg_uc_files/color_and_bw_graph.png" style="max-width: 560px" alt="a color and a black and white graph">
+          <img class="stretchy" src="images/color_and_bw_graph.png" style="max-width: 560px" alt="a color and a black and white graph">
           <figcaption>Fig. <span class="figno">7</span> <span class="fig-title">
             
               Two pie charts, one in color and one in black and white, which
@@ -1116,8 +1114,8 @@ aside.example div.example div.example-title {
         by <a href="http://paulrobertlloyd.com/">Paul Robert Lloyd</a>.
       </p>
       <p id="participantslist">
-        <!-- 
-        To get the participant's list, go to 
+        <!--
+        To get the participant's list, go to
         http://www.w3.org/community/respimg/participants
 
         var all = document.querySelectorAll("td>h3"),
@@ -1127,7 +1125,7 @@ aside.example div.example div.example-title {
         }
         console.log(each.join(", "))
         -->
-         <dfn id="dfn-participants">Participants</dfn> of the <a href="http://w3c.responsiveimages.org/">Responsive Images Community Group</a>
+         <dfn id="dfn-participants">Participants</dfn> of the <a href="http://w3c.responsiveimages.org">Responsive Images Community Group</a>
         at the time of publication were: Barry Atimer, Daniel Abril, George
         Adamson, Heide Alexander, Marie Alhomme, John Allan, Joshua Allen,
         Angely Alvarez, Agustin Amenabar, Aaryn Anderson, Philip Andrews,
