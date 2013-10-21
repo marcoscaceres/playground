@@ -166,16 +166,16 @@ aside.example div.example {
 aside.example div.example div.example-title {
     color: #999;
 }
-</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-NOTE"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ui/save-html" src="https://raw.github.com/darobin/respec/gh-pages/js/ui/save-html.js"></script></head>
-  <body class="h-entry" style="" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
+</style><link href="https://www.w3.org/StyleSheets/TR/W3C-NOTE" rel="stylesheet"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><script src="https://raw.github.com/darobin/respec/gh-pages/js/ui/save-html.js" data-requiremodule="ui/save-html" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script></head>
+  <body id="respecDocument" role="document" class="h-entry"><div id="respecHeader" role="contentinfo" class="head">
   <p>
     
-      <a href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/Icons/w3c_home" alt="W3C"></a>
+      <a href="http://www.w3.org/"><img src="https://www.w3.org/Icons/w3c_home" alt="W3C" width="72" height="48"></a>
     
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Use Cases and Requirements for Standardizing Responsive Images</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2013-11-05T00:00:00.000Z" id="w3c-note-05-november-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Note <time class="dt-published" datetime="2013-11-05">05 November 2013</time></h2>
+  <h2 id="w3c-note-05-november-2013" property="dcterms:issued" datatype="xsd:dateTime" content="2013-11-05T00:00:00.000Z"><abbr title="World Wide Web Consortium">W3C</abbr> Note <time class="dt-published" datetime="2013-11-05">05 November 2013</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -245,8 +245,8 @@ aside.example div.example div.example-title {
              
                 
                   <dd>
-                    <a href="Public mailing list">
-                      http://list.responsiveimages.org
+                    <a href="http://list.responsiveimages.org">
+                      Public mailing list
                     </a>
                   </dd>
                 
@@ -310,11 +310,11 @@ aside.example div.example div.example-title {
     <p>
       <a href="http://responsiveimages.org"><img style="position: absolute; top: 1em; right: 1em;" src="images/RICG_logo_small.png" alt="Responsive Images Community Group"></a>
     </p>
-    <section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_abstract">Abstract</h2>
+    <section rel="bibo:Chapter" resource="#ref" typeof="bibo:Chapter" datatype="" property="dcterms:abstract" class="introductory" id="abstract"><h2 id="h2_abstract" role="heading" aria-level="1">Abstract</h2>
       <p>
         This document captures the use cases and requirements for standardizing
-        a solution for responsive images. The <a href="#dfn-use-cases" class="internalDFN">use cases</a> and
-        <a href="#dfn-requirements" class="internalDFN">requirements</a> were gathered with consultation with the <a href="http://w3c.org/">HTML Working Group</a> and <a href="http://whatwg.org">WHATWG</a> participants, <a href="http://www.w3.org/community/respimg/"><abbr title="Responsive Images Community Group">RICG</abbr></a> group members, and
+        a solution for responsive images. The <a class="internalDFN" href="#dfn-use-cases">use cases</a> and
+        <a class="internalDFN" href="#dfn-requirements">requirements</a> were gathered with consultation with the <a href="http://w3c.org/">HTML Working Group</a> and <a href="http://whatwg.org">WHATWG</a> participants, <a href="http://www.w3.org/community/respimg/"><abbr title="Responsive Images Community Group">RICG</abbr></a> group members, and
         the general public.
       </p>
       <p id="welcome" class="now3c">
@@ -322,7 +322,7 @@ aside.example div.example div.example-title {
         a bug on github</a> or <a href="mailto:public-respimg@w3.org">email
         us</a>!
       </p>
-    </section><section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_sotd">Status of This Document</h2>
+    </section><section rel="bibo:Chapter" resource="#ref" typeof="bibo:Chapter" id="sotd" class="introductory"><h2 id="h2_sotd" role="heading" aria-level="1">Status of This Document</h2>
   
     
       
@@ -379,42 +379,42 @@ aside.example div.example div.example-title {
       
     
   
-</section><section id="toc"><h2 class="introductory" aria-level="1" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>
+</section><section id="toc"><h2 id="h2_toc" role="heading" aria-level="1" class="introductory">Table of Contents</h2><ul id="respecContents" role="directory" class="toc"><li class="tocline"><a class="tocxref" href="#introduction"><span class="secno">1. </span>
         Introduction
-      </a><ul class="toc"><li class="tocline"><a href="#proposed-solutions" class="tocxref"><span class="secno">1.1 </span>
+      </a><ul class="toc"><li class="tocline"><a class="tocxref" href="#proposed-solutions"><span class="secno">1.1 </span>
           Proposed Solutions
-        </a></li></ul></li><li class="tocline"><a href="#limitations-of-current-techniques" class="tocxref"><span class="secno">2. </span>
+        </a></li></ul></li><li class="tocline"><a class="tocxref" href="#limitations-of-current-techniques"><span class="secno">2. </span>
         Limitations of current techniques
-      </a></li><li class="tocline"><a href="#use-cases" class="tocxref"><span class="secno">3. </span>
+      </a></li><li class="tocline"><a class="tocxref" href="#use-cases"><span class="secno">3. </span>
         Use cases
-      </a><ul class="toc"><li class="tocline"><a href="#resolution-based-selection" class="tocxref"><span class="secno">3.1 </span>
+      </a><ul class="toc"><li class="tocline"><a class="tocxref" href="#resolution-based-selection"><span class="secno">3.1 </span>
           Resolution-based selection
-        </a></li><li class="tocline"><a href="#viewport-based-selection" class="tocxref"><span class="secno">3.2 </span>
+        </a></li><li class="tocline"><a class="tocxref" href="#viewport-based-selection"><span class="secno">3.2 </span>
           Viewport-based selection
-        </a></li><li class="tocline"><a href="#device-pixel-ratio-based-selection" class="tocxref"><span class="secno">3.3 </span>
+        </a></li><li class="tocline"><a class="tocxref" href="#device-pixel-ratio-based-selection"><span class="secno">3.3 </span>
           Device-pixel-ratio-based selection
-        </a></li><li class="tocline"><a href="#art-direction" class="tocxref"><span class="secno">3.4 </span>
+        </a></li><li class="tocline"><a class="tocxref" href="#art-direction"><span class="secno">3.4 </span>
           <span>Art direction</span>
-        </a></li><li class="tocline"><a href="#design-breakpoints" class="tocxref"><span class="secno">3.5 </span>
+        </a></li><li class="tocline"><a class="tocxref" href="#design-breakpoints"><span class="secno">3.5 </span>
           Design breakpoints
-        </a></li><li class="tocline"><a href="#matching-media-features-and-media-types" class="tocxref"><span class="secno">3.6 </span>
+        </a></li><li class="tocline"><a class="tocxref" href="#matching-media-features-and-media-types"><span class="secno">3.6 </span>
           Matching media features and media types
-        </a></li><li class="tocline"><a href="#relative-units" class="tocxref"><span class="secno">3.7 </span>
+        </a></li><li class="tocline"><a class="tocxref" href="#relative-units"><span class="secno">3.7 </span>
           Relative units
-        </a></li><li class="tocline"><a href="#image-formats" class="tocxref"><span class="secno">3.8 </span>
+        </a></li><li class="tocline"><a class="tocxref" href="#image-formats"><span class="secno">3.8 </span>
           Image formats
-        </a></li><li class="tocline"><a href="#user-control-over-sources" class="tocxref"><span class="secno">3.9 </span>
+        </a></li><li class="tocline"><a class="tocxref" href="#user-control-over-sources"><span class="secno">3.9 </span>
           User control over sources
-        </a></li></ul></li><li class="tocline"><a href="#requirements" class="tocxref"><span class="secno">4. </span>
+        </a></li></ul></li><li class="tocline"><a class="tocxref" href="#requirements"><span class="secno">4. </span>
         Requirements
-      </a></li><li class="tocline"><a href="#open-issues" class="tocxref"><span class="secno">A. </span>
+      </a></li><li class="tocline"><a class="tocxref" href="#open-issues"><span class="secno">A. </span>
         Open issues
-      </a></li><li class="tocline"><a href="#acknowledgements-1" class="tocxref"><span class="secno">B. </span>
+      </a></li><li class="tocline"><a class="tocxref" href="#acknowledgements-1"><span class="secno">B. </span>
         Acknowledgements
       </a></li></ul></section>
     
     <section id="introduction">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_introduction"><span class="secno">1. </span>
+      <!--OddPage--><h2 id="h2_introduction" role="heading" aria-level="1"><span class="secno">1. </span>
         Introduction
       </h2>
       <p>
@@ -423,7 +423,7 @@ aside.example div.example div.example-title {
         <dfn id="dfn-media-features">media features</dfn> (e.g., pixel-density, orientation, max-width,
         etc.) and CSS media types (e.g., print, screen, etc.). A
         <dfn id="dfn-responsive-image">responsive image</dfn> is an image that adapts in response to
-        different <a href="#dfn-environmental-conditions" class="internalDFN">environmental conditions</a>: adaptations can include, but
+        different <a class="internalDFN" href="#dfn-environmental-conditions">environmental conditions</a>: adaptations can include, but
         are not limited to, changing the dimensions, crop, or even the source
         of an image.
       </p>
@@ -447,7 +447,7 @@ aside.example div.example div.example-title {
         number and varieties of high-density screens has increased</a> (both on
         mobile and desktop devices), web developers have had to create custom
         techniques for serving images that best match a browser's
-        <a href="#dfn-environmental-conditions" class="internalDFN">environmental conditions</a>. For a list of examples of the range of
+        <a class="internalDFN" href="#dfn-environmental-conditions">environmental conditions</a>. For a list of examples of the range of
         <dfn id="dfn-techniques">techniques</dfn> in use in 2012, see Chris Coyier's article
         "<a href="http://css-tricks.com/which-responsive-images-solution-should-you-use/">Which
         responsive images solution should you use?</a>". These techniques have
@@ -461,12 +461,12 @@ aside.example div.example div.example-title {
         only tries to describe the use cases and what the <a href="http://www.w3.org/community/respimg/"><abbr title="Responsive Images Community Group">RICG</abbr></a> understands, from
         <a href="https://github.com/ResponsiveImagesCG/picture-element/wiki/Relevant-resources#articles">
         practice</a>, would be needed to address the use cases in the form of
-        <a href="#dfn-requirements" class="internalDFN">requirements</a>. The <a href="http://www.w3.org/community/respimg/"><abbr title="Responsive Images Community Group">RICG</abbr></a> expects that a
+        <a class="internalDFN" href="#dfn-requirements">requirements</a>. The <a href="http://www.w3.org/community/respimg/"><abbr title="Responsive Images Community Group">RICG</abbr></a> expects that a
         technical specification can be created to formally address each of the
-        <a href="#dfn-requirements" class="internalDFN">requirements</a> (i.e., the <dfn id="dfn-solution">solution</dfn>).
+        <a class="internalDFN" href="#dfn-requirements">requirements</a> (i.e., the <dfn id="dfn-solution">solution</dfn>).
       </p>
       <section id="proposed-solutions">
-        <h3 aria-level="2" role="heading" id="h3_proposed-solutions"><span class="secno">1.1 </span>
+        <h3 id="h3_proposed-solutions" role="heading" aria-level="2"><span class="secno">1.1 </span>
           Proposed Solutions
         </h3>
         <p>
@@ -503,8 +503,8 @@ aside.example div.example div.example-title {
               multiple versions of an image based on different characteristics
               (e.g., format, resolution, orientation, etc.). This allows the
               user agent to select the optimum image to present to an end-user
-              based on the user agent's <a href="#dfn-environmental-conditions" class="internalDFN">environmental conditions</a>, while
-              also providing the ability to "<a title="art direction" href="#dfn-art-direction" class="internalDFN">art
+              based on the user agent's <a class="internalDFN" href="#dfn-environmental-conditions">environmental conditions</a>, while
+              also providing the ability to "<a class="internalDFN" href="#dfn-art-direction" title="art direction">art
               direct</a>" images.
             </p>
           </dd>
@@ -518,7 +518,7 @@ aside.example div.example div.example-title {
               list of device and agent specific preferences. Servers can then
               use these "client hints" to assist in content negotiation,
               ideally resulting in content being served that best matches the
-              <a href="#dfn-environmental-conditions" class="internalDFN">environmental conditions</a> of the client for the resource
+              <a class="internalDFN" href="#dfn-environmental-conditions">environmental conditions</a> of the client for the resource
               being requested.
             </p>
           </dd>
@@ -542,7 +542,7 @@ aside.example div.example div.example-title {
       </section>
     </section>
     <section id="limitations-of-current-techniques">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_limitations-of-current-techniques"><span class="secno">2. </span>
+      <!--OddPage--><h2 id="h2_limitations-of-current-techniques" role="heading" aria-level="1"><span class="secno">2. </span>
         Limitations of current techniques
       </h2>
       <p>
@@ -608,11 +608,11 @@ aside.example div.example div.example-title {
       <p>
         The <abbr title="Responsive Images Community Group">RICG</abbr>
         believes standardization of a browser-based solution can overcome these
-        <a href="#dfn-limitations" class="internalDFN">limitations</a>.
+        <a class="internalDFN" href="#dfn-limitations">limitations</a>.
       </p>
     </section>
     <section id="use-cases">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_use-cases"><span class="secno">3. </span>
+      <!--OddPage--><h2 id="h2_use-cases" role="heading" aria-level="1"><span class="secno">3. </span>
         Use cases
       </h2>
       <p>
@@ -620,7 +620,7 @@ aside.example div.example div.example-title {
         seen "in the wild".
       </p>
       <section id="resolution-based-selection">
-        <h3 aria-level="2" role="heading" id="h3_resolution-based-selection"><span class="secno">3.1 </span>
+        <h3 id="h3_resolution-based-selection" role="heading" aria-level="2"><span class="secno">3.1 </span>
           Resolution-based selection
         </h3>
         <p>
@@ -641,7 +641,7 @@ aside.example div.example div.example-title {
         </figure>
       </section>
       <section id="viewport-based-selection">
-        <h3 aria-level="2" role="heading" id="h3_viewport-based-selection"><span class="secno">3.2 </span>
+        <h3 id="h3_viewport-based-selection" role="heading" aria-level="2"><span class="secno">3.2 </span>
           Viewport-based selection
         </h3>
         <p>
@@ -675,7 +675,7 @@ aside.example div.example div.example-title {
         </figure>
       </section>
       <section id="device-pixel-ratio-based-selection">
-        <h3 aria-level="2" role="heading" id="h3_device-pixel-ratio-based-selection"><span class="secno">3.3 </span>
+        <h3 id="h3_device-pixel-ratio-based-selection" role="heading" aria-level="2"><span class="secno">3.3 </span>
           Device-pixel-ratio-based selection
         </h3>
         <p>
@@ -700,7 +700,7 @@ aside.example div.example div.example-title {
         </figure>
       </section>
       <section id="art-direction">
-        <h3 aria-level="2" role="heading" id="h3_art-direction"><span class="secno">3.4 </span>
+        <h3 id="h3_art-direction" role="heading" aria-level="2"><span class="secno">3.4 </span>
           <dfn id="dfn-art-direction">Art direction</dfn>
         </h3>
         <p>
@@ -719,7 +719,7 @@ aside.example div.example div.example-title {
           relevance, usefulness, and legibility. Thus, by "art directing", a
           web developer can better control communication by explicitly
           dictating which image should be shown at which size (or when some
-          <a title="environmental conditions" href="#dfn-environmental-conditions" class="internalDFN">environmental condition</a> is
+          <a class="internalDFN" href="#dfn-environmental-conditions" title="environmental conditions">environmental condition</a> is
           met).
           </li>
         </ul>
@@ -763,11 +763,11 @@ aside.example div.example div.example-title {
           <source src="videos/screenrmx1.m4v" type="video/mp4">
           <source src="videos/screenrmx1.webm" type="video/webm">
           <source src="videos/screenrmx1.ogv" type="video/ogg">
-          <source src="videos/screenrmx1.mp4"><object type="application/x-shockwave-flash" data="videos/flashfox.swf" width="652" height="389" style="position:relative;">
+          <source src="videos/screenrmx1.mp4"><object type="application/x-shockwave-flash" data="videos/flashfox.swf" style="position:relative;" width="652" height="389">
             <param name="movie" value="videos/flashfox.swf">
             <param name="allowFullScreen" value="true">
             <param name="flashVars" value="autoplay=false&amp;controls=true&amp;fullScreenEnabled=true&amp;loop=false&amp;poster=videos/screenrmx1.jpg&amp;src=screenrmx1.m4v">
-            <embed src="videos/flashfox.swf" width="652" height="389" style="position:relative;" flashvars="autoplay=false&amp;controls=true&amp;fullScreenEnabled=true&amp;loop=false&amp;poster=videos/screenrmx1.jpg&amp;src=screenrmx1.m4v" allowfullscreen="true" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_en"> <img alt="Responsive images on Meego website" src="videos/screenrmx1.jpg" style="position:absolute;left:0;" width="652" height="389" title="Video playback is not supported by your browser">
+            <embed src="videos/flashfox.swf" style="position:relative;" flashvars="autoplay=false&amp;controls=true&amp;fullScreenEnabled=true&amp;loop=false&amp;poster=videos/screenrmx1.jpg&amp;src=screenrmx1.m4v" allowfullscreen="true" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_en" width="652" height="389"> <img alt="Responsive images on Meego website" src="videos/screenrmx1.jpg" style="position:absolute;left:0;" title="Video playback is not supported by your browser" width="652" height="389">
           </object></video>
           <figcaption>Fig. <span class="figno">5</span> <span class="fig-title">
             
@@ -777,14 +777,14 @@ aside.example div.example div.example-title {
         </figure>
       </section>
       <section id="design-breakpoints">
-        <h3 aria-level="2" role="heading" id="h3_design-breakpoints"><span class="secno">3.5 </span>
+        <h3 id="h3_design-breakpoints" role="heading" aria-level="2"><span class="secno">3.5 </span>
           Design breakpoints
         </h3>
         <p>
           In Web development, a <dfn id="dfn-breakpoint">breakpoint</dfn> is one of a series of
           <a href="http://www.w3.org/TR/css3-mediaqueries/">CSS Media
           Queries</a>, which can update the styles of a page based on matching
-          of <a href="#dfn-media-features" class="internalDFN">media features</a>. A single breakpoint represents a rule (or
+          of <a class="internalDFN" href="#dfn-media-features">media features</a>. A single breakpoint represents a rule (or
           set of rules) that determines the point at which the contents of that
           media query are applied to a page’s layout. For example:
         </p>
@@ -792,7 +792,7 @@ aside.example div.example div.example-title {
 @media screen and (max-width: 32em) { ... }
 @media screen and (max-width: 41em) { ... }</pre></div>
         <p>
-          Developers currently match specific <a title="breakpoint" href="#dfn-breakpoint" class="internalDFN">breakpoints</a> for images to the breakpoints that they
+          Developers currently match specific <a class="internalDFN" href="#dfn-breakpoint" title="breakpoint">breakpoints</a> for images to the breakpoints that they
           have defined in the <a href="http://www.w3.org/Style/CSS/Overview.en.html">CSS</a> for their
           applications. Being able to match the breakpoints ensures that images
           are operating under the same rules that define the layout of a
@@ -806,7 +806,7 @@ aside.example div.example div.example-title {
           likelihood of human-error on the part of developers.
         </p>
         <p>
-          For example, if a <a href="#dfn-breakpoint" class="internalDFN">breakpoint</a> is specified as "<code>max-width:
+          For example, if a <a class="internalDFN" href="#dfn-breakpoint">breakpoint</a> is specified as "<code>max-width:
           41em</code>", then web developers would like to define a similar
           breakpoint for images at a <code>max-width</code> of
           <code>41em</code>. Otherwise they are forced to transform
@@ -815,7 +815,7 @@ aside.example div.example div.example-title {
         </p>
       </section>
       <section id="matching-media-features-and-media-types">
-        <h3 aria-level="2" role="heading" id="h3_matching-media-features-and-media-types"><span class="secno">3.6 </span>
+        <h3 id="h3_matching-media-features-and-media-types" role="heading" aria-level="2"><span class="secno">3.6 </span>
           Matching media features and media types
         </h3>
         <p>
@@ -894,12 +894,12 @@ aside.example div.example div.example-title {
           <a href="http://dev.w3.org/csswg/mediaqueries4/#luminosity">luminosity</a>.
           The lack of a declarative mechanism to associate image content with
           media features means that developers cannot use them without relying
-          on the aforementioned <a title="limitations" href="#dfn-limitations" class="internalDFN">limited</a>
-          <a href="#dfn-techniques" class="internalDFN">techniques</a>.
+          on the aforementioned <a class="internalDFN" href="#dfn-limitations" title="limitations">limited</a>
+          <a class="internalDFN" href="#dfn-techniques">techniques</a>.
         </p>
       </section>
       <section id="relative-units">
-        <h3 aria-level="2" role="heading" id="h3_relative-units"><span class="secno">3.7 </span>
+        <h3 id="h3_relative-units" role="heading" aria-level="2"><span class="secno">3.7 </span>
           Relative units
         </h3>
         <p>
@@ -918,7 +918,7 @@ aside.example div.example div.example-title {
         </p>
       </section>
       <section id="image-formats">
-        <h3 aria-level="2" role="heading" id="h3_image-formats"><span class="secno">3.8 </span>
+        <h3 id="h3_image-formats" role="heading" aria-level="2"><span class="secno">3.8 </span>
           Image formats
         </h3>
         <p>
@@ -946,7 +946,7 @@ aside.example div.example div.example-title {
         </p>
       </section>
       <section id="user-control-over-sources">
-        <h3 aria-level="2" role="heading" id="h3_user-control-over-sources"><span class="secno">3.9 </span>
+        <h3 id="h3_user-control-over-sources" role="heading" aria-level="2"><span class="secno">3.9 </span>
           User control over sources
         </h3>
         <p>
@@ -973,26 +973,26 @@ aside.example div.example div.example-title {
       </section>
     </section>
     <section id="requirements">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_requirements"><span class="secno">4. </span>
+      <!--OddPage--><h2 id="h2_requirements" role="heading" aria-level="1"><span class="secno">4. </span>
         Requirements
       </h2>
       <p>
-        The <a href="#dfn-use-cases" class="internalDFN">use cases</a> give rise to the following
+        The <a class="internalDFN" href="#dfn-use-cases">use cases</a> give rise to the following
         <dfn id="dfn-requirements">requirements</dfn>:
       </p>
       <ol>
         <li>
           <p>
-            To allow for art direction, the <a href="#dfn-solution" class="internalDFN">solution</a> <em class="rfc2119" title="MUST">MUST</em> afford
+            To allow for art direction, the <a class="internalDFN" href="#dfn-solution">solution</a> <em title="MUST" class="rfc2119">MUST</em> afford
             developers the ability to match image sources with particular media
-            features and/or media types - and the user agent <em class="rfc2119" title="SHOULD">SHOULD</em> update the
+            features and/or media types - and the user agent <em title="SHOULD" class="rfc2119">SHOULD</em> update the
             source of an image as the media features and media types of the
             browser environment change dynamically.
           </p>
         </li>
         <li>
           <p>
-            The <a href="#dfn-solution" class="internalDFN">solution</a> <em class="rfc2119" title="MUST">MUST</em> support selection based on viewport
+            The <a class="internalDFN" href="#dfn-solution">solution</a> <em title="MUST" class="rfc2119">MUST</em> support selection based on viewport
             dimensions, screen resolution, and device-pixel-ratio (DPR).
             Sending the right image for the given dimension and DPR avoids
             delaying the page load, wasting bandwidth, and potentially reduces
@@ -1004,20 +1004,20 @@ aside.example div.example div.example-title {
         </li>
         <li>
           <p>
-            The <a href="#dfn-solution" class="internalDFN">solution</a> <em class="rfc2119" title="MUST">MUST</em> degrade gracefully on legacy user agents
+            The <a class="internalDFN" href="#dfn-solution">solution</a> <em title="MUST" class="rfc2119">MUST</em> degrade gracefully on legacy user agents
             by, for example, relying on HTML's built-in fallback mechanisms and
             legacy elements.
           </p>
         </li>
         <li>
           <p>
-            The <a href="#dfn-solution" class="internalDFN">solution</a> <em class="rfc2119" title="MUST">MUST</em> afford developers with the ability to
+            The <a class="internalDFN" href="#dfn-solution">solution</a> <em title="MUST" class="rfc2119">MUST</em> afford developers with the ability to
             include content that is accessible to assistive technologies.
           </p>
         </li>
         <li>
           <p>
-            The <a href="#dfn-solution" class="internalDFN">solution</a> <em class="rfc2119" title="MUST NOT">MUST NOT</em> require server-side processing to
+            The <a class="internalDFN" href="#dfn-solution">solution</a> <em title="MUST NOT" class="rfc2119">MUST NOT</em> require server-side processing to
             work. However, if required, server-side adaptation can still occur
             through <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html">content
             negotiation</a> or similar techniques (i.e., they are not mutually
@@ -1026,7 +1026,7 @@ aside.example div.example div.example-title {
         </li>
         <li>
           <p>
-            The <a href="#dfn-solution" class="internalDFN">solution</a> <em class="rfc2119" title="MUST">MUST</em> afford developers the ability to define
+            The <a class="internalDFN" href="#dfn-solution">solution</a> <em title="MUST" class="rfc2119">MUST</em> afford developers the ability to define
             the breakpoints for images as either minimum values (mobile first)
             or maximum values (desktop first) to match the media queries used
             in their design.
@@ -1034,35 +1034,35 @@ aside.example div.example div.example-title {
         </li>
         <li>
           <p>
-            The <a href="#dfn-solution" class="internalDFN">solution</a> <em class="rfc2119" title="SHOULD">SHOULD</em> allow developers to specify images in
+            The <a class="internalDFN" href="#dfn-solution">solution</a> <em title="SHOULD" class="rfc2119">SHOULD</em> allow developers to specify images in
             different formats (or specify the format of a set of image
             sources).
           </p>
         </li>
         <li>
           <p>
-            To provide compatibility with legacy user agents, it <em class="rfc2119" title="SHOULD">SHOULD</em> be
+            To provide compatibility with legacy user agents, it <em title="SHOULD" class="rfc2119">SHOULD</em> be
             possible for developers to <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfill</a>
-            the <a href="#dfn-solution" class="internalDFN">solution</a>. See the <a href="https://github.com/w3ctag/extending-html-responsibly/blob/master/RICG-recs/ricg.md">
+            the <a class="internalDFN" href="#dfn-solution">solution</a>. See the <a href="https://github.com/w3ctag/extending-html-responsibly/blob/master/RICG-recs/ricg.md">
             <abbr title="World Wide Web Consortium">W3C</abbr>'s TAG's recommendations to the <abbr title="Responsive Images Community Group">RICG</abbr>.</a>
           </p>
         </li>
         <li>
           <p>
-            The <a href="#dfn-solution" class="internalDFN">solution</a> <em class="rfc2119" title="SHOULD">SHOULD</em> afford user agents with the ability to
+            The <a class="internalDFN" href="#dfn-solution">solution</a> <em title="SHOULD" class="rfc2119">SHOULD</em> afford user agents with the ability to
             provide a user-settable preference for controlling which source of
             an image they prefer.&nbsp;For example, &nbsp;preference options
             could include: "always lowest resolution", "always high
             resolution", "download high resolution as bandwidth permits", and
             so on. To be clear, user agents are not required to provide such a
-            user-settable preference, but the <a href="#dfn-solution" class="internalDFN">solution</a> needs to be
+            user-settable preference, but the <a class="internalDFN" href="#dfn-solution">solution</a> needs to be
             designed in such a way that it could be done.
           </p>
         </li>
         <li>
           <p>
             In order to avoid introducing delays to the page load, the solution
-            <em class="rfc2119" title="MUST">MUST</em> integrate well with existing performance optimization provided
+            <em title="MUST" class="rfc2119">MUST</em> integrate well with existing performance optimization provided
             by browsers (e.g., the solution would work well with a browser's
             the preload scanner). Specifically, the solution needs to result in
             faster page loads than the current <a href="http://css-tricks.com/which-responsive-images-solution-should-you-use/">
@@ -1071,8 +1071,8 @@ aside.example div.example div.example-title {
         </li>
       </ol>
     </section>
-    <section class="appendix" id="open-issues">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_open-issues"><span class="secno">A. </span>
+    <section id="open-issues" class="appendix">
+      <!--OddPage--><h2 id="h2_open-issues" role="heading" aria-level="1"><span class="secno">A. </span>
         Open issues
       </h2>
       <p>
@@ -1091,8 +1091,8 @@ aside.example div.example div.example-title {
         all the closed issues</a> relating to this document.
       </p>
     </section>
-    <section class="appendix" typeof="bibo:Chapter" resource="#ref" rel="bibo:Chapter" id="acknowledgements-1">
-      <!--OddPage--><h2 id="acknowledgements" aria-level="1" role="heading"><span class="secno">B. </span>
+    <section id="acknowledgements-1" rel="bibo:Chapter" resource="#ref" typeof="bibo:Chapter" class="appendix">
+      <!--OddPage--><h2 role="heading" aria-level="1" id="acknowledgements"><span class="secno">B. </span>
         Acknowledgements
       </h2>
       <p>
