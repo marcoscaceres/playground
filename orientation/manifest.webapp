@@ -1,0 +1,7 @@
+{
+  "name": "landscape test",
+  "icons":{
+  	"128": "icon.ico"
+  },
+  "orientation": "landscape-secondary"
+}

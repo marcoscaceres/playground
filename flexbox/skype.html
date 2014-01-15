@@ -1,0 +1,148 @@
+<!doctype html>
+<style>
+html, body, ul, li, section{
+	font-family: Helvetica, Arial, sans-serif;
+	margin: 0; 
+	padding: 0;
+}
+
+body{
+	display: flex;
+	flex-direction: column;
+}
+
+section, li, ul{
+	display: flex;
+}
+
+#toolbar{
+	flex-direction: row;
+	justify-content: space-between;
+}
+#search{
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+#people{
+	flex-direction: column;
+}
+
+#people li{
+	flex-direction: row;
+	margin: .25cm;
+}
+
+#people .details{
+	font-size: .8em;
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: center;
+}
+
+#people ul{
+	flex-direction: column;
+}
+
+#people .avatar{
+	background: linear-gradient(to bottom, #d5f0f9 0%,#b0e6f8 100%); 
+	width: auto;
+	min-height: 50px;
+	min-width: 50px;
+	max-width: 1cm;
+	height: 1cm;
+	margin-right: .25cm;
+	border-radius: 1px 1px;
+	box-shadow:
+        0 0 0 1px white,
+        1px 1px 0 2px rgba(0,0,0,1),
+        inset 0 0 1px #000000;
+}
+
+@media screen and (min-width: 26em){
+	#people ul{
+		flex-direction: row;
+		flex-wrap: wrap;
+		flex-flow: row wrap;
+		justify-content: space-around;
+	}
+
+
+	#people li{
+		display: inline-flex;
+		flex-direction: column;
+		height: 5cm;
+		width: 5cm;
+		margin: .5cm;
+	}
+	
+	#people li:active{
+		background: green;
+	}
+
+	#people .avatar{
+		height: 200px;
+		width: auto;
+		max-width: 200px
+	}
+}
+</style>
+
+<section id="toolbar">
+ <button>&#9776;</button>
+ <span>
+ 	<button>&#9743;</button>
+ 	<button>+</button>
+</span>
+</section>
+
+<section id="search">
+  <button>All</button>
+  <input type="search">
+</section>
+
+<section id="people">
+	<ul>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?a" alt="">
+			<div class="details"><img alt="offline"> Wynell Adelson</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?b" alt="">
+			<div class="details"><img alt="offline"> Remona Bizier</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?c" alt="">
+			<div class="details"><img alt="offline"> Jarvis Burk</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?d" alt="">
+			<div class="details"><img alt="offline"> Cecille Lasker</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?e" alt="">
+			<div class="details"><img alt="offline"> Theresa Rohrbach</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?f" alt="">
+			<div class="details"><img alt="offline"> Larry Zufelt</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?g" alt="">
+			<div class="details"><img alt="offline"> Margert Braggs</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?h" alt="">
+			<div class="details"><img alt="offline"> Lakeshia Denicola</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?i" alt="">
+			<div class="details"><img alt="offline"> Melita Bockelman</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?j" alt="">
+			<div class="details"><img alt="offline"> Arlyne Levin</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?k" alt="">
+			<div class="details"><img alt="offline"> Lyn Siegal</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?l" alt="">
+			<div class="details"><img alt="offline"> Jasmin Poyer</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?m" alt="">
+			<div class="details"><img alt="offline"> Reggie Wene</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?n" alt="">
+			<div class="details"><img alt="offline"> Leigh Ocheltree</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?o" alt="">
+			<div class="details"><img alt="offline"> Debrah Villasenor</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?p" alt="">
+			<div class="details"><img alt="offline"> Clinton Lannon</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?q" alt="">
+			<div class="details"><img alt="offline"> Annabell Kyker</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?r" alt="">
+			<div class="details"><img alt="offline"> Joella Parkhill</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?s" alt="">
+			<div class="details"><img alt="offline"> Buford Stingley</div></li>
+		<li><img class="avatar" width="200" height="200" src="http://lorempixel.com/200/200/?t" alt="">
+			<div class="details"><img alt="offline"> Shalon Wong</div></li>
+	</ul>
+</section>
+

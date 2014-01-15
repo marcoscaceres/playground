@@ -1,0 +1,268 @@
+<!doctype html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=device-width">
+<style>
+html, body, fieldset, p, legend, button, sub{
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+
+html,body{
+	height: 100%;
+	font-family: "Helvetica Neue", sans-serif;
+	font-weight: 100;
+	font-size: 1em;
+	letter-spacing: .01em;
+}
+
+body{
+	display: flex;
+	flex-direction: column;
+	color: white;
+}
+
+#statusbar{
+	display: flex;
+	justify-content: space-between;
+	font-size: .7em;
+	padding: .1cm;
+	background: rgba(0,0,0,.9);
+}
+
+#lockscreen{
+	display: flex;
+	flex-direction: column;
+	flex: 2;
+	justify-content: center;
+	align-self: stretch;
+}
+
+.commonbg{
+	background-attachment: fixed;
+	background-image: url("bg.jpg");
+	background-size: cover;
+	transition: background-position .1s;
+}
+
+#keypad{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	max-width: 6cm;
+	border: none;
+	align-self: center;
+}
+
+#keypad p{
+	text-align: center;
+}
+
+#keypad > div{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: .3cm;
+}
+
+#keypad button{
+	color: white;
+	background-color: transparent;
+	border: none;
+	font-size: .8em;
+	padding-top: .1cm;
+}
+
+#keypad > div:last-child{
+	justify-content: center;
+}
+
+#keypad .phonekey{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: transparent;
+	border-radius: 1cm;
+	width: 1.5cm;
+	height: 1.5cm;
+	border: .05cm solid rgba(255,255,255,.8);
+	font-size: 1.5em;
+	transition: -webkit-filter .5s;
+	-webkit-filter: brightness(1.0) ;
+	filter: brightness(1)
+}
+
+#keypad .phonekey > sub{
+	letter-spacing: .05cm;
+	font-size: .3em;
+	font-weight: inherit;
+	text-transform: uppercase;
+}
+
+#keypad button:active{
+	background-color: rgba(127,127,127,.7);
+	transition: -webkit-filter .0s;
+	-webkit-filter: brightness(1.5) saturate(3.8);
+}
+
+#batteryprogress:before, #batterymeter:before{
+	position: absolute;
+	margin-left: -1.5%;
+	margin-top: -.04cm;
+	content: attr(value) "%";
+	font-size: .9em;
+}
+
+#batterymeter, #batteryprogress{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: transparent;
+	display: none;
+	border: thin solid white;
+	border-radius: 2px 2px;
+	height: .25cm;
+	width: .9cm;
+}
+
+#batterymeter.discharging, #batteryprogress.charging{
+	display: inline;
+}
+
+#batterymeter:-moz-meter-optimum::-moz-meter-bar {
+  background: white;
+}
+
+#batterymeter:-moz-meter-sub-optimum::-moz-meter-bar {
+  background: red;
+}
+
+#batterymeter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+  background: linear-gradient(#f77, #f77, #fcc 20%, #d44 45%, #d44 55%);
+}
+
+#batteryprogress.charging::-moz-progress-bar {
+	background: #4cd964;
+}
+
+#indicator{
+	display: flex;
+	justify-content: space-between;
+	padding-top: .3cm;
+	width: 45%;
+	margin: auto;
+	margin-bottom: 1cm;
+}
+
+#indicator > span{
+	border: .05cm solid rgba(255,255,255,.8);
+	border-radius: .3cm;
+	width: .3cm;
+	height: .3cm;
+	display: inline-block;
+}
+
+#emergencybutton, #cancelbutton{
+	position: absolute;
+	bottom: 0px;
+	padding: .5cm;
+}
+
+#emergencybutton{
+	left: 0px;
+}
+#cancelbutton{
+	right: 0px;
+}
+
+@media screen and (min-width: 40em) {
+	#emergencybutton, #cancelbutton{
+
+	}
+
+	#emergencybutton{
+		display: none;
+	}
+
+	#cancelbutton{
+		align-self: inherit;
+		position: absolute;
+		right: inherit;
+		padding: 0;
+		bottom: inherit;
+		right: inherit;
+		margin-left: 1cm;
+		margin-top: .5cm;
+	}
+}
+
+</style>
+
+<script>
+window.addEventListener("DOMContentLoaded", function(){
+	var battery = navigator.battery,
+		batteryMeter,
+		batteryProgress;
+
+	if(battery){
+		batteryMeter = document.querySelector("#batterymeter");
+		batteryProgress = document.querySelector("#batteryprogress");
+	    battery.addEventListener("levelchange", updateLevels);
+	    battery.addEventListener("chargingchange", chargingChanged);
+	    chargingChanged();
+	    updateLevels();
+	}
+
+	function updateLevels(){
+		batteryProgress.value = batteryMeter.value = battery.level;
+	}
+
+	function chargingChanged(e){
+		batteryProgress.classList.toggle("charging", battery.charging);
+		batteryMeter.classList.toggle("discharging", !battery.charging);
+	}
+
+});
+</script>
+
+<body class="commonbg"> 
+<section id="statusbar">
+	<p>No Sim</p>
+	<meter low="0.11" value="0" min="0.0" max="1.0" id="batterymeter"></meter>
+	<progress value="0" id="batteryprogress" max="1.0"></progress>
+</section>
+
+<section id="lockscreen"> 
+	<fieldset id="keypad">
+		<p>Enter Passcode</p>
+		<section id="indicator">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</section>
+	    
+		<div>
+		<button class="phonekey commonbg"><span>1</span></button>
+		<button class="phonekey commonbg"><span>2</span><sub>abc</sub></button>
+		<button class="phonekey commonbg"><span>3</span><sub>def</sub></button>
+		</div>
+		<div>
+		<button class="phonekey commonbg"><span>4</span><sub>ghi</sub></button>
+		<button class="phonekey commonbg"><span>5</span><sub>jkl</sub></button>
+		<button class="phonekey commonbg"><span>6</span><sub>mno</sub></button>
+		</div>
+		<div>
+		<button class="phonekey commonbg"><span>7</span><sub>pqrs</sub></button>
+		<button class="phonekey commonbg"><span>8</span><sub>tuv</sub></button>
+		<button class="phonekey commonbg"><span>9</span><sub>wxyz</sub></button>
+		</div>
+		<div>
+		<button id="emergencybutton">Emergency</button>
+		<button class="phonekey commonbg" id="zero"><span>0</span></button>
+		<button id="cancelbutton">Cancel</button>
+		</div>
+	</fieldset>
+</section>

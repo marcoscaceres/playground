@@ -1,0 +1,57 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+.installed #install-btn{
+	display: none;
+}
+</style>
+
+<h1>DOMContentLoaded</h1>
+ 
+<button id="install-btn">Install app</button>
+
+
+<output id="out"></output>
+
+<script>
+var manifest_url =  'http://192.168.0.15:8888/manifest.json';
+var out = document.querySelector("#out");
+function install(ev) {
+  ev.preventDefault();
+  // define the manifest URL
+  // install the app
+  var installLocFind = navigator.mozApps.install(manifest_url);
+  installLocFind.onsuccess = function(data) {
+    // App is installed, do something
+    document.body.classList.add("installed");
+  };
+  installLocFind.onerror = function() {
+    // App wasn't installed, info is in
+    // installapp.error.name
+    alert(installLocFind.error.name);
+  };
+};
+
+// get a reference to the button and call install() on click if the app isn't already installed. If it is, hide the button.
+var button = document.getElementById('install-btn');
+
+try{
+var installCheck = navigator.mozApps.checkInstalled(manifest_url);
+
+installCheck.onsuccess = function() {
+  if(!installCheck.result) {
+    return button.addEventListener('click', install);
+  };
+  document.body.classList.add("installed");
+};
+}catch(e){ 
+  out.innerHTML += "<br>" +  e;
+}
+
+
+window.addEventListener("DOMContentLoaded", function(){
+	var ori = window.screen.mozLockOrientation("landscape");
+  out.innerHTML += "<br>" + String(ori);
+});
+</script>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="montage-app-loaded"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="Calculator_files/tapeentry.css"><link rel="stylesheet" href="Calculator_files/scroll-bars.css"><link rel="stylesheet" href="Calculator_files/button.css"><link rel="stylesheet" href="Calculator_files/scroller.css"><link rel="stylesheet" href="Calculator_files/calculator.css"><link rel="stylesheet" href="Calculator_files/tape.css"><link rel="stylesheet" href="Calculator_files/mobile.css"><link rel="stylesheet" href="Calculator_files/main.css"><link rel="stylesheet" href="Calculator_files/progress.css"><link rel="stylesheet" href="Calculator_files/loading-panel.css">
+    <title>Calculator</title>
+    <meta charset="utf-8">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://montagejs.org/apps/calculator/asset/image/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://montagejs.org/apps/calculator/asset/image/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://montagejs.org/apps/calculator/asset/image/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="http://montagejs.org/apps/calculator/asset/image/apple-touch-icon-precomposed.png">
+
+    <script>
+        // Workaround for window.Touch on desktop browsers
+        if (!("ontouchstart" in window)) {
+            window.Touch = null;
+        }
+    </script>
+
+    
+    
+
+    <style type="text/css">
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+            margin: 0;
+            background: #EBEBEB;
+
+        }
+        #loadingPanel {
+            width: 100%;
+            height: 100%;
+            display: -webkit-box;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+            display: -moz-box;
+            -moz-box-align: center;
+            -moz-box-pack: center;
+            font: 1.2em sans-serif;
+            color: #555;
+            opacity: 0;
+        }
+        .montage-app-bootstrapping #loadingPanel {
+            opacity: 1;
+        }
+    </style>
+
+</head>
+<body><div data-montage-id="mainElement" class="main">
+            <div class=" calculator" data-montage-id="calculator">
+            <div class="calc-container">
+                <div class="cal-display">
+                    <div data-montage-id="MEM-indicator" class="memory-value montage-invisible"></div>
+                    <div class="cal-displayfield1" data-montage-id="currentEntry">132</div>
+                    <div class="led-container">
+                        <div class="led-entries" data-montage-id="ledRes"></div>
+                        <div class="led-entries" data-montage-id="led">132</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <div class="table-style">
+                        <div class="calc-row">
+                            <div class="calc-cell"><div role="button" data-montage-id="_M_add" class="button MEM cal-button-operators montage-Button">m+</div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_M_min" class="button MEM cal-button-operators montage-Button">m-</div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_MR_MC" class="button MEM cal-button-operators MR-MC montage-Button"><span class="MR">mr</span><span class="MC">mc</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_divide" class="button ARITH cal-button-operators divide montage-Button">÷</div></div>
+                        </div>
+                        <div class="calc-row">
+                            <div class="calc-cell"><div role="button" data-montage-id="_1" class="button cal-button-digits montage-Button"><span class="fontGradient">1</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_2" class="button cal-button-digits montage-Button"><span class="fontGradient">2</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_3" class="button cal-button-digits montage-Button"><span class="fontGradient">3</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_x" class="button ARITH cal-button-operators montage-Button">×</div></div>
+                        </div>
+                        <div class="calc-row">
+                            <div class="calc-cell"><div role="button" data-montage-id="_4" class="button cal-button-digits montage-Button"><span class="fontGradient">4</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_5" class="button cal-button-digits montage-Button"><span class="fontGradient">5</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_6" class="button cal-button-digits montage-Button"><span class="fontGradient">6</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_plus" class="button ARITH cal-button-operators montage-Button">+</div></div>
+                        </div>
+                        <div class="calc-row">
+                            <div class="calc-cell"><div role="button" data-montage-id="_7" class="button cal-button-digits montage-Button"><span class="fontGradient">7</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_8" class="button cal-button-digits montage-Button"><span class="fontGradient">8</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_9" class="button cal-button-digits montage-Button"><span class="fontGradient">9</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_minus" class="button ARITH cal-button-operators montage-Button">−</div></div>
+                        </div>
+                        <div class="calc-row">
+                            <div class="calc-cell"><div role="button" data-montage-id="_DEL" class="button DEL cal-button-operators montage-Button"><span class="CLEAR fontGradient">C</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_0" class="button cal-button-digits montage-Button"><span class="fontGradient">0</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_dot" class="button cal-button-digits montage-Button"><span class="fontGradient">•</span></div></div>
+                            <div class="calc-cell"><div role="button" data-montage-id="_equal" class="button EQUAL cal-button-operators montage-Button">=</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class=" tape" data-montage-id="tape">
+            <div style="border-left: 2px gray; height: 100%; width: 100%; float: right">
+                <div style="; position: relative; width: 100%; height: 100%; overflow: hidden" data-montage-id="_scrollview" class="montage-Scroller">
+        <div data-montage-id="scrollbars" class="montage-ScrollBars">
+        <div style="display: block; transform: translate(0px, 2px); transition: none 0s ease 0s ; opacity: 0;" data-montage-id="top" class="montage-ScrollBars-top"></div>
+        <div style="display: block; height: 834px; clip: rect(3px, 6px, 835px, -1px); transform: translate(0px, 2px);" data-montage-id="bottom-clip" class="montage-ScrollBars-bottomClip">
+            <div style="height: 834px; transform: translate(0px, -103px); transition: none 0s ease 0s ; opacity: 0;" data-montage-id="bottom" class="montage-ScrollBars-bottom"></div>
+        </div>
+        <div style="display: none;" data-montage-id="left" class="montage-ScrollBars-left"></div>
+        <div style="display: none;" data-montage-id="right-clip" class="montage-ScrollBars-rightClip">
+            <div data-montage-id="right" class="montage-ScrollBars-right"></div>
+        </div>
+    </div>
+        <div style="transform: translate(0px, 0px);" data-montage-id="content" class="montage-Scroller-content montage-Slot">
+                    <div data-montage-id="tape-content">
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs">22 × 6</span>
+                    <span data-montage-id="rhs" class="rhs">132</span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment">Calculator</div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    
+                        <div data-montage-id="tape-entry" class="tape-entry content">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
+        </div>
+                    </div>
+                </div>
+    </div>
+            </div>
+        </div>
+        </div></body></html>
