@@ -23,13 +23,13 @@ var details = {
 var options = {
   requestPayerEmail: true
 };
-var payment = new PaymentRequest (
-    supportedInstruments,  // required payment method data including payment method identifiers
-    details,     // required transaction information 
-    options      // optional information like shipping or contact info to be returned 
+var payment = new PaymentRequest(
+  supportedInstruments,  // required payment method data including payment method identifiers
+  details,     // required transaction information 
+  options      // optional information like shipping or contact info to be returned 
 );
 
-function doPaymentRequest(){
+function doPaymentRequest() {
   payment.show().then(response => {
     response.complete('success');
   });
