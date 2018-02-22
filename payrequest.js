@@ -20,8 +20,11 @@ var details = {
     amount: { currency: "USD", value: '18.99' },
   }],
 };
-
 var options = {
   requestPayerEmail: true
 };
+
+paymentRequest.show().then(response => {
+  response.complete('success');
+});
 
