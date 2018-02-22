@@ -8,6 +8,10 @@ const methodData = [
 ];
 
 const details = {
+  displayItems: [{
+    label: "test",
+    amount: { currency: "USD", value: "1000.00" },
+  }],
   total: {
     label: "Total due",
     amount: { currency: "USD", value: "1000.00" },
