@@ -1,6 +1,6 @@
 const methodData = [
   {
-    supportedMethods: "basic-card",
+    supportedMethods: ["basic-card"],
     data: {
       supportedTypes: ["debit", "credit"],
     },
@@ -29,7 +29,7 @@ const debitCardFee = {
 const modifiers = [
   {
     additionalDisplayItems: [creditCardFee],
-    supportedMethods: "basic-card",
+    supportedMethods: ["basic-card"],
     total: {
       label: "Total due",
       amount: { currency: "USD", value: "500.00" },
@@ -40,7 +40,7 @@ const modifiers = [
   },
   {
     additionalDisplayItems: [debitCardFee],
-    supportedMethods: "basic-card",
+    supportedMethods: ["basic-card"],
     total: {
       label: "Total due",
       amount: { currency: "USD", value: "2000.00" },
