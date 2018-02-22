@@ -54,22 +54,9 @@ async function doPaymentRequest() {
     const request = new PaymentRequest(methodData, details);
     // See below for a detailed example of handling these events
     const response = await request.show();
-    await validateResponse(response);
+    await response.complete("unknown");
   } catch (err) {
     // AbortError, SecurityError
     console.error(err);
   }
 }
-async function validateResponse(response) {
-  try {
-    if (await checkAllValuesAreGood(response)) {
-      await response.complete("success");
-    } else {
-      await response.complete("fail");
-    }
-  } catch (err) {
-    // Something went wrong...
-    await response.complete("fail");
-  }
-}
-
