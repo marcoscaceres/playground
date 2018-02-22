@@ -24,7 +24,7 @@ var options = {
   requestPayerEmail: true
 };
 var payment = new PaymentRequest (
-    methodData,  // required payment method data including payment method identifiers 
+    supportedInstruments,  // required payment method data including payment method identifiers
     details,     // required transaction information 
     options      // optional information like shipping or contact info to be returned 
 );
