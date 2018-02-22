@@ -32,6 +32,6 @@ var payment = new PaymentRequest(
 function doPaymentRequest() {
   payment.show().then(response => {
     response.complete('success');
-  });
+  }).catch(err => console.error(err));
 }
 
