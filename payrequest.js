@@ -56,7 +56,6 @@ async function doPaymentRequest() {
     const response = await request.show();
     await response.complete("unknown");
   } catch (err) {
-    // AbortError, SecurityError
-    console.error(err);
+    console.error("from catch", err);
   }
 }
