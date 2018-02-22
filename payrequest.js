@@ -75,4 +75,4 @@ async function validateResponse(response) {
     await response.complete("fail");
   }
 }
-doPaymentRequest();
+
