@@ -24,7 +24,9 @@ var options = {
   requestPayerEmail: true
 };
 
-paymentRequest.show().then(response => {
-  response.complete('success');
-});
+function doPaymentRequest(){
+  paymentRequest.show().then(response => {
+    response.complete('success');
+  });
+}
 
