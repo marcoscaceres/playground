@@ -30,7 +30,7 @@ var payment = new PaymentRequest (
 );
 
 function doPaymentRequest(){
-  paymentRequest.show().then(response => {
+  payment.show().then(response => {
     response.complete('success');
   });
 }
