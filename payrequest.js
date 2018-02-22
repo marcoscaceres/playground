@@ -55,10 +55,8 @@ const details = {
 async function doPaymentRequest() {
   try {
     console.log("OH HAI!!!");
-    const request = new PaymentRequest(methodData, details);
-    console.log(request);
+    const request = new PaymentRequest(methodData, details, {requestPayerName: true});
     // See below for a detailed example of handling these events
-    window.request = request;
     const response = await request.show();
   } catch (err) {
     // AbortError, SecurityError
