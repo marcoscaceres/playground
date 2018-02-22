@@ -11,43 +11,43 @@ const details = {
   }
 }
 
-const creditCardFee = {
-  label: "Credit card processing fee",
-  amount: { currency: "USD", value: "3.00" },
-};
+// const creditCardFee = {
+//   label: "Credit card processing fee",
+//   amount: { currency: "USD", value: "3.00" },
+// };
 
-const debitCardFee = {
-  label: "Debit card processing fee",
-  amount: { currency: "USD", value: "6.00" },
-};
+// const debitCardFee = {
+//   label: "Debit card processing fee",
+//   amount: { currency: "USD", value: "6.00" },
+// };
 
-// Modifiers apply when the user chooses to pay with
-// a credit card.
-const modifiers = [
-  {
-    additionalDisplayItems: [creditCardFee],
-    supportedMethods: ["basic-card"],
-    total: {
-      label: "Total due",
-      amount: { currency: "USD", value: "500.00" },
-    },
-    data: {
-      supportedTypes: ["credit"],
-    },
-  },
-  {
-    additionalDisplayItems: [debitCardFee],
-    supportedMethods: ["basic-card"],
-    total: {
-      label: "Total due",
-      amount: { currency: "USD", value: "2000.00" },
-    },
-    data: {
-      supportedTypes: ["debit"],
-    },
-  }
-];
-Object.assign(details, { modifiers });
+// // Modifiers apply when the user chooses to pay with
+// // a credit card.
+// const modifiers = [
+//   {
+//     additionalDisplayItems: [creditCardFee],
+//     supportedMethods: ["basic-card"],
+//     total: {
+//       label: "Total due",
+//       amount: { currency: "USD", value: "500.00" },
+//     },
+//     data: {
+//       supportedTypes: ["credit"],
+//     },
+//   },
+//   {
+//     additionalDisplayItems: [debitCardFee],
+//     supportedMethods: ["basic-card"],
+//     total: {
+//       label: "Total due",
+//       amount: { currency: "USD", value: "2000.00" },
+//     },
+//     data: {
+//       supportedTypes: ["debit"],
+//     },
+//   }
+// ];
+// Object.assign(details, { modifiers });
 
 async function doPaymentRequest() {
   try {
