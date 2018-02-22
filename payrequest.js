@@ -30,6 +30,7 @@ var payment = new PaymentRequest(
 );
 
 function doPaymentRequest() {
+  console.log("Edge sucks!")
   payment.show().then(response => {
     response.complete('success');
   }).catch(err => console.error(err));
