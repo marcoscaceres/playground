@@ -27,23 +27,15 @@ const modifiers = [
   {
     additionalDisplayItems: [creditCardFee],
     supportedMethods: ["basic-card"],
-    total: {
-      label: "Total due",
-      amount: { currency: "USD", value: "500.00" },
-    },
     data: {
-      supportedTypes: "credit",
+      supportedTypes: ["credit"],
     },
   },
   {
     additionalDisplayItems: [debitCardFee],
     supportedMethods: ["basic-card"],
-    total: {
-      label: "Total due",
-      amount: { currency: "USD", value: "2000.00" },
-    },
     data: {
-      supportedTypes: "debit",
+      supportedTypes: ["debit"],
     },
   }
 ];
