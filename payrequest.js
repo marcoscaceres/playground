@@ -1,38 +1,61 @@
-var supportedInstruments = [{
-  supportedMethods: ['basic-card'],
-  data: {
-    supportedNetworks: ['visa', 'mastercard', 'amex'],
-    supportedTypes: ['credit']
-    //for test transactions uncomment the test flag below
-    //environment: 'TEST'
-  }
-}];
-var details = {
-  total: {
-    label: 'Total (USD)',
-    amount: { currency: 'USD', value: '193.98' }
+const methodData = [
+  {
+    supportedMethods: ["basic-card"],
   },
-  displayItems: [{
-    label: 'Subtotal',
-    amount: { currency: 'USD', value: '174.99' }
-  }, {
-    label: 'Taxes',
-    amount: { currency: "USD", value: '18.99' },
-  }],
-};
-var options = {
-  requestPayerEmail: true
-};
-var payment = new PaymentRequest(
-  supportedInstruments,  // required payment method data including payment method identifiers
-  details,     // required transaction information 
-  options      // optional information like shipping or contact info to be returned 
-);
+];
 
-function doPaymentRequest() {
-  console.log("Edge sucks!")
-  payment.show().then(response => {
-    response.complete('success');
-  }).catch(err => console.error(err));
+const details = {
+  total: {
+    label: "Total due",
+    amount: { currency: "USD", value: "1000.00" },
+  }
 }
 
+const creditCardFee = {
+  label: "Credit card processing fee",
+  amount: { currency: "USD", value: "3.00" },
+};
+
+const debitCardFee = {
+  label: "Debit card processing fee",
+  amount: { currency: "USD", value: "6.00" },
+};
+
+// Modifiers apply when the user chooses to pay with
+// a credit card.
+const modifiers = [
+  {
+    additionalDisplayItems: [creditCardFee],
+    supportedMethods: ["basic-card"],
+    total: {
+      label: "Total due",
+      amount: { currency: "USD", value: "500.00" },
+    },
+    data: {
+      supportedTypes: "credit",
+    },
+  },
+  {
+    additionalDisplayItems: [debitCardFee],
+    supportedMethods: ["basic-card"],
+    total: {
+      label: "Total due",
+      amount: { currency: "USD", value: "2000.00" },
+    },
+    data: {
+      supportedTypes: "debit",
+    },
+  }
+];
+Object.assign(details, { modifiers });
+
+async function doPaymentRequest() {
+  try {
+    const request = new PaymentRequest(methodData, details);
+    // See below for a detailed example of handling these events
+    const response = await request.show();
+    await response.complete("unknown");
+  } catch (err) {
+    console.error(err);
+  }
+}
