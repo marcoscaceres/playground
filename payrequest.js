@@ -1,23 +1,27 @@
-const methodData = [
-  {
-    supportedMethods: ["visa"],
-  },
-];
-
-const details = {
+var supportedInstruments = [{
+  supportedMethods: ['basic-card'],
+  data: {
+    supportedNetworks: ['visa', 'mastercard', 'amex'],
+    supportedTypes: ['credit']
+    //for test transactions uncomment the test flag below
+    //environment: 'TEST'
+  }
+}];
+var details = {
   total: {
-    label: "Total due",
-    amount: { currency: "USD", value: "1000.00" },
-  }
-}
+    label: 'Total (USD)',
+    amount: { currency: 'USD', value: '193.98' }
+  },
+  displayItems: [{
+    label: 'Subtotal',
+    amount: { currency: 'USD', value: '174.99' }
+  }, {
+    label: 'Taxes',
+    amount: { currency: "USD", value: '18.99' },
+  }],
+};
 
-async function doPaymentRequest() {
-  try {
-    const request = new PaymentRequest(methodData, details);
-    // See below for a detailed example of handling these events
-    const response = await request.show();
-    await response.complete("unknown");
-  } catch (err) {
-    console.error("from catch", err);
-  }
-}
+var options = {
+  requestPayerEmail: true
+};
+
