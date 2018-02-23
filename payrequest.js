@@ -13,7 +13,7 @@ const details = {
 
 const allCardsFee = {
   label: "ALL CARDS FEE",
-  amount: { currency: "USD", value: "10101010.00" },
+  amount: { currency: "USD", value: "5.00" },
 };
 
 const creditCardFee = {
@@ -34,39 +34,6 @@ const modifiers = [
     supportedMethods: ["basic-card"],
     total: {
       label: "ALL CARD TOTAL",
-      amount: { currency: "USD", value: "1111.00" },
-    },
-  },,
-  {
-    additionalDisplayItems: [creditCardFee],
-    supportedMethods: ["basic-card"],
-    data: {
-      supportedNetworks: ["visa"],
-    },
-    total: {
-      label: "VISA 1",
-      amount: { currency: "USD", value: "1111.00" },
-    },
-  },
-  {
-    additionalDisplayItems: [debitCardFee],
-    supportedMethods: ["basic-card"],
-    data: {
-      supportedNetworks: ["mastercard"],
-    },
-    total: {
-      label: "MASTERCARD 1",
-      amount: { currency: "USD", value: "2222.00" },
-    },
-  },
-  {
-    additionalDisplayItems: [debitCardFee],
-    supportedMethods: ["basic-card"],
-    data: {
-      supportedNetworks: ["visa"],
-    },
-    total: {
-      label: "VISA 2",
       amount: { currency: "USD", value: "3333.00" },
     },
   },
@@ -74,11 +41,24 @@ const modifiers = [
     additionalDisplayItems: [debitCardFee],
     supportedMethods: ["basic-card"],
     data: {
+      supportedTypes: ["debit"],
       supportedNetworks: ["mastercard"],
     },
     total: {
-      label: "MASTERCARD 2",
-      amount: { currency: "USD", value: "44444.00" },
+      label: "DEBIT CARD FEE",
+      amount: { currency: "USD", value: "1111.00" },
+    },
+  },
+  {
+    additionalDisplayItems: [creditCardFee],
+    supportedMethods: ["basic-card"],
+    data: {
+      supportedTypes: ["credit"],
+      supportedNetworks: ["visa"],
+    },
+    total: {
+      label: "VISA 1",
+      amount: { currency: "USD", value: "2222.00" },
     },
   },
 ];
