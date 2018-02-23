@@ -30,6 +30,10 @@ const modifiers = [
     data: {
       supportedNetworks: ["visa"],
     },
+    total: {
+      label: "VISA 1",
+      amount: { currency: "USD", value: "1111.00" },
+    },
   },
   {
     additionalDisplayItems: [debitCardFee],
@@ -37,7 +41,33 @@ const modifiers = [
     data: {
       supportedNetworks: ["mastercard"],
     },
-  }
+    total: {
+      label: "MASTERCARD 1",
+      amount: { currency: "USD", value: "2222.00" },
+    },
+  },
+  {
+    additionalDisplayItems: [debitCardFee],
+    supportedMethods: ["basic-card"],
+    data: {
+      supportedNetworks: ["visa"],
+    },
+    total: {
+      label: "VISA 2",
+      amount: { currency: "USD", value: "3333.00" },
+    },
+  },
+  {
+    additionalDisplayItems: [debitCardFee],
+    supportedMethods: ["basic-card"],
+    data: {
+      supportedNetworks: ["mastercard"],
+    },
+    total: {
+      label: "MASTERCARD 2",
+      amount: { currency: "USD", value: "4444.00" },
+    },
+  },
 ];
 Object.assign(details, { modifiers });
 
@@ -51,5 +81,3 @@ async function doPaymentRequest() {
     console.error(err);
   }
 }
-
-doPaymentRequest();
