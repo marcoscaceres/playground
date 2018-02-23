@@ -51,3 +51,5 @@ async function doPaymentRequest() {
     console.error(err);
   }
 }
+
+doPaymentRequest();
