@@ -28,14 +28,14 @@ const modifiers = [
     additionalDisplayItems: [creditCardFee],
     supportedMethods: ["basic-card"],
     data: {
-      supportedTypes: ["credit"],
+      supportedNetworks: ["visa"],
     },
   },
   {
     additionalDisplayItems: [debitCardFee],
     supportedMethods: ["basic-card"],
     data: {
-      supportedTypes: ["debit"],
+      supportedNetworks: ["mastercard"],
     },
   }
 ];
