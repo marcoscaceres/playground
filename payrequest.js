@@ -11,6 +11,11 @@ const details = {
   }
 }
 
+const allCardsFee = {
+  label: "ALL CARDS FEE",
+  amount: { currency: "USD", value: "10101010.00" },
+};
+
 const creditCardFee = {
   label: "Credit card processing fee",
   amount: { currency: "USD", value: "3.00" },
@@ -24,6 +29,14 @@ const debitCardFee = {
 // Modifiers apply when the user chooses to pay with
 // a credit card.
 const modifiers = [
+  {
+    additionalDisplayItems: [allCardsFee],
+    supportedMethods: ["basic-card"],
+    total: {
+      label: "ALL CARD TOTAL",
+      amount: { currency: "USD", value: "1111.00" },
+    },
+  },,
   {
     additionalDisplayItems: [creditCardFee],
     supportedMethods: ["basic-card"],
@@ -65,7 +78,7 @@ const modifiers = [
     },
     total: {
       label: "MASTERCARD 2",
-      amount: { currency: "USD", value: "4444.00" },
+      amount: { currency: "USD", value: "44444.00" },
     },
   },
 ];
