@@ -3,7 +3,7 @@ const methodData = [
     supportedMethods: ["basic-card"],
   },
 ];
-
+// test 
 const details = {
   total: {
     label: "Total due",
