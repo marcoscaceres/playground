@@ -1,0 +1,922 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="generator" content="ReSpec 24.7.0"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><style>/* --- EXAMPLES --- */
+  span.example-title {
+      text-transform: none;
+  }
+  aside.example, div.example, div.illegal-example {
+      padding: 0.5em;
+      margin: 1em 0;
+      position: relative;
+      clear: both;
+  }
+  div.illegal-example { color: red }
+  div.illegal-example p { color: black }
+  aside.example, div.example {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+      border-color: #e0cb52;
+      background: #fcfaee;
+  }
+
+  aside.example div.example {
+      border-left-width: .1em;
+      border-color: #999;
+      background: #fff;
+  }
+  aside.example div.example span.example-title {
+      color: #999;
+  }
+  </style><style>/* --- ISSUES/NOTES --- */
+  .issue-label {
+      text-transform: initial;
+  }
+
+  .warning > p:first-child { margin-top: 0 }
+  .warning {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+  }
+  span.warning { padding: .1em .5em .15em; }
+
+  .issue.closed span.issue-number {
+      text-decoration: line-through;
+  }
+
+  .warning {
+      border-color: #f11;
+      border-width: .2em;
+      border-style: solid;
+      background: #fbe9e9;
+  }
+
+  .warning-title:before{
+      content: "⚠"; /*U+26A0 WARNING SIGN*/
+      font-size: 3em;
+      float: left;
+      height: 100%;
+      padding-right: .3em;
+      vertical-align: top;
+      margin-top: -0.5em;
+  }
+
+  li.task-list-item {
+      list-style: none;
+  }
+
+  input.task-list-item-checkbox {
+      margin: 0 0.35em 0.25em -1.6em;
+      vertical-align: middle;
+  }
+
+  .issue a.respec-gh-label {
+    padding: 5px;
+    margin: 0 2px 0 2px;
+    font-size: 10px;
+    text-transform: none;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    position: relative;
+    bottom: 2px;
+    border: none;
+  }
+
+  .issue a.respec-label-dark {
+    color: #fff;
+    background-color: #000;
+  }
+
+  .issue a.respec-label-light {
+    color: #000;
+    background-color: #fff;
+  }
+  </style>
+      <title>
+        Payment Method Identifiers
+      </title>
+
+
+
+    <style id="respec-mainstyle">/*****************************************************************
+   * ReSpec 3 CSS
+   * Robin Berjon - http://berjon.com/
+   *****************************************************************/
+
+  /* Override code highlighter background */
+  .hljs {
+    background: transparent !important;
+  }
+
+  /* --- INLINES --- */
+  h1 abbr,
+  h2 abbr,
+  h3 abbr,
+  h4 abbr,
+  h5 abbr,
+  h6 abbr,
+  a abbr {
+    border: none;
+  }
+
+  dfn {
+    font-weight: bold;
+  }
+
+  a.internalDFN {
+    color: inherit;
+    border-bottom: 1px solid #99c;
+    text-decoration: none;
+  }
+
+  a.externalDFN {
+    color: inherit;
+    border-bottom: 1px dotted #ccc;
+    text-decoration: none;
+  }
+
+  a.bibref {
+    text-decoration: none;
+  }
+
+  #references :target {
+    background: #eaf3ff;
+  }
+
+  cite .bibref {
+    font-style: normal;
+  }
+
+  code {
+    color: #c83500;
+  }
+
+  th code {
+    color: inherit;
+  }
+
+  /* --- TOC --- */
+
+  .toc a,
+  .tof a {
+    text-decoration: none;
+  }
+
+  a .secno,
+  a .figno {
+    color: #000;
+  }
+
+  ul.tof,
+  ol.tof {
+    list-style: none outside none;
+  }
+
+  .caption {
+    margin-top: 0.5em;
+    font-style: italic;
+  }
+
+  /* --- TABLE --- */
+
+  table.simple {
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-bottom: 3px solid #005a9c;
+  }
+
+  .simple th {
+    background: #005a9c;
+    color: #fff;
+    padding: 3px 5px;
+    text-align: left;
+  }
+
+  .simple th[scope="row"] {
+    background: inherit;
+    color: inherit;
+    border-top: 1px solid #ddd;
+  }
+
+  .simple td {
+    padding: 3px 10px;
+    border-top: 1px solid #ddd;
+  }
+
+  .simple tr:nth-child(even) {
+    background: #f0f6ff;
+  }
+
+  /* --- DL --- */
+
+  .section dd>p:first-child {
+    margin-top: 0;
+  }
+
+  .section dd>p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section dd {
+    margin-bottom: 1em;
+  }
+
+  .section dl.attrs dd,
+  .section dl.eldef dd {
+    margin-bottom: 0;
+  }
+
+  #issue-summary>ul,
+  .respec-dfn-list {
+    column-count: 2;
+  }
+
+  #issue-summary li,
+  .respec-dfn-list li {
+    list-style: none;
+  }
+
+  details.respec-tests-details {
+    margin-left: 1em;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  details.respec-tests-details>* {
+    padding-right: 2em;
+  }
+
+  details.respec-tests-details[open] {
+    z-index: 999999;
+    position: absolute;
+    border: thin solid #cad3e2;
+    border-radius: 0.3em;
+    background-color: white;
+    padding-bottom: 0.5em;
+  }
+
+  details.respec-tests-details[open]>summary {
+    border-bottom: thin solid #cad3e2;
+    padding-left: 1em;
+    margin-bottom: 1em;
+    line-height: 2em;
+  }
+
+  details.respec-tests-details>ul {
+    width: 100%;
+    margin-top: -0.3em;
+  }
+
+  details.respec-tests-details>li {
+    padding-left: 1em;
+  }
+
+  a[href].self-link:hover {
+    opacity: 1;
+    text-decoration: none;
+    background-color: transparent;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    position: relative;
+  }
+
+  aside.example .marker > a.self-link {
+    color: inherit;
+  }
+
+  h2>a.self-link,
+  h3>a.self-link,
+  h4>a.self-link,
+  h5>a.self-link,
+  h6>a.self-link {
+    border: none;
+    color: inherit;
+    font-size: 83%;
+    height: 2em;
+    left: -1.6em;
+    opacity: .5;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top: 0;
+    transition: opacity .2s;
+    width: 2em;
+  }
+
+  h2>a.self-link::before,
+  h3>a.self-link::before,
+  h4>a.self-link::before,
+  h5>a.self-link::before,
+  h6>a.self-link::before {
+    content: "§";
+    display: block;
+  }
+
+  @media (max-width: 767px) {
+    dd {
+      margin-left: 0;
+    }
+
+    /* Don't position self-link in headings off-screen */
+    h2>a.self-link,
+    h3>a.self-link,
+    h4>a.self-link,
+    h5>a.self-link,
+    h6>a.self-link {
+      left: auto;
+      top: auto;
+    }
+  }
+
+  @media print {
+    .removeOnSave {
+      display: none;
+    }
+  }
+  </style><link rel="canonical" href="https://www.w3.org/TR/payment-method-id/"><style>/*
+
+  github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+  */
+
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #333;
+    background: #f8f8f8;
+  }
+
+  .hljs-comment,
+  .hljs-quote {
+    color: #998;
+    font-style: italic;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-subst {
+    color: #333;
+    font-weight: bold;
+  }
+
+  .hljs-number,
+  .hljs-literal,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-tag .hljs-attr {
+    color: #008080;
+  }
+
+  .hljs-string,
+  .hljs-doctag {
+    color: #d14;
+  }
+
+  .hljs-title,
+  .hljs-section,
+  .hljs-selector-id {
+    color: #900;
+    font-weight: bold;
+  }
+
+  .hljs-subst {
+    font-weight: normal;
+  }
+
+  .hljs-type,
+  .hljs-class .hljs-title {
+    color: #458;
+    font-weight: bold;
+  }
+
+  .hljs-tag,
+  .hljs-name,
+  .hljs-attribute {
+    color: #000080;
+    font-weight: normal;
+  }
+
+  .hljs-regexp,
+  .hljs-link {
+    color: #009926;
+  }
+
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #990073;
+  }
+
+  .hljs-built_in,
+  .hljs-builtin-name {
+    color: #0086b3;
+  }
+
+  .hljs-meta {
+    color: #999;
+    font-weight: bold;
+  }
+
+  .hljs-deletion {
+    background: #fdd;
+  }
+
+  .hljs-addition {
+    background: #dfd;
+  }
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    font-weight: bold;
+  }
+  </style><script id="initialUserConfig" type="application/json">{
+    "formerEditors": [
+      {
+        "name": "Adrian Bateman",
+        "company": "Microsoft Corporation",
+        "w3cid": 42763
+      }
+    ],
+    "editors": [
+      {
+        "name": "Marcos Cáceres",
+        "company": "Mozilla",
+        "w3cid": 39125
+      },
+      {
+        "name": "Domenic Denicola",
+        "company": "Google",
+        "w3cid": 52873
+      },
+      {
+        "name": "Zach Koch",
+        "company": "Google",
+        "w3cid": 76588
+      },
+      {
+        "name": "Roy McElmurry",
+        "company": "Facebook",
+        "w3cid": 88345
+      }
+    ],
+    "crEnd": "2019-05-08",
+    "github": "https://github.com/w3c/payment-method-id",
+    "implementationReportURI": "https://w3c.github.io/test-results/payment-method-id/all.html",
+    "license": "w3c-software-doc",
+    "previousMaturity": "CR",
+    "previousPublishDate": "2017-09-14",
+    "specStatus": "CR",
+    "testSuiteURI": "https://w3c-test.org/payment-method-id/",
+    "wg": "Web Payments Working Group",
+    "wgPatentURI": "https://www.w3.org/2004/01/pp-impl/83744/status",
+    "wgURI": "https://www.w3.org/Payments/WG/",
+    "publishDate": "2019-04-02",
+    "publishISODate": "2019-04-02T00:00:00.000Z",
+    "generatedSubtitle": "Candidate Recommendation 02 April 2019"
+  }</script><meta name="description" content="This specification defines payment method identifiers and how they are
+          validated, and, where applicable, minted and formally registered with
+          the W3C. Other specifications (e.g.,
+          the Payment Request API) make use of
+          these identifiers to facilitate monetary transactions on the web
+          platform."><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-CR"></head>
+    <body class="h-entry informative toc-inline"><div class="head">
+        <a href="https://www.w3.org/" class="logo"><img alt="W3C" width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C"></a> <h1 id="title" class="title p-name">Payment Method Identifiers</h1>
+
+        <h2>
+          <abbr title="World Wide Web Consortium">W3C</abbr> Candidate Recommendation
+          <time class="dt-published" datetime="2019-04-02">02 April 2019</time>
+        </h2>
+        <dl>
+          <dt>This version:</dt><dd>
+                  <a class="u-url" href="https://www.w3.org/TR/2019/CR-payment-method-id-20190402/">https://www.w3.org/TR/2019/CR-payment-method-id-20190402/</a>
+                </dd><dt>Latest published version:</dt><dd>
+                  <a href="https://www.w3.org/TR/payment-method-id/">https://www.w3.org/TR/payment-method-id/</a>
+                </dd>
+          <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/payment-method-id/">https://w3c.github.io/payment-method-id/</a></dd>
+          <dt>Test suite:</dt><dd><a href="https://w3c-test.org/payment-method-id/">https://w3c-test.org/payment-method-id/</a></dd>
+          <dt>Implementation report:</dt><dd>
+                  <a href="https://w3c.github.io/test-results/payment-method-id/all.html">https://w3c.github.io/test-results/payment-method-id/all.html</a>
+                </dd>
+
+
+          <dt>Previous version:</dt><dd><a href="https://www.w3.org/TR/2017/CR-payment-method-id-20170914/">https://www.w3.org/TR/2017/CR-payment-method-id-20170914/</a></dd>
+
+          <dt>Editors:</dt>
+          <dd class="p-author h-card vcard" data-editor-id="39125"><span class="p-name fn">Marcos Cáceres</span>
+              (Mozilla)
+            </dd><dd class="p-author h-card vcard" data-editor-id="52873"><span class="p-name fn">Domenic Denicola</span>
+              (Google)
+            </dd><dd class="p-author h-card vcard" data-editor-id="76588"><span class="p-name fn">Zach Koch</span>
+              (Google)
+            </dd><dd class="p-author h-card vcard" data-editor-id="88345"><span class="p-name fn">Roy McElmurry</span>
+              (Facebook)
+            </dd>
+          <dt>
+                  Former editor:
+                </dt><dd class="p-author h-card vcard" data-editor-id="42763"><span class="p-name fn">Adrian Bateman</span>
+              (Microsoft Corporation)
+            </dd>
+
+          <dt>Participate:</dt><dd>
+        <a href="https://github.com/w3c/payment-method-id/">GitHub w3c/payment-method-id</a>
+      </dd><dd>
+        <a href="https://github.com/w3c/payment-method-id/issues/">File a bug</a>
+      </dd><dd>
+        <a href="https://github.com/w3c/payment-method-id/commits/gh-pages">Commit history</a>
+      </dd><dd>
+        <a href="https://github.com/w3c/payment-method-id/pulls/">Pull requests</a>
+      </dd>
+        </dl>
+
+
+
+        <p class="copyright">
+        <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+        ©
+        2019
+
+        <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+        <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>,
+        <a href="https://ev.buaa.edu.cn/">Beihang</a>).
+        <abbr title="World Wide Web Consortium">W3C</abbr> <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+        <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a rel="license" href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules
+        apply.
+      </p>
+        <hr title="Separator for header">
+      </div>
+      <section id="abstract" class="introductory"><h2>Abstract</h2>
+        <p>
+          This specification defines payment method identifiers and how they are
+          validated, and, where applicable, minted and formally registered with
+          the <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a>. Other specifications (e.g.,
+          the <a href="https://www.w3.org/TR/payment-request/">Payment Request API</a>) make use of
+          these identifiers to facilitate monetary transactions on the web
+          platform.
+        </p>
+      </section>
+      <section id="sotd" class="introductory"><h2>Status of This Document</h2><p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at https://www.w3.org/TR/.</em></p>
+        <p>
+          The working group will demonstrate implementation experience by
+          producing an <a href="https://w3c.github.io/test-results/payment-method-id/all.html">implementation
+          report</a>. The report will show two or more independent
+          implementations passing each mandatory test in the <a href="https://w3c-test.org/payment-method-id/">test suite</a> (i.e., each
+          test corresponds to a <em class="rfc2119" title="MUST">MUST</em> requirement of the specification).
+        </p>
+        <p>
+          There has been no change in dependencies on other workings groups
+          during the development of this specification.
+        </p>
+        <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Note</span></div><p class="">
+          Please file any issues with this specification in the <a href="https://github.com/w3c/payment-method-id/issues">payment method
+          identifiers repository</a> on GitHub.
+        </p></div>
+      <p>
+                          This document was published by the <a href="https://www.w3.org/Payments/WG/">Web Payments Working Group</a> as
+                          a Candidate Recommendation.
+                          This document is intended to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation.
+                        </p><p>
+        <a href="https://github.com/w3c/payment-method-id/issues/">GitHub Issues</a> are preferred for
+              discussion of this specification.
+
+
+      </p><p>
+
+                    <abbr title="World Wide Web Consortium">W3C</abbr> publishes a Candidate Recommendation to indicate that the document is believed to be
+                    stable and to encourage implementation by the developer community. This Candidate
+                    Recommendation is expected to advance to Proposed Recommendation no earlier than
+                    08 May 2019.
+
+
+
+                              </p><p>
+        Please see the Working Group's
+        <a href="https://w3c.github.io/test-results/payment-method-id/all.html">implementation report</a>.
+      </p><p>
+        Publication as a Candidate Recommendation does not imply endorsement by the
+        <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may be updated, replaced or
+        obsoleted by other documents at any time. It is inappropriate to cite this
+        document as other than work in progress.
+      </p><p>
+
+          This document was produced by a group
+          operating under the
+          <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+
+
+                    <abbr title="World Wide Web Consortium">W3C</abbr> maintains a
+                    <a rel="disclosure" href="https://www.w3.org/2004/01/pp-impl/83744/status">public list of any patent disclosures</a>
+              made in connection with the deliverables of
+              the group; that page also includes
+              instructions for disclosing a patent. An individual who has actual
+              knowledge of a patent which the individual believes contains
+              <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a>
+              must disclose the information in accordance with
+              <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+
+
+      </p><p>
+                    This document is governed by the
+                    <a id="w3c_process_revision" href="https://www.w3.org/2019/Process-20190301/">1 March 2019 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+                  </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#payment-method-identifiers-pmis"><span class="secno">1. </span>
+          Payment method identifiers (PMIs)
+        </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#validity"><span class="secno">1.1 </span>
+            Validity
+          </a></li></ol></li><li class="tocline"><a class="tocxref" href="#url-based-payment-method-identifiers"><span class="secno">2. </span>
+          URL-based payment method identifiers
+        </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#validation"><span class="secno">2.1 </span>
+            Validation
+          </a></li><li class="tocline"><a class="tocxref" href="#comparison"><span class="secno">2.2 </span>
+            Comparison
+          </a></li><li class="tocline"><a class="tocxref" href="#fetching-dereferencing"><span class="secno">2.3 </span>
+            Fetching (dereferencing)
+          </a></li></ol></li><li class="tocline"><a class="tocxref" href="#standardized-payment-method-identifiers"><span class="secno">3. </span>
+          Standardized payment method identifiers
+        </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#validity-0"><span class="secno">3.1 </span>
+            Validity
+          </a></li><li class="tocline"><a class="tocxref" href="#comparison-0"><span class="secno">3.2 </span>
+            Comparison
+          </a></li></ol></li><li class="tocline"><a class="tocxref" href="#registry-of-standardized-payment-methods"><span class="secno">4. </span>
+          Registry of standardized payment methods
+        </a></li><li class="tocline"><a class="tocxref" href="#url-based-pmi-and-third-party-payment-handlers"><span class="secno">5. </span>
+          URL-based PMI and third-party payment handlers
+        </a></li><li class="tocline"><a class="tocxref" href="#privacy-and-security-consideration"><span class="secno">6. </span>
+          Privacy and security consideration
+        </a></li><li class="tocline"><a class="tocxref" href="#references"><span class="secno">A. </span>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informative-references"><span class="secno">A.1 </span>Informative references</a></li></ol></li></ol></nav>
+      <section id="payment-method-identifiers-pmis">
+        <!--OddPage--><h2 id="x1-payment-method-identifiers-pmis"><span class="secno">1. </span>
+          Payment method identifiers (PMIs)
+        <a class="self-link" aria-label="§" href="#payment-method-identifiers-pmis"></a></h2>
+        <p>
+          A <dfn data-lt="payment method identifiers|payment method identifier" data-dfn-type="dfn" id="dfn-payment-method-identifiers">payment method
+          identifier</dfn> is either a:
+        </p>
+        <ul>
+          <li>
+            <a href="#dfn-url-based-payment-method-identifiers" class="internalDFN" data-link-type="dfn">URL-based payment method identifier</a>,
+          </li>
+          <li>or a <a href="#dfn-standardized-payment-method-identifiers" class="internalDFN" data-link-type="dfn">standardized payment method identifier</a>.
+          </li>
+        </ul>
+        <section id="validity">
+          <h3 id="x1-1-validity"><span class="secno">1.1 </span>
+            Validity
+          <a class="self-link" aria-label="§" href="#validity"></a></h3>
+          <p>
+            Specifications that rely on <a href="#dfn-payment-method-identifiers" class="internalDFN" data-link-type="dfn">payment method identifiers</a> <em class="rfc2119" title="MUST">MUST</em>
+            specify their own rules for handling invalid payment method
+            identifiers.
+          </p>
+          <p>
+            The steps to <dfn data-dfn-type="dfn" id="dfn-validate-a-payment-method-identifier">validate a payment method identifier</dfn> with a
+            string <var>pmi</var> are given by the following algorithm. It
+            returns true if the <var>pmi</var> is valid.
+          </p>
+          <ol>
+            <li>Let <var>url</var> be the result of running the <a href="https://url.spec.whatwg.org/#concept-basic-url-parser">basic URL parser</a> with
+            <var>pmi</var>.
+            </li>
+            <li>If <var>url</var> is failure, <a href="#dfn-validate-a-standardized-payment-method-identifier" class="internalDFN" data-link-type="dfn">validate a standardized payment
+            method identifier</a> with <var>pmi</var> and return the result.
+            </li>
+            <li>Otherwise, <a href="#dfn-validate-a-url-based-payment-method-identifier" class="internalDFN" data-link-type="dfn">validate a URL-based payment method identifier</a>
+            passing <var>url</var> and return the result.
+            </li>
+          </ol>
+        </section>
+      </section>
+      <section id="url-based-payment-method-identifiers">
+        <!--OddPage--><h2 id="x2-url-based-payment-method-identifiers"><span class="secno">2. </span>
+          URL-based payment method identifiers
+        <a class="self-link" aria-label="§" href="#url-based-payment-method-identifiers"></a></h2>
+        <p>
+          A <dfn data-lt="url-based payment method identifiers|url-based payment method identifier" data-dfn-type="dfn" id="dfn-url-based-payment-method-identifiers">URL-based payment
+          method identifier</dfn> is a <dfn data-dfn-type="dfn" id="dfn-url"><a href="https://url.spec.whatwg.org/#concept-url">URL</a></dfn>
+          that is valid as per the steps to <a href="#dfn-validate-a-url-based-payment-method-identifier" class="internalDFN" data-link-type="dfn">validate a URL-based payment
+          method identifier</a>.
+        </p>
+        <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="3"><span>Note</span></div><div class="">
+          <p>
+            Developers wanting to use a URL-based payment method identifier for a
+            third party payment handler are encouraged to read the <a href="https://github.com/w3c/payment-request-info/wiki/PaymentMethodPractice">
+            Payment Method Best Practice</a> document.
+          </p>
+        </div></div>
+        <section id="validation">
+          <h3 id="x2-1-validation"><span class="secno">2.1 </span>
+            Validation
+          <a class="self-link" aria-label="§" href="#validation"></a></h3>
+          <p>
+            The steps to <dfn data-dfn-type="dfn" id="dfn-validate-a-url-based-payment-method-identifier">validate a URL-based payment method
+            identifier</dfn> are given by the following algorithm. The algorithm
+            takes a <a href="https://url.spec.whatwg.org/#concept-url">URL</a> <var>url</var> as
+            input and returns true if the URL is valid:
+          </p>
+          <ol class="algorithm">
+            <li>If <var>url</var>'s <a href="https://url.spec.whatwg.org/#concept-url-scheme">scheme</a> is not "https", return false.
+            </li>
+            <li>If <var>url</var>'s <a href="https://url.spec.whatwg.org/#concept-url-username">username</a> or <a href="https://url.spec.whatwg.org/#concept-url-password">password</a> is not the empty string,
+            return false.
+            </li>
+            <li>Otherwise, return true.
+            </li>
+          </ol>
+          <div class="example" id="example-1-valid-and-invalid-url-based-pmis">
+            <div class="marker">
+        <a class="self-link" href="#example-1-valid-and-invalid-url-based-pmis">Example 1</a><span class="example-title">: valid and invalid URL-based PMIs</span>
+      </div>
+            <pre aria-busy="false"><code class="hljs javascript"><span class="hljs-keyword">const</span> valid = [
+    {
+      <span class="hljs-attr">supportedMethods</span>: <span class="hljs-string">"https://example.com/pay"</span>,
+    },
+    {
+      <span class="hljs-attr">supportedMethods</span>: <span class="hljs-string">"https://example.com/pay?version=1"</span>,
+    },
+    {
+      <span class="hljs-attr">supportedMethods</span>: <span class="hljs-string">"https://example.com/pay/version/1"</span>,
+    },
+  ];
+
+  <span class="hljs-keyword">const</span> invalid = [
+    {
+      <span class="hljs-comment">// ❌ Uses http://, a username, and a password.</span>
+      supportedMethods: <span class="hljs-string">"http://username:password@example.com/pay"</span>,
+    },
+    {
+      <span class="hljs-comment">// ❌ Uses unknown URI scheme.</span>
+      supportedMethods: <span class="hljs-string">"unknown://example.com/pay"</span>,
+    },
+  ];</code></pre>
+          </div>
+        </section>
+        <section id="comparison">
+          <h3 id="x2-2-comparison"><span class="secno">2.2 </span>
+            Comparison
+          <a class="self-link" aria-label="§" href="#comparison"></a></h3>
+          <p>
+            User agents <em class="rfc2119" title="MUST">MUST</em> perform comparisons of <a href="#dfn-url-based-payment-method-identifiers" class="internalDFN" data-link-type="dfn">URL-based payment method
+            identifiers</a> using <a href="https://url.spec.whatwg.org/#concept-url-equals">equals</a>. [<cite><a class="bibref" href="#bib-url">URL</a></cite>]
+          </p>
+        </section>
+        <section id="fetching-dereferencing">
+          <h3 id="x2-3-fetching-dereferencing"><span class="secno">2.3 </span>
+            Fetching (dereferencing)
+          <a class="self-link" aria-label="§" href="#fetching-dereferencing"></a></h3>
+          <p>
+            It is <em class="rfc2119" title="OPTIONAL">OPTIONAL</em> for user agents to <a href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a> a <a href="#dfn-url-based-payment-method-identifiers" class="internalDFN" data-link-type="dfn">URL-based payment method
+            identifier</a>.
+          </p>
+        </section>
+      </section>
+      <section id="standardized-payment-method-identifiers">
+        <!--OddPage--><h2 id="x3-standardized-payment-method-identifiers"><span class="secno">3. </span>
+          Standardized payment method identifiers
+        <a class="self-link" aria-label="§" href="#standardized-payment-method-identifiers"></a></h2>
+        <p>
+          A <dfn data-lt="standardized payment method identifiers|standardized payment method identifier" data-dfn-type="dfn" id="dfn-standardized-payment-method-identifiers">standardized
+          payment method identifier</dfn> is a string that represents a
+          <a href="#dfn-standardized-payment-method" class="internalDFN" data-link-type="dfn">standardized payment method</a>.
+        </p>
+        <p>
+          The <dfn data-dfn-type="dfn" id="dfn-syntax-of-a-standardized-payment-method-identifier">syntax of a standardized payment method identifier</dfn> is
+          given by the following [<cite><a class="bibref" href="#bib-abnf">ABNF</a></cite>]:
+        </p>
+        <pre class="ABFN" aria-busy="false"><code class="hljs">stdpmi = part *( "-" part )
+  part = 1loweralpha *( DIGIT / loweralpha )
+  loweralpha =  %x61-7A</code></pre>
+        <p>
+          User agents <em class="rfc2119" title="MAY">MAY</em> support zero or more <a href="#dfn-standardized-payment-method-identifiers" class="internalDFN" data-link-type="dfn">standardized payment method
+          identifiers</a> listed in section <a href="#registry"></a>.
+        </p>
+        <section id="validity-0">
+          <h3 id="x3-1-validity"><span class="secno">3.1 </span>
+            Validity
+          <a class="self-link" aria-label="§" href="#validity-0"></a></h3>
+          <p>
+            The steps to <dfn data-dfn-type="dfn" id="dfn-validate-a-standardized-payment-method-identifier">validate a standardized payment method
+            identifier</dfn> are given by the following algorithm. The algorithm
+            takes a <var>string</var> as input and returns true if the identifier
+            is valid:
+          </p>
+          <ol class="algorithm">
+            <li>Return true if <var>string</var> conforms to the <a href="#dfn-syntax-of-a-standardized-payment-method-identifier" class="internalDFN" data-link-type="dfn">syntax of a
+            standardized payment method identifier</a>. Otherwise, return false.
+            </li>
+          </ol>
+          <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span></div><aside class="">
+            <p>
+              When used in an API, the following method identifiers are all
+              ignored by the user agent. Some user agents might inform developers
+              that identifiers are invalid to help them fix issues.
+            </p>
+            <div class="example" id="example-1-valid-and-invalid-identifiers">
+            <div class="marker">
+        <a class="self-link" href="#example-1-valid-and-invalid-identifiers">Example</a><span class="example-title">: Valid and invalid identifiers</span>
+      </div>
+            <pre aria-busy="false"><code class="hljs javascript"><span class="hljs-keyword">const</span> valid = [
+    {
+      <span class="hljs-attr">supportedMethods</span>: <span class="hljs-string">"basic-card"</span>,
+    },
+  ];
+
+  <span class="hljs-keyword">const</span> invalid = [
+    {
+      <span class="hljs-comment">// ❌ Contains Unicode character outside the valid ranges.</span>
+      supportedMethods: <span class="hljs-string">"basic-💳"</span>,
+    },
+    {
+      <span class="hljs-comment">// ❌ Contains uppercase characters.</span>
+      supportedMethods: <span class="hljs-string">"Basic-Card"</span>,
+    },
+    {
+      <span class="hljs-comment">// ❌ Contains Unicode characters outside the valid ranges.</span>
+      supportedMethods: <span class="hljs-string">"¡basic-*-card!"</span>,
+    },
+  ];</code></pre>
+          </div>
+          </aside></div>
+        </section>
+        <section id="comparison-0">
+          <h3 id="x3-2-comparison"><span class="secno">3.2 </span>
+            Comparison
+          <a class="self-link" aria-label="§" href="#comparison-0"></a></h3>
+          <p>
+            For <a href="#dfn-standardized-payment-method-identifiers" class="internalDFN" data-link-type="dfn">standardized payment method identifiers</a>, user agents <em class="rfc2119" title="MUST">MUST</em>
+            compare strings in a <a href="https://html.spec.whatwg.org/multipage/#case-sensitive">case-sensitive</a> manner (code point for code
+            point).
+          </p>
+        </section>
+      </section>
+      <section class="informative" id="registry-of-standardized-payment-methods">
+        <!--OddPage--><h2 id="registry"><span class="secno">4. </span>
+          Registry of standardized payment methods
+        <a class="self-link" aria-label="§" href="#registry-of-standardized-payment-methods"></a></h2><p><em>This section is non-normative.</em></p>
+        <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-2" aria-level="3"><span>Note</span></div><aside class="">
+          <p>
+            There is no need to register a <a href="#dfn-url-based-payment-method-identifiers" class="internalDFN" data-link-type="dfn">URL-based payment method
+            identifier</a>.
+          </p>
+          <p>
+            Organizations seeking to mint a new identifier for a payment method
+            are encouraged to <a href="https://www.w3.org/Consortium/join">join
+            the <abbr title="World Wide Web Consortium">W3C</abbr></a> and follow the <a href="https://www.w3.org/Consortium/Process/"><abbr title="World Wide Web Consortium">W3C</abbr> process</a>.
+          </p>
+        </aside></div>
+        <p>
+          A <dfn data-dfn-type="dfn" id="dfn-standardized-payment-method">standardized payment method</dfn> is a payment method that has
+          undergone standardization at the <abbr title="World Wide Web Consortium">W3C</abbr>, and is listed in this registry.
+        </p>
+        <p>
+          The Working Group has minted the following <a href="#dfn-standardized-payment-method-identifiers" class="internalDFN" data-link-type="dfn">standardized payment
+          method identifiers</a>:
+        </p>
+        <dl>
+          <dt>
+            "<code>basic-card</code>"
+          </dt>
+          <dd>
+            The <cite><a href="https://www.w3.org/TR/payment-method-basic-card/">Payment Method:
+            Basic Card</a></cite> specification.
+          </dd>
+        </dl>
+      </section>
+      <section class="informative" id="url-based-pmi-and-third-party-payment-handlers">
+        <!--OddPage--><h2 id="x5-url-based-pmi-and-third-party-payment-handlers"><span class="secno">5. </span>
+          URL-based PMI and third-party payment handlers
+        <a class="self-link" aria-label="§" href="#url-based-pmi-and-third-party-payment-handlers"></a></h2><p><em>This section is non-normative.</em></p>
+        <p>
+          Developers wanting to use a URL-based payment method identifier for a
+          third party payment handler are encouraged to read the <a href="https://www.w3.org/TR/payment-method-manifest/">Payment Method Manifest</a> specification and
+          the <a href="https://github.com/w3c/payment-request-info/wiki/PaymentMethodPractice">
+          Payment Method Best Practice</a> wiki page. Together, these documents
+          describe how to manage the ecosystem of authorized payment handlers for
+          a payment method, including just-in-time payment handler installation
+          by the browser.
+        </p>
+      </section>
+      <section id="privacy-and-security-consideration">
+        <!--OddPage--><h2 id="x6-privacy-and-security-consideration"><span class="secno">6. </span>
+          Privacy and security consideration
+        <a class="self-link" aria-label="§" href="#privacy-and-security-consideration"></a></h2>
+        <p>
+          There are no known privacy or security concerns to be taken into
+          considerations at this time.
+        </p>
+      </section>
+
+
+  <section id="references" class="appendix">
+        <!--OddPage--><h2 id="a-references"><span class="secno">A. </span>References<a class="self-link" aria-label="§" href="#references"></a></h2>
+
+      <section id="informative-references">
+          <h3 id="a-1-informative-references"><span class="secno">A.1 </span>Informative references<a class="self-link" aria-label="§" href="#informative-references"></a></h3>
+        <dl class="bibliography">
+          <dt id="bib-abnf">[ABNF]</dt><dd><a href="https://tools.ietf.org/html/rfc5234"><cite>Augmented BNF for Syntax Specifications: ABNF</cite></a>. D. Crocker, Ed.; P. Overell. IETF. January 2008. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc5234">https://tools.ietf.org/html/rfc5234</a></dd><dt id="bib-html">[HTML]</dt><dd><a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters. WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a></dd><dt id="bib-payment-method-basic-card">[payment-method-basic-card]</dt><dd><a href="https://www.w3.org/TR/payment-method-basic-card/"><cite>Payment Method: Basic Card</cite></a>. Marcos Caceres; Domenic Denicola; Zach Koch; Roy McElmurry; Adrian Bateman. W3C. 26 March 2019. W3C Working Draft. URL: <a href="https://www.w3.org/TR/payment-method-basic-card/">https://www.w3.org/TR/payment-method-basic-card/</a></dd><dt id="bib-payment-method-manifest">[payment-method-manifest]</dt><dd><a href="https://www.w3.org/TR/payment-method-manifest/"><cite>Payment Method Manifest</cite></a>. Dapeng Liu; Domenic Denicola; Zach Koch. W3C. 12 December 2017. W3C Working Draft. URL: <a href="https://www.w3.org/TR/payment-method-manifest/">https://www.w3.org/TR/payment-method-manifest/</a></dd><dt id="bib-payment-request">[payment-request]</dt><dd><a href="https://www.w3.org/TR/payment-request/"><cite>Payment Request API</cite></a>. Adrian Bateman; Zach Koch; Roy McElmurry; Domenic Denicola; Marcos Caceres. W3C. 30 August 2018. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/payment-request/">https://www.w3.org/TR/payment-request/</a></dd><dt id="bib-url">[URL]</dt><dd><a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a></dd><dt id="bib-whatwg-fetch">[WHATWG-FETCH]</dt><dd><a href="https://fetch.spec.whatwg.org/"><cite>Fetch Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a></dd>
+        </dl></section></section><p role="navigation" id="back-to-top"><a href="#title"><abbr title="Back to Top">↑</abbr></a></p><script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>
