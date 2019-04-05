@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="generator" content="ReSpec 24.6.2"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><style>/* --- EXAMPLES --- */
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="generator" content="ReSpec 24.10.0"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><style>/* --- EXAMPLES --- */
   span.example-title {
       text-transform: none;
   }
@@ -231,6 +231,19 @@
    * Robin Berjon - http://berjon.com/
    *****************************************************************/
 
+  @keyframes pop {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1.25, 1.25);
+      opacity: 0.75;
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+
   /* Override code highlighter background */
   .hljs {
     background: transparent !important;
@@ -267,8 +280,34 @@
     text-decoration: none;
   }
 
+  .respec-offending-element:target {
+    animation: pop 0.25s ease-in-out 0s 1;
+  }
+
+  /* TODO: Remove once https://github.com/w3c/tr-design/pull/176 is merged. */
+  .respec-offending-element a[href] {
+    margin: 0;
+  }
+
+  .respec-offending-element {
+    display: inline-block;
+    position: relative;
+    /* Red squiggly line */
+    background: url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=)
+      bottom repeat-x;
+  }
+  @supports (text-decoration-style: wavy) {
+    .respec-offending-element {
+      background: none;
+      text-decoration-line: underline;
+      text-decoration-style: wavy;
+      text-decoration-color: red;
+    }
+  }
+
   #references :target {
     background: #eaf3ff;
+    animation: pop 0.4s ease-in-out 0s 1;
   }
 
   cite .bibref {
@@ -281,6 +320,15 @@
 
   th code {
     color: inherit;
+  }
+
+  a[href].orcid {
+      padding-left: 4px;
+      padding-right: 4px;
+  }
+
+  a[href].orcid > svg {
+      margin-bottom: -2px;
   }
 
   /* --- TOC --- */
@@ -337,11 +385,11 @@
 
   /* --- DL --- */
 
-  .section dd>p:first-child {
+  .section dd > p:first-child {
     margin-top: 0;
   }
 
-  .section dd>p:last-child {
+  .section dd > p:last-child {
     margin-bottom: 0;
   }
 
@@ -354,7 +402,7 @@
     margin-bottom: 0;
   }
 
-  #issue-summary>ul,
+  #issue-summary > ul,
   .respec-dfn-list {
     column-count: 2;
   }
@@ -370,7 +418,7 @@
     vertical-align: top;
   }
 
-  details.respec-tests-details>* {
+  details.respec-tests-details > * {
     padding-right: 2em;
   }
 
@@ -383,19 +431,19 @@
     padding-bottom: 0.5em;
   }
 
-  details.respec-tests-details[open]>summary {
+  details.respec-tests-details[open] > summary {
     border-bottom: thin solid #cad3e2;
     padding-left: 1em;
     margin-bottom: 1em;
     line-height: 2em;
   }
 
-  details.respec-tests-details>ul {
+  details.respec-tests-details > ul {
     width: 100%;
     margin-top: -0.3em;
   }
 
-  details.respec-tests-details>li {
+  details.respec-tests-details > li {
     padding-left: 1em;
   }
 
@@ -417,30 +465,30 @@
     color: inherit;
   }
 
-  h2>a.self-link,
-  h3>a.self-link,
-  h4>a.self-link,
-  h5>a.self-link,
-  h6>a.self-link {
+  h2 > a.self-link,
+  h3 > a.self-link,
+  h4 > a.self-link,
+  h5 > a.self-link,
+  h6 > a.self-link {
     border: none;
     color: inherit;
     font-size: 83%;
     height: 2em;
     left: -1.6em;
-    opacity: .5;
+    opacity: 0.5;
     position: absolute;
     text-align: center;
     text-decoration: none;
     top: 0;
-    transition: opacity .2s;
+    transition: opacity 0.2s;
     width: 2em;
   }
 
-  h2>a.self-link::before,
-  h3>a.self-link::before,
-  h4>a.self-link::before,
-  h5>a.self-link::before,
-  h6>a.self-link::before {
+  h2 > a.self-link::before,
+  h3 > a.self-link::before,
+  h4 > a.self-link::before,
+  h5 > a.self-link::before,
+  h6 > a.self-link::before {
     content: "§";
     display: block;
   }
@@ -451,11 +499,11 @@
     }
 
     /* Don't position self-link in headings off-screen */
-    h2>a.self-link,
-    h3>a.self-link,
-    h4>a.self-link,
-    h5>a.self-link,
-    h6>a.self-link {
+    h2 > a.self-link,
+    h3 > a.self-link,
+    h4 > a.self-link,
+    h5 > a.self-link,
+    h6 > a.self-link {
       left: auto;
       top: auto;
     }
@@ -629,7 +677,7 @@
         "w3cid": 83784
       }
     ],
-    "crEnd": "2019-05-08",
+    "crEnd": "2019-06-01",
     "license": "w3c-software-doc",
     "previousMaturity": "CR",
     "previousPublishDate": "2018-08-30",
@@ -649,9 +697,9 @@
     "highlightVars": true,
     "pluralize": true,
     "xref": true,
-    "publishDate": "2019-04-02",
-    "publishISODate": "2019-04-02T00:00:00.000Z",
-    "generatedSubtitle": "Candidate Recommendation 02 April 2019"
+    "publishDate": "2019-04-16",
+    "publishISODate": "2019-04-16T00:00:00.000Z",
+    "generatedSubtitle": "Candidate Recommendation 16 April 2019"
   }</script><meta name="description" content="This specification standardizes an API to allow merchants (i.e. web
           sites selling physical or digital goods) to utilize one or more payment
           methods with minimal integration. User agents (e.g., browsers)
@@ -685,7 +733,7 @@
     "name": "Payment Request API",
     "inLanguage": "en",
     "license": "https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document",
-    "datePublished": "2019-04-02",
+    "datePublished": "2019-04-16",
     "copyrightHolder": {
       "name": "World Wide Web Consortium",
       "url": "https://www.w3.org/"
@@ -848,17 +896,17 @@
     ]
   }</script><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-CR"></head>
     <body data-cite="HTML WEBIDL INFRA URL DOM" class="h-entry toc-inline"><div class="head">
-        <a href="https://www.w3.org/" class="logo"><img alt="W3C" width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C"></a> <h1 id="title" class="title p-name">
+        <a class="logo" href="https://www.w3.org/"><img alt="W3C" width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C"></a> <h1 id="title" class="title p-name">
         Payment Request API
       </h1>
 
         <h2>
           <abbr title="World Wide Web Consortium">W3C</abbr> Candidate Recommendation
-          <time class="dt-published" datetime="2019-04-02">02 April 2019</time>
+          <time class="dt-published" datetime="2019-04-16">16 April 2019</time>
         </h2>
         <dl>
           <dt>This version:</dt><dd>
-                  <a class="u-url" href="https://www.w3.org/TR/2019/CR-payment-request-20190402/">https://www.w3.org/TR/2019/CR-payment-request-20190402/</a>
+                  <a class="u-url" href="https://www.w3.org/TR/2019/CR-payment-request-20190416/">https://www.w3.org/TR/2019/CR-payment-request-20190416/</a>
                 </dd><dt>Latest published version:</dt><dd>
                   <a href="https://www.w3.org/TR/payment-request/">https://www.w3.org/TR/payment-request/</a>
                 </dd>
@@ -959,41 +1007,37 @@
                     <abbr title="World Wide Web Consortium">W3C</abbr> publishes a Candidate Recommendation to indicate that the document is believed to be
                     stable and to encourage implementation by the developer community. This Candidate
                     Recommendation is expected to advance to Proposed Recommendation no earlier than
-                    08 May 2019.
+                    01 June 2019.
 
 
 
                               </p><p>
-                          Please see the Working Group's
-                          <a href="https://w3c.github.io/test-results/payment-request/all.html">implementation report</a>.
-                        </p><p>
-                          Publication as a Candidate Recommendation does not
-                          imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft
-                          document and may be updated, replaced or obsoleted by
-                          other documents at any time. It is inappropriate to cite
-                          this document as other than work in progress.
-                        </p><p>
+        Please see the Working Group's
+        <a href="https://w3c.github.io/test-results/payment-request/all.html">implementation report</a>.
+      </p><p>
+        Publication as a Candidate Recommendation does not imply endorsement by the
+        <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may be updated, replaced or
+        obsoleted by other documents at any time. It is inappropriate to cite this
+        document as other than work in progress.
+      </p><p>
 
-                          This document was produced by
-                          a group operating
-                          under the
-                          <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+          This document was produced by a group
+          operating under the
+          <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
 
 
-
-                                <abbr title="World Wide Web Consortium">W3C</abbr> maintains a
-                                <a rel="disclosure" href="https://www.w3.org/2004/01/pp-impl/83744/status">public list of any patent disclosures</a>
-                          made in connection with the deliverables of
-                          the group; that page also includes
-                          instructions for disclosing a patent. An individual who
-                          has actual knowledge of a patent which the individual
-                          believes contains
-                          <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a>
-                          must disclose the information in accordance with
-                          <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+                    <abbr title="World Wide Web Consortium">W3C</abbr> maintains a
+                    <a rel="disclosure" href="https://www.w3.org/2004/01/pp-impl/83744/status">public list of any patent disclosures</a>
+              made in connection with the deliverables of
+              the group; that page also includes
+              instructions for disclosing a patent. An individual who has actual
+              knowledge of a patent which the individual believes contains
+              <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a>
+              must disclose the information in accordance with
+              <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
 
 
-                  </p><p>
+      </p><p>
                     This document is governed by the
                     <a id="w3c_process_revision" href="https://www.w3.org/2019/Process-20190301/">1 March 2019 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
                   </p><section>
@@ -1037,7 +1081,7 @@
             allows multiple browser tabs to show a payment UI at the same time
             (for those payment handlers able to support it).
             </li>
-            <li>Integrated with <a href="https://wicg.github.io/feature-policy/">Feature Policy</a>.
+            <li>Integrated with <cite><a href="https://wicg.github.io/feature-policy/">Feature Policy</a></cite>.
             </li>
             <li>Defined handling of multiple applicable modifiers.
             </li>
@@ -1333,13 +1377,6 @@
               Steps that describe how to handle the user changing payment method
               or monetary instrument (e.g., from a debit card to a credit card)
               that results in a <a data-cite-path="" href="https://heycam.github.io/webidl/#dfn-dictionary">dictionary</a> or <a href="https://heycam.github.io/webidl/#idl-object">object</a> or null.
-            </p>
-            <p>
-              A <a href="#dfn-payment-handler" class="internalDFN" data-link-type="dfn">payment handler</a> that defines <a href="#dfn-steps-for-when-a-user-changes-payment-method" class="internalDFN" data-link-type="dfn">steps for when a user
-              changes payment method</a> <em class="rfc2119" title="MUST">MUST</em> redact the <a href="#dfn-address-line" class="internalDFN" data-link-type="dfn">address line</a>,
-              <a href="#dfn-organization" class="internalDFN" data-link-type="dfn">organization</a>, <a href="#dfn-phone-number" class="internalDFN" data-link-type="dfn">phone number</a>, and <a href="#dfn-recipient" class="internalDFN" data-link-type="dfn">recipient</a> from
-              any <a href="#dom-paymentaddress" class="internalDFN" data-link-type="dfn"><code>PaymentAddress</code></a> included in the
-              <a href="#dom-paymentmethodchangeevent" class="internalDFN" data-link-type="dfn"><code>PaymentMethodChangeEvent</code></a>'s <a data-link-for="PaymentMethodChangeEvent" href="#dom-paymentmethodchangeevent-methoddetails" class="internalDFN" data-link-type="dfn"><code>methodDetails</code></a> attribute.
             </p>
           </dd>
         </dl>
@@ -1712,7 +1749,7 @@
             back to a server for processing. To make this as easy as possible,
             <a href="#dom-paymentresponse" class="internalDFN" data-link-type="dfn"><code>PaymentResponse</code></a> provides a <a href="#dom-paymentresponse-tojson" class="internalDFN" data-link-type="dfn"><code>toJSON()</code></a> method that
             serializes the object directly into JSON. This makes it trivial to
-            POST the resulting JSON back to a server using the <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>:
+            POST the resulting JSON back to a server using the <cite><a href="https://fetch.spec.whatwg.org/">Fetch Standard</a></cite>:
           </p>
           <div class="example" id="example-9-posting-with-fetch">
             <div class="marker">
@@ -3181,14 +3218,15 @@
             <dfn data-dfn-for="paymentoptions" data-dfn-type="dfn" id="dom-paymentoptions-requestbillingaddress" data-idl="field" data-title="requestBillingAddress" data-type="boolean"><code>requestBillingAddress</code></dfn> member
           </dt>
           <dd data-link-for="PaymentMethodChangeEvent">
-            A boolean that instructs the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> to get the billing
-            address associated with a <a href="#dfn-payment-method" class="internalDFN" data-link-type="dfn">payment method</a> (e.g., the billing
-            address associated with a credit card). Typically, the user agent
-            will return the billing address as part of the
-            <a href="#dom-paymentmethodchangeevent" class="internalDFN" data-link-type="dfn"><code>PaymentMethodChangeEvent</code></a>'s <a href="#dom-paymentmethodchangeevent-methoddetails" class="internalDFN" data-link-type="dfn"><code>methodDetails</code></a>, albeit
-            possibly with parts of the address redacted for privacy reasons. A
+            A boolean that indicates whether the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> <em class="rfc2119" title="SHOULD">SHOULD</em> collect
+            and return the billing address associated with a <a href="#dfn-payment-method" class="internalDFN" data-link-type="dfn">payment
+            method</a> (e.g., the billing address associated with a credit card).
+            Typically, the user agent will return the billing address as part of
+            the <a href="#dom-paymentmethodchangeevent" class="internalDFN" data-link-type="dfn"><code>PaymentMethodChangeEvent</code></a>'s <a href="#dom-paymentmethodchangeevent-methoddetails" class="internalDFN" data-link-type="dfn"><code>methodDetails</code></a>. A
             merchant can use this information to, for example, calculate tax in
-            certain jurisdictions.
+            certain jurisdictions and update the displayed total. See below for
+            privacy considerations regarding <a href="#user-info">exposing user
+            information</a>.
           </dd>
           <dt>
             <dfn data-dfn-for="paymentoptions" data-dfn-type="dfn" id="dom-paymentoptions-requestpayername" data-idl="field" data-title="requestPayerName" data-type="boolean"><code>requestPayerName</code></dfn> member
@@ -4393,7 +4431,7 @@
           <div class="note" role="note" id="issue-container-generatedID-27"><div role="heading" class="note-title marker" id="h-note-27" aria-level="4"><span>Note</span></div><aside class="">
             <p>
               Each <a href="https://www.w3.org/TR/payment-method-id/#standardized-payment-method-identifiers">standardized
-              payment method identifier</a>, such as <a href="https://www.w3.org/TR/payment-method-basic-card/">Payment Method: Basic Card</a> ("basic-card"), defines its own
+              payment method identifier</a>, such as <cite><a href="https://www.w3.org/TR/payment-method-basic-card/">Payment Method: Basic Card</a></cite> ("basic-card"), defines its own
               unique IDL <a data-cite-path="" href="https://heycam.github.io/webidl/#dfn-dictionary">dictionary</a> for use with the <a href="#dom-paymentresponse-details" class="internalDFN" data-link-type="dfn"><code>details</code></a>
               attribute. The shape of this data (i.e., its members and their
               corresponding types and formats) differs depending on which
@@ -4616,7 +4654,7 @@
           To indicate that a cross-origin <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element"><code>iframe</code></a> is allowed to invoke the
           payment request API, the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-allowpaymentrequest"><code>allowpaymentrequest</code></a> attribute can be
           specified on the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element"><code>iframe</code></a> element. See <a href="#feature-policy" class="sec-ref"><span class="secno">§&nbsp;16.</span> <span class="sec-title">Feature Policy integration</span></a> for details of how <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-allowpaymentrequest"><code>allowpaymentrequest</code></a>
-          and <a href="https://wicg.github.io/feature-policy/">Feature Policy</a> interact.
+          and <cite><a href="https://wicg.github.io/feature-policy/">Feature Policy</a></cite> interact.
         </p>
       </section>
       <section id="feature-policy" data-cite="feature-policy">
@@ -5451,6 +5489,9 @@
                 part of the user interface that could cause another change to the
                 payer details to be fired.
                 </li>
+                <li>Otherwise, set <var>event</var>.<a href="#dfn-waitforupdate" class="internalDFN" data-link-type="dfn">[[waitForUpdate]]</a> to
+                true.
+                </li>
               </ol>
             </li>
           </ol>
@@ -6148,7 +6189,7 @@
           </p>
         </section>
         <section id="exposing-user-information">
-          <h3 id="x19-6-exposing-user-information"><span class="secno">19.6 </span>
+          <h3 id="user-info"><span class="secno">19.6 </span>
             Exposing user information
           <a class="self-link" aria-label="§" href="#exposing-user-information"></a></h3>
           <p>
@@ -6156,19 +6197,42 @@
             a developer (e.g., the shipping address) without user consent.
           </p>
           <p>
-            One way that the API supports limited information sharing is through
-            the "<var>redactList</var>" associated with the creation of
-            <a href="#dfn-physical-address" class="internalDFN" data-link-type="dfn">physical addresses</a> throughout the API. This feature enables
-            user agents to provide the payee with enough information to compute
-            shipping costs or tax information, while limiting the payee's ability
-            to identify the payer via the address.
-          </p>
-          <p>
             The <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> <em class="rfc2119" title="MUST NOT">MUST NOT</em> share the values of the <a data-lt="PaymentDetailsBase.displayItems" href="#dom-paymentdetailsbase-displayitems" class="internalDFN" data-link-type="dfn"><code>displayItems</code></a> member or
             <a data-lt="PaymentDetailsModifier.additionalDisplayItems" href="#dom-paymentdetailsmodifier-additionaldisplayitems" class="internalDFN" data-link-type="dfn"><code>additionalDisplayItems</code></a>
             member with a third-party <a href="#dfn-payment-handler" class="internalDFN" data-link-type="dfn">payment handler</a> without user
             consent.
           </p>
+          <p>
+            The <a href="#dom-paymentmethodchangeevent" class="internalDFN" data-link-type="dfn"><code>PaymentMethodChangeEvent</code></a> enables the payee to update the
+            displayed total based on information specific to a selected
+            <a href="#dfn-payment-method" class="internalDFN" data-link-type="dfn">payment method</a>. For example, the billing address associated
+            with a selected <a href="#dfn-payment-method" class="internalDFN" data-link-type="dfn">payment method</a> might affect the tax
+            computation (e.g., VAT), and it is desirable that the user interface
+            accurately display the total before the payer completes the
+            transaction. At the same time, it is desirable to share as little
+            information as possible prior to completion of the payment.
+            Therefore, when a <a href="#dfn-payment-method" class="internalDFN" data-link-type="dfn">payment method</a> defines the <a href="#dfn-steps-for-when-a-user-changes-payment-method" class="internalDFN" data-link-type="dfn">steps for when
+            a user changes payment method</a>, it is important to minimize the
+            data shared via the <a href="#dom-paymentmethodchangeevent" class="internalDFN" data-link-type="dfn"><code>PaymentMethodChangeEvent</code></a>'s
+            <a data-link-for="PaymentMethodChangeEvent" href="#dom-paymentmethodchangeevent-methoddetails" class="internalDFN" data-link-type="dfn"><code>methodDetails</code></a>
+            attribute. Requirements and approaches for minimizing shared data are
+            likely to vary by <a href="#dfn-payment-method" class="internalDFN" data-link-type="dfn">payment method</a> and might include:
+          </p>
+          <ul>
+            <li>Use of a "<var>redactList</var>" for <a href="#dfn-physical-address" class="internalDFN" data-link-type="dfn">physical addresses</a>.
+            The current specification makes use of a "<var>redactList</var>" to
+            redact the <a href="#dfn-address-line" class="internalDFN" data-link-type="dfn">address line</a>, <a href="#dfn-organization" class="internalDFN" data-link-type="dfn">organization</a>, <a href="#dfn-phone-number" class="internalDFN" data-link-type="dfn">phone
+            number</a>, and <a href="#dfn-recipient" class="internalDFN" data-link-type="dfn">recipient</a> from a <a data-link-for="PaymentRequest" href="#dom-paymentrequest-shippingaddress" class="internalDFN" data-link-type="dfn"><code>shippingAddress</code></a>.
+            </li>
+            <li>Support for instructions from the payee identifying specific
+            elements to exclude or include from the <a href="#dfn-payment-method" class="internalDFN" data-link-type="dfn">payment method</a>
+            response data (returned through
+            <a href="#dom-paymentresponse" class="internalDFN" data-link-type="dfn"><code>PaymentResponse</code></a>.<var>details</var>). The payee might provide
+            these instructions via <a href="#dom-paymentmethoddata" class="internalDFN" data-link-type="dfn"><code>PaymentMethodData</code></a>.<var>data</var>,
+            enabling a <a href="#dfn-payment-method" class="internalDFN" data-link-type="dfn">payment method</a> definition to evolve without
+            requiring changes to the current API.
+            </li>
+          </ul>
           <p>
             Where sharing of privacy-sensitive information might not be obvious
             to users (e.g., when <a data-lt="payment method changed algorithm" href="#dfn-payment-method-changed-algorithm" class="internalDFN" data-link-type="dfn">changing payment methods</a>), it
@@ -6589,9 +6653,9 @@
       <section id="normative-references">
           <h3 id="c-1-normative-references"><span class="secno">C.1 </span>Normative references<a class="self-link" aria-label="§" href="#normative-references"></a></h3>
         <dl class="bibliography">
-          <dt id="bib-dom">[DOM]</dt><dd><a href="https://dom.spec.whatwg.org/"><cite>DOM Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a></dd><dt id="bib-e.164">[E.164]</dt><dd><a href="https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-E.164-201011-I!!PDF-E&amp;type=items"><cite>The international public telecommunication numbering plan</cite></a>.  ITU-T. November 2010. Recommendation. URL: <a href="https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-E.164-201011-I!!PDF-E&amp;type=items">https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-E.164-201011-I!!PDF-E&amp;type=items</a></dd><dt id="bib-ecma-402">[ecma-402]</dt><dd><a href="https://tc39.github.io/ecma402/"><cite>ECMAScript Internationalization API Specification</cite></a>.  Ecma International. URL: <a href="https://tc39.github.io/ecma402/">https://tc39.github.io/ecma402/</a></dd><dt id="bib-ecmascript">[ECMASCRIPT]</dt><dd><a href="https://tc39.github.io/ecma262/"><cite>ECMAScript Language Specification</cite></a>.  Ecma International. URL: <a href="https://tc39.github.io/ecma262/">https://tc39.github.io/ecma262/</a></dd><dt id="bib-feature-policy">[feature-policy]</dt><dd><a href="https://wicg.github.io/feature-policy/"><cite>Feature Policy</cite></a>.  WICG. Living Standard. URL: <a href="https://wicg.github.io/feature-policy/">https://wicg.github.io/feature-policy/</a></dd><dt id="bib-html">[HTML]</dt><dd><a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters. WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a></dd><dt id="bib-infra">[infra]</dt><dd><a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola. WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a></dd><dt id="bib-iso3166-1">[ISO3166-1]</dt><dd><a href="https://www.iso.org/standard/63545.html"><cite>ISO 3166: Codes for the representation of names of countries and their subdivisions – Part 1: Country codes</cite></a>.  International Organization for Standardization (ISO). November 2013. Published. URL: <a href="https://www.iso.org/standard/63545.html">https://www.iso.org/standard/63545.html</a></dd><dt id="bib-iso3166-2">[ISO3166-2]</dt><dd><a href="https://www.iso.org/standard/63546.html"><cite>ISO 3166: Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code.</cite></a>.  International Organization for Standardization (ISO). November 2013. Published. URL: <a href="https://www.iso.org/standard/63546.html">https://www.iso.org/standard/63546.html</a></dd><dt id="bib-iso4217">[ISO4217]</dt><dd><a href="http://www.iso.org/iso/home/standards/currency_codes.htm"><cite>Currency codes - ISO 4217</cite></a>.  ISO. 2015. International Standard. URL: <a href="http://www.iso.org/iso/home/standards/currency_codes.htm">http://www.iso.org/iso/home/standards/currency_codes.htm</a></dd><dt id="bib-payment-method-id">[payment-method-id]</dt><dd><a href="https://www.w3.org/TR/payment-method-id/"><cite>Payment Method Identifiers</cite></a>. Adrian Bateman; Zach Koch; Roy McElmurry; Marcos Caceres. W3C. 14 September 2017. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/payment-method-id/">https://www.w3.org/TR/payment-method-id/</a></dd><dt id="bib-promises-guide">[PROMISES-GUIDE]</dt><dd><a href="https://www.w3.org/2001/tag/doc/promises-guide"><cite>Writing Promise-Using Specifications</cite></a>. Domenic Denicola. W3C. 16 February 2016. TAG Finding. URL: <a href="https://www.w3.org/2001/tag/doc/promises-guide">https://www.w3.org/2001/tag/doc/promises-guide</a></dd><dt id="bib-rfc2119">[RFC2119]</dt><dd><a href="https://tools.ietf.org/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner. IETF. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a></dd><dt id="bib-rfc4122">[RFC4122]</dt><dd><a href="https://tools.ietf.org/html/rfc4122"><cite>A Universally Unique IDentifier (UUID) URN Namespace</cite></a>. P. Leach; M. Mealling; R. Salz. IETF. July 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc4122">https://tools.ietf.org/html/rfc4122</a></dd><dt id="bib-url">[URL]</dt><dd><a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a></dd><dt id="bib-webidl">[WEBIDL]</dt><dd><a href="https://heycam.github.io/webidl/"><cite>Web IDL</cite></a>. Boris Zbarsky. W3C. 15 December 2016. W3C Editor's Draft. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a></dd>
+          <dt id="bib-dom">[DOM]</dt><dd><a href="https://dom.spec.whatwg.org/"><cite>DOM Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a></dd><dt id="bib-e.164">[E.164]</dt><dd><a href="https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-E.164-201011-I!!PDF-E&amp;type=items"><cite>The international public telecommunication numbering plan</cite></a>.  ITU-T. November 2010. Recommendation. URL: <a href="https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-E.164-201011-I!!PDF-E&amp;type=items">https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-E.164-201011-I!!PDF-E&amp;type=items</a></dd><dt id="bib-ecma-402">[ecma-402]</dt><dd><a href="https://tc39.github.io/ecma402/"><cite>ECMAScript Internationalization API Specification</cite></a>.  Ecma International. URL: <a href="https://tc39.github.io/ecma402/">https://tc39.github.io/ecma402/</a></dd><dt id="bib-ecmascript">[ECMASCRIPT]</dt><dd><a href="https://tc39.github.io/ecma262/"><cite>ECMAScript Language Specification</cite></a>.  Ecma International. URL: <a href="https://tc39.github.io/ecma262/">https://tc39.github.io/ecma262/</a></dd><dt id="bib-feature-policy">[feature-policy]</dt><dd><a href="https://wicg.github.io/feature-policy/"><cite>Feature Policy</cite></a>.  WICG. Living Standard. URL: <a href="https://wicg.github.io/feature-policy/">https://wicg.github.io/feature-policy/</a></dd><dt id="bib-html">[HTML]</dt><dd><a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters. WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a></dd><dt id="bib-infra">[infra]</dt><dd><a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola. WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a></dd><dt id="bib-iso3166-1">[ISO3166-1]</dt><dd><a href="https://www.iso.org/standard/63545.html"><cite>ISO 3166: Codes for the representation of names of countries and their subdivisions – Part 1: Country codes</cite></a>.  International Organization for Standardization (ISO). November 2013. Published. URL: <a href="https://www.iso.org/standard/63545.html">https://www.iso.org/standard/63545.html</a></dd><dt id="bib-iso3166-2">[ISO3166-2]</dt><dd><a href="https://www.iso.org/standard/63546.html"><cite>ISO 3166: Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code.</cite></a>.  International Organization for Standardization (ISO). November 2013. Published. URL: <a href="https://www.iso.org/standard/63546.html">https://www.iso.org/standard/63546.html</a></dd><dt id="bib-iso4217">[ISO4217]</dt><dd><a href="http://www.iso.org/iso/home/standards/currency_codes.htm"><cite>Currency codes - ISO 4217</cite></a>.  ISO. 2015. International Standard. URL: <a href="http://www.iso.org/iso/home/standards/currency_codes.htm">http://www.iso.org/iso/home/standards/currency_codes.htm</a></dd><dt id="bib-payment-method-id">[payment-method-id]</dt><dd><a href="https://www.w3.org/TR/payment-method-id/"><cite>Payment Method Identifiers</cite></a>. Marcos Caceres; Domenic Denicola; Zach Koch; Roy McElmurry; Adrian Bateman. W3C. 3 April 2019. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/payment-method-id/">https://www.w3.org/TR/payment-method-id/</a></dd><dt id="bib-promises-guide">[PROMISES-GUIDE]</dt><dd><a href="https://www.w3.org/2001/tag/doc/promises-guide"><cite>Writing Promise-Using Specifications</cite></a>. Domenic Denicola. W3C. 16 February 2016. TAG Finding. URL: <a href="https://www.w3.org/2001/tag/doc/promises-guide">https://www.w3.org/2001/tag/doc/promises-guide</a></dd><dt id="bib-rfc2119">[RFC2119]</dt><dd><a href="https://tools.ietf.org/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner. IETF. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a></dd><dt id="bib-rfc4122">[RFC4122]</dt><dd><a href="https://tools.ietf.org/html/rfc4122"><cite>A Universally Unique IDentifier (UUID) URN Namespace</cite></a>. P. Leach; M. Mealling; R. Salz. IETF. July 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc4122">https://tools.ietf.org/html/rfc4122</a></dd><dt id="bib-url">[URL]</dt><dd><a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a></dd><dt id="bib-webidl">[WEBIDL]</dt><dd><a href="https://heycam.github.io/webidl/"><cite>Web IDL</cite></a>. Boris Zbarsky. W3C. 15 December 2016. W3C Editor's Draft. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a></dd>
         </dl></section><section id="informative-references">
           <h3 id="c-2-informative-references"><span class="secno">C.2 </span>Informative references<a class="self-link" aria-label="§" href="#informative-references"></a></h3>
         <dl class="bibliography">
-          <dt id="bib-fetch">[fetch]</dt><dd><a href="https://fetch.spec.whatwg.org/"><cite>Fetch Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a></dd><dt id="bib-payment-method-basic-card">[payment-method-basic-card]</dt><dd><a href="https://www.w3.org/TR/payment-method-basic-card/"><cite>Payment Method: Basic Card</cite></a>. Marcos Caceres; Domenic Denicola; Zach Koch; Roy McElmurry; Adrian Bateman. W3C. 26 March 2019. W3C Working Draft. URL: <a href="https://www.w3.org/TR/payment-method-basic-card/">https://www.w3.org/TR/payment-method-basic-card/</a></dd><dt id="bib-rfc6454">[rfc6454]</dt><dd><a href="https://tools.ietf.org/html/rfc6454"><cite>The Web Origin Concept</cite></a>. A. Barth. IETF. December 2011. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc6454">https://tools.ietf.org/html/rfc6454</a></dd><dt id="bib-secure-contexts">[secure-contexts]</dt><dd><a href="https://www.w3.org/TR/secure-contexts/"><cite>Secure Contexts</cite></a>. Mike West. W3C. 15 September 2016. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/secure-contexts/">https://www.w3.org/TR/secure-contexts/</a></dd>
+          <dt id="bib-fetch">[fetch]</dt><dd><a href="https://fetch.spec.whatwg.org/"><cite>Fetch Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a></dd><dt id="bib-payment-method-basic-card">[payment-method-basic-card]</dt><dd><a href="https://www.w3.org/TR/payment-method-basic-card/"><cite>Payment Method: Basic Card</cite></a>. Marcos Caceres; Domenic Denicola; Zach Koch; Roy McElmurry; Adrian Bateman. W3C. 3 April 2019. W3C Working Draft. URL: <a href="https://www.w3.org/TR/payment-method-basic-card/">https://www.w3.org/TR/payment-method-basic-card/</a></dd><dt id="bib-rfc6454">[rfc6454]</dt><dd><a href="https://tools.ietf.org/html/rfc6454"><cite>The Web Origin Concept</cite></a>. A. Barth. IETF. December 2011. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc6454">https://tools.ietf.org/html/rfc6454</a></dd><dt id="bib-secure-contexts">[secure-contexts]</dt><dd><a href="https://www.w3.org/TR/secure-contexts/"><cite>Secure Contexts</cite></a>. Mike West. W3C. 15 September 2016. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/secure-contexts/">https://www.w3.org/TR/secure-contexts/</a></dd>
         </dl></section></section><p role="navigation" id="back-to-top"><a href="#title"><abbr title="Back to Top">↑</abbr></a></p><script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>
