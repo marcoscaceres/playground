@@ -15974,7 +15974,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
   }
 
   function _templateObject2() {
-    const data = _taggedTemplateLiteral(["<span class='secno'>", " </span>"]);
+    const data = _taggedTemplateLiteral(["<bdi class='secno'>", " </bdi>"]);
 
     _templateObject2 = function _templateObject2() {
       return data;
