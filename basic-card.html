@@ -1,0 +1,2584 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="generator" content="ReSpec 24.38.1"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><style>/* --- EXAMPLES --- */
+span.example-title {
+    text-transform: none;
+}
+aside.example, div.example, div.illegal-example {
+    padding: 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+div.illegal-example { color: red }
+div.illegal-example p { color: black }
+aside.example, div.example {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+    border-color: #e0cb52;
+    background: #fcfaee;
+}
+
+aside.example div.example {
+    border-left-width: .1em;
+    border-color: #999;
+    background: #fff;
+}
+aside.example div.example span.example-title {
+    color: #999;
+}
+</style><style>/* --- ISSUES/NOTES --- */
+.issue-label {
+    text-transform: initial;
+}
+
+.warning > p:first-child { margin-top: 0 }
+.warning {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+}
+span.warning { padding: .1em .5em .15em; }
+
+.issue.closed span.issue-number {
+    text-decoration: line-through;
+}
+
+.warning {
+    border-color: #f11;
+    border-width: .2em;
+    border-style: solid;
+    background: #fbe9e9;
+}
+
+.warning-title:before{
+    content: "⚠"; /*U+26A0 WARNING SIGN*/
+    font-size: 1.3em;
+    float: left;
+    padding-right: .3em;
+    margin-top: -0.3em;
+}
+
+li.task-list-item {
+    list-style: none;
+}
+
+input.task-list-item-checkbox {
+    margin: 0 0.35em 0.25em -1.6em;
+    vertical-align: middle;
+}
+
+.issue a.respec-gh-label {
+  padding: 5px;
+  margin: 0 2px 0 2px;
+  font-size: 10px;
+  text-transform: none;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  position: relative;
+  bottom: 2px;
+  border: none;
+  display: inline-block;
+}
+
+.issue a.respec-label-dark {
+  color: #fff;
+  background-color: #000;
+}
+
+.issue a.respec-label-light {
+  color: #000;
+  background-color: #fff;
+}
+</style><style>/* --- WEB IDL --- */
+
+pre.idl {
+  padding: 1em;
+  position: relative;
+}
+
+@media print {
+  pre.idl {
+    white-space: pre-wrap;
+  }
+}
+
+pre.idl::before {
+  content: "WebIDL";
+  display: block;
+  width: 150px;
+  background: #90b8de;
+  color: #fff;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin: -1em 0 1em -1em;
+  height: 28px;
+  line-height: 28px;  
+}
+
+.idlID {
+  font-weight: bold;
+  color: #005a9c;
+}
+
+.idlType {
+  color: #005a9c;
+}
+
+.idlName {
+  color: #ff4500;
+}
+
+.idlName a {
+  color: #ff4500;
+  border-bottom: 1px dotted #ff4500;
+  text-decoration: none;
+}
+
+a.idlEnumItem {
+  color: #000;
+  border-bottom: 1px dotted #ccc;
+  text-decoration: none;
+}
+
+.idlSuperclass {
+  font-style: italic;
+  color: #005a9c;
+}
+
+
+/*.idlParam*/
+
+.idlParamName,
+.idlDefaultValue {
+  font-style: italic;
+}
+
+.extAttr {
+  color: #666;
+}
+
+
+/*.idlSectionComment*/
+
+.idlSectionComment {
+  color: gray;
+}
+
+.idlIncludes a {
+  font-weight: bold;
+}
+
+.respec-button-copy-paste:focus {
+  text-decoration: none;
+  border-color: #51a7e8;
+  outline: none;
+  box-shadow: 0 0 5px rgba(81, 167, 232, 0.5);
+}
+
+.respec-button-copy-paste:focus:hover,
+.respec-button-copy-paste.selected:focus {
+  border-color: #51a7e8;
+}
+
+.respec-button-copy-paste:hover,
+.respec-button-copy-paste:active,
+.respec-button-copy-paste.zeroclipboard-is-hover,
+.respec-button-copy-paste.zeroclipboard-is-active {
+  text-decoration: none;
+  background-color: #ddd;
+  background-image: linear-gradient(#eee, #ddd);
+  border-color: #ccc;
+}
+
+.respec-button-copy-paste:active,
+.respec-button-copy-paste.selected,
+.respec-button-copy-paste.zeroclipboard-is-active {
+  background-color: #dcdcdc;
+  background-image: none;
+  border-color: #b5b5b5;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15)
+}
+
+.respec-button-copy-paste.selected:hover {
+  background-color: #cfcfcf;
+}
+
+.respec-button-copy-paste:disabled,
+.respec-button-copy-paste:disabled:hover,
+.respec-button-copy-paste.disabled,
+.respec-button-copy-paste.disabled:hover {
+  color: rgba(102, 102, 102, 0.5);
+  cursor: default;
+  background-color: rgba(229, 229, 229, 0.5);
+  background-image: none;
+  border-color: rgba(197, 197, 197, 0.5);
+  box-shadow: none;
+}
+
+@media print {
+  .respec-button-copy-paste {
+    visibility: hidden;
+  }
+}
+</style><style>/* dfn popup panel that list all local references to a dfn */
+dfn {
+  cursor: pointer;
+}
+
+.dfn-panel {
+  position: absolute;
+  left: var(--left); /* set via JS */
+  top: var(--top); /* set via JS */
+  z-index: 35;
+  height: auto;
+  width: max-content;
+  max-width: 300px;
+  max-height: 500px;
+  overflow: auto;
+  padding: 0.5em 0.75em;
+  font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+  background: #dddddd;
+  color: black;
+  border: outset 0.2em;
+}
+
+.dfn-panel * {
+  margin: 0;
+}
+
+.dfn-panel > b {
+  display: block;
+}
+
+.dfn-panel ul a[href] {
+  color: black;
+}
+
+.dfn-panel a:not(:hover) {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.dfn-panel a[href]:hover {
+  border-bottom-width: 1px;
+}
+
+.dfn-panel > b + b {
+  margin-top: 0.25em;
+}
+
+.dfn-panel ul {
+  padding: 0;
+}
+
+.dfn-panel li {
+  list-style: inside;
+}
+
+.dfn-panel.docked {
+  display: inline-block;
+  position: fixed;
+  left: 0.5em;
+  top: unset;
+  bottom: 2em;
+  margin: 0 auto;
+  /* 0.75em from padding (x2), 0.5em from left position, 0.2em border (x2) */
+  max-width: calc(100vw - 0.75em * 2 - 0.5em - 0.2em * 2);
+  max-height: 30vh;
+}
+</style>
+    <title>
+      Payment Method: Basic Card
+    </title>
+    
+    
+    
+  <style id="respec-mainstyle">/*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+
+@keyframes pop {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1.25, 1.25);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+/* Override code highlighter background */
+.hljs {
+  background: transparent !important;
+}
+
+/* --- INLINES --- */
+h1 abbr,
+h2 abbr,
+h3 abbr,
+h4 abbr,
+h5 abbr,
+h6 abbr,
+a abbr {
+  border: none;
+}
+
+dfn {
+  font-weight: bold;
+}
+
+a.internalDFN {
+  color: inherit;
+  border-bottom: 1px solid #99c;
+  text-decoration: none;
+}
+
+a.externalDFN {
+  color: inherit;
+  border-bottom: 1px dotted #ccc;
+  text-decoration: none;
+}
+
+a.bibref {
+  text-decoration: none;
+}
+
+.respec-offending-element:target {
+  animation: pop 0.25s ease-in-out 0s 1;
+}
+
+.respec-offending-element,
+a[href].respec-offending-element {
+  text-decoration: red wavy underline;
+}
+@supports not (text-decoration: red wavy underline) {
+  .respec-offending-element:not(pre) {
+    display: inline-block;
+  }
+  .respec-offending-element {
+    /* Red squiggly line */
+    background: url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=)
+      bottom repeat-x;
+  }
+}
+
+#references :target {
+  background: #eaf3ff;
+  animation: pop 0.4s ease-in-out 0s 1;
+}
+
+cite .bibref {
+  font-style: normal;
+}
+
+code {
+  color: #c83500;
+}
+
+th code {
+  color: inherit;
+}
+
+a[href].orcid {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+a[href].orcid > svg {
+    margin-bottom: -2px;
+}
+
+/* --- TOC --- */
+
+.toc a,
+.tof a {
+  text-decoration: none;
+}
+
+a .secno,
+a .figno {
+  color: #000;
+}
+
+ul.tof,
+ol.tof {
+  list-style: none outside none;
+}
+
+.caption {
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+/* --- TABLE --- */
+
+table.simple {
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-bottom: 3px solid #005a9c;
+}
+
+.simple th {
+  background: #005a9c;
+  color: #fff;
+  padding: 3px 5px;
+  text-align: left;
+}
+
+.simple th a {
+  color: #fff;
+  padding: 3px 5px;
+  text-align: left;
+}
+
+.simple th[scope="row"] {
+  background: inherit;
+  color: inherit;
+  border-top: 1px solid #ddd;
+}
+
+.simple td {
+  padding: 3px 10px;
+  border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+  background: #f0f6ff;
+}
+
+/* --- DL --- */
+
+.section dd > p:first-child {
+  margin-top: 0;
+}
+
+.section dd > p:last-child {
+  margin-bottom: 0;
+}
+
+.section dd {
+  margin-bottom: 1em;
+}
+
+.section dl.attrs dd,
+.section dl.eldef dd {
+  margin-bottom: 0;
+}
+
+#issue-summary > ul,
+.respec-dfn-list {
+  column-count: 2;
+}
+
+#issue-summary li,
+.respec-dfn-list li {
+  list-style: none;
+}
+
+details.respec-tests-details {
+  margin-left: 1em;
+  display: inline-block;
+  vertical-align: top;
+}
+
+details.respec-tests-details > * {
+  padding-right: 2em;
+}
+
+details.respec-tests-details[open] {
+  z-index: 999999;
+  position: absolute;
+  border: thin solid #cad3e2;
+  border-radius: 0.3em;
+  background-color: white;
+  padding-bottom: 0.5em;
+}
+
+details.respec-tests-details[open] > summary {
+  border-bottom: thin solid #cad3e2;
+  padding-left: 1em;
+  margin-bottom: 1em;
+  line-height: 2em;
+}
+
+details.respec-tests-details > ul {
+  width: 100%;
+  margin-top: -0.3em;
+}
+
+details.respec-tests-details > li {
+  padding-left: 1em;
+}
+
+a[href].self-link:hover {
+  opacity: 1;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+}
+
+aside.example .marker > a.self-link {
+  color: inherit;
+}
+
+h2 > a.self-link,
+h3 > a.self-link,
+h4 > a.self-link,
+h5 > a.self-link,
+h6 > a.self-link {
+  border: none;
+  color: inherit;
+  font-size: 83%;
+  height: 2em;
+  left: -1.6em;
+  opacity: 0.5;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  top: 0;
+  transition: opacity 0.2s;
+  width: 2em;
+}
+
+h2 > a.self-link::before,
+h3 > a.self-link::before,
+h4 > a.self-link::before,
+h5 > a.self-link::before,
+h6 > a.self-link::before {
+  content: "§";
+  display: block;
+}
+
+@media (max-width: 767px) {
+  dd {
+    margin-left: 0;
+  }
+
+  /* Don't position self-link in headings off-screen */
+  h2 > a.self-link,
+  h3 > a.self-link,
+  h4 > a.self-link,
+  h5 > a.self-link,
+  h6 > a.self-link {
+    left: auto;
+    top: auto;
+  }
+}
+
+@media print {
+  .removeOnSave {
+    display: none;
+  }
+}
+</style><style>.mdn {
+  display: block;
+  font: 12px sans-serif;
+  position: absolute;
+  z-index: 9;
+  right: 0.3em;
+  background-color: #eee;
+  margin: -26px 0 0 0;
+  padding: 7px 5px 5px 6px;
+  min-width: 140px;
+  box-shadow: 0 0 3px #999;
+}
+
+.mdn button {
+  cursor: pointer;
+  border: none;
+  color: #000;
+  background: transparent;
+  margin: -8px;
+  outline: none;
+}
+
+.mdn b {
+  color: #fff;
+  background-color: #000;
+  font-weight: normal;
+  font-family: zillaslab, Palatino, "Palatino Linotype", serif;
+  padding: 2px 3px 0px 3px;
+  line-height: 1.3em;
+  vertical-align: top;
+}
+
+.mdn > div > div {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+
+.nosupportdata {
+  font-style: italic;
+  margin-top: 4px;
+  margin-left: 8px;
+  padding-bottom: 8px;
+}
+
+.mdnsupport {
+  display: table;
+  margin-top: 4px;
+}
+
+.mdnsupport > span {
+  display: table-row;
+  padding: 0.2em 0;
+  padding-top: 0.2em;
+  font-size: 9.6px;
+}
+
+.mdnsupport > span > span {
+  display: table-cell;
+  padding: 0 0.5em;
+  vertical-align: top;
+  line-height: 1.5em;
+}
+
+.mdnsupport > span > span:last-child {
+  text-align: right;
+  padding: 0;
+}
+
+.mdnsupport > span.no {
+  color: #cccccc;
+  filter: grayscale(100%);
+}
+
+.mdnsupport > span.unknown {
+  color: #cccccc;
+  filter: grayscale(100%);
+}
+
+.mdnsupport > span.no::before {
+  opacity: 0.5;
+}
+
+.mdnsupport > span.unknown::before {
+  opacity: 0.5;
+}
+
+.mdnsupport > span::before {
+  content: "";
+  display: table-cell;
+  min-width: 1.5em;
+  height: 1.5em;
+  background: no-repeat center center / contain;
+  text-align: right;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.mdnsupport > .chrome::before,
+.mdnsupport > .chrome_android::before {
+  background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg);
+}
+
+.mdnsupport > .edge::before,
+.mdnsupport > .edge_mobile::before {
+  background-image: url(https://resources.whatwg.org/browser-logos/edge.svg);
+}
+
+.mdnsupport > .firefox::before,
+.mdnsupport > .firefox_android::before {
+  background-image: url(https://resources.whatwg.org/browser-logos/firefox.png);
+}
+
+.mdnsupport > .ie::before {
+  background-image: url(https://resources.whatwg.org/browser-logos/ie.png);
+}
+
+.mdnsupport > .opera::before,
+.mdnsupport > .opera_android::before {
+  background-image: url(https://resources.whatwg.org/browser-logos/opera.svg);
+}
+
+.mdnsupport > .safari::before {
+  background-image: url(https://resources.whatwg.org/browser-logos/safari.png);
+}
+
+.mdnsupport > .safari_ios::before {
+  background-image: url(https://resources.whatwg.org/browser-logos/safari-ios.svg);
+}
+
+.mdnsupport > .samsunginternet_android::before {
+  background-image: url(https://resources.whatwg.org/browser-logos/samsung.svg);
+}
+
+.mdnsupport > .webview_android::before {
+  background-image: url(https://cdnjs.loli.net/ajax/libs/browser-logos/41.0.0/android-webview-beta/android-webview-beta_32x32.png);
+}
+
+.mdn.wrapped div:nth-child(n + 3) {
+  display: none;
+}
+
+.mdn div:nth-child(n + 3) > b {
+  color: #eee;
+  background-color: #eee;
+}
+
+p + .mdn {
+  margin-top: -45px;
+}
+
+.mdn.before {
+  margin-top: 3em;
+}
+
+h2 + .mdn {
+  margin: -48px 0 0 0;
+}
+
+h3 + .mdn {
+  margin: -46px 0 0 0;
+}
+
+h4 + .mdn {
+  margin: -42px 0 0 0;
+}
+
+h5 + .mdn {
+  margin: -40px 0 0 0;
+}
+
+h6 + .mdn {
+  margin: -40px 0 0 0;
+}
+
+.mdn div {
+  margin: 0;
+}
+
+.mdn :link {
+  color: #0000ee;
+}
+
+.mdn :visited {
+  color: #551a8b;
+}
+
+.mdn :link:active,
+:visited:active {
+  color: #ff0000;
+}
+
+.mdn :link,
+:visited {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mdn.wrapped {
+  min-width: 0px;
+}
+
+.mdn.wrapped > div > div {
+  display: none;
+}
+
+.mdn:hover {
+  z-index: 11;
+}
+
+.mdn:focus-within {
+  z-index: 11;
+}
+</style><script>
+     function toggleMDNStatus(div) {
+       div.parentNode.classList.toggle('wrapped');
+     }
+  </script><meta name="description" content="This specification describes data structures and formats, and a simple
+        processing model, to facilitate card-based payments on the Web. It is
+        used by other specifications to facilitate monetary transactions with a
+        &quot;basic-card&quot;, such as credit, debit, or prepaid card."><link rel="canonical" href="https://www.w3.org/TR/payment-method-basic-card/"><script type="application/ld+json">{
+  "@context": [
+    "http://schema.org",
+    {
+      "@vocab": "http://schema.org/",
+      "@language": "en",
+      "w3p": "http://www.w3.org/2001/02pd/rec54#",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "datePublished": {
+        "@type": "http://www.w3.org/2001/XMLSchema#date"
+      },
+      "inLanguage": {
+        "@language": null
+      },
+      "isBasedOn": {
+        "@type": "@id"
+      },
+      "license": {
+        "@type": "@id"
+      }
+    }
+  ],
+  "id": "https://www.w3.org/TR/payment-method-basic-card/",
+  "type": [
+    "TechArticle",
+    "w3p:WD"
+  ],
+  "name": "Payment Method: Basic Card",
+  "inLanguage": "en",
+  "license": "https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document",
+  "datePublished": "2019-12-28",
+  "copyrightHolder": {
+    "name": "World Wide Web Consortium",
+    "url": "https://www.w3.org/"
+  },
+  "discussionUrl": "https://github.com/w3c/payment-method-basic-card/issues/",
+  "alternativeHeadline": "",
+  "isBasedOn": "https://www.w3.org/TR/2016/WD-payment-method-basic-card-20160421/",
+  "description": "This specification describes data structures and formats, and a simple\n        processing model, to facilitate card-based payments on the Web. It is\n        used by other specifications to facilitate monetary transactions with a\n        \"basic-card\", such as credit, debit, or prepaid card.",
+  "editor": [
+    {
+      "type": "Person",
+      "name": "Marcos Cáceres",
+      "worksFor": {
+        "name": "Mozilla"
+      }
+    },
+    {
+      "type": "Person",
+      "name": "Domenic Denicola",
+      "worksFor": {
+        "name": "Google"
+      }
+    },
+    {
+      "type": "Person",
+      "name": "Zach Koch",
+      "worksFor": {
+        "name": "Google"
+      }
+    },
+    {
+      "type": "Person",
+      "name": "Roy McElmurry",
+      "worksFor": {
+        "name": "Facebook"
+      }
+    }
+  ],
+  "citation": [
+    {
+      "id": "https://www.iso.org/standard/70484.html",
+      "type": "TechArticle",
+      "name": "Identification cards - Identification of issuers - Part 1: Numbering system",
+      "url": "https://www.iso.org/standard/70484.html",
+      "publisher": {
+        "name": "ISO/IEC 7812-1: Identification cards - Identification of issuers - Part 1"
+      }
+    },
+    {
+      "id": "https://www.w3.org/TR/payment-request/",
+      "type": "TechArticle",
+      "name": "Payment Request API",
+      "url": "https://www.w3.org/TR/payment-request/",
+      "creator": [
+        {
+          "name": "Adrian Bateman"
+        },
+        {
+          "name": "Zach Koch"
+        },
+        {
+          "name": "Roy McElmurry"
+        },
+        {
+          "name": "Domenic Denicola"
+        },
+        {
+          "name": "Marcos Caceres"
+        }
+      ],
+      "publisher": {
+        "name": "W3C"
+      }
+    },
+    {
+      "id": "https://tools.ietf.org/html/rfc2119",
+      "type": "TechArticle",
+      "name": "Key words for use in RFCs to Indicate Requirement Levels",
+      "url": "https://tools.ietf.org/html/rfc2119",
+      "creator": [
+        {
+          "name": "S. Bradner"
+        }
+      ],
+      "publisher": {
+        "name": "IETF"
+      }
+    },
+    {
+      "id": "https://tools.ietf.org/html/rfc8174",
+      "type": "TechArticle",
+      "name": "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words",
+      "url": "https://tools.ietf.org/html/rfc8174",
+      "creator": [
+        {
+          "name": "B. Leiba"
+        }
+      ],
+      "publisher": {
+        "name": "IETF"
+      }
+    },
+    {
+      "id": "https://www.w3.org/Payments/card-network-ids",
+      "type": "TechArticle",
+      "name": "Card Network Identifiers Approved for use with Payment Request API",
+      "url": "https://www.w3.org/Payments/card-network-ids",
+      "publisher": {
+        "name": "W3C"
+      }
+    },
+    {
+      "id": "https://heycam.github.io/webidl/",
+      "type": "TechArticle",
+      "name": "Web IDL",
+      "url": "https://heycam.github.io/webidl/",
+      "creator": [
+        {
+          "name": "Boris Zbarsky"
+        }
+      ],
+      "publisher": {
+        "name": "W3C"
+      }
+    },
+    {
+      "id": "https://tc39.es/ecma262/",
+      "type": "TechArticle",
+      "name": "ECMAScript Language Specification",
+      "url": "https://tc39.es/ecma262/",
+      "publisher": {
+        "name": "Ecma International"
+      }
+    },
+    {
+      "id": "https://infra.spec.whatwg.org/",
+      "type": "TechArticle",
+      "name": "Infra Standard",
+      "url": "https://infra.spec.whatwg.org/",
+      "creator": [
+        {
+          "name": "Anne van Kesteren"
+        },
+        {
+          "name": "Domenic Denicola"
+        }
+      ],
+      "publisher": {
+        "name": "WHATWG"
+      }
+    },
+    {
+      "id": "https://html.spec.whatwg.org/multipage/",
+      "type": "TechArticle",
+      "name": "HTML Standard",
+      "url": "https://html.spec.whatwg.org/multipage/",
+      "creator": [
+        {
+          "name": "Anne van Kesteren"
+        },
+        {
+          "name": "Domenic Denicola"
+        },
+        {
+          "name": "Ian Hickson"
+        },
+        {
+          "name": "Philip Jägenstedt"
+        },
+        {
+          "name": "Simon Pieters"
+        }
+      ],
+      "publisher": {
+        "name": "WHATWG"
+      }
+    }
+  ]
+}</script><style>/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+</style><style>var {
+  position: relative;
+  cursor: pointer;
+}
+
+var[data-type]::before,
+var[data-type]::after {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+/* the triangle or arrow or caret or whatever */
+var[data-type]::before {
+  content: "";
+  transform: translateX(-50%);
+  border-width: 4px 6px 0 6px;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: #000;
+}
+
+/* actual text */
+var[data-type]::after {
+  content: attr(data-type);
+  transform: translateX(-50%) translateY(-100%);
+  background: #000;
+  text-align: center;
+  /* additional styling */
+  font-family: "Dank Mono", "Fira Code", monospace;
+  font-style: normal;
+  padding: 6px;
+  border-radius: 3px;
+  color: #daca88;
+  text-indent: 0;
+  font-weight: normal;
+}
+
+var[data-type]:hover::after,
+var[data-type]:hover::before {
+  opacity: 1;
+}
+</style><script id="initialUserConfig" type="application/json">{
+  "editors": [
+    {
+      "name": "Marcos Cáceres",
+      "company": "Mozilla",
+      "w3cid": 39125
+    },
+    {
+      "name": "Domenic Denicola",
+      "company": "Google",
+      "w3cid": 52873
+    },
+    {
+      "name": "Zach Koch",
+      "company": "Google",
+      "w3cid": 76588
+    },
+    {
+      "name": "Roy McElmurry",
+      "company": "Facebook",
+      "w3cid": 88345
+    }
+  ],
+  "doJsonLd": true,
+  "github": "w3c/payment-method-basic-card",
+  "noRecTrack": true,
+  "previousMaturity": "FPWD",
+  "previousPublishDate": "2016-04-21",
+  "specStatus": "WD",
+  "testSuiteURI": "https://w3c-test.org/payment-method-basic-card/",
+  "wg": "Web Payments Working Group",
+  "wgPatentURI": "https://www.w3.org/2004/01/pp-impl/83744/status",
+  "wgURI": "https://www.w3.org/Payments/WG/",
+  "xref": "web-platform",
+  "mdn": true,
+  "publishISODate": "2019-12-28T00:00:00.000Z",
+  "generatedSubtitle": "Working Draft 28 December 2019"
+}</script><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD"></head>
+  <body data-cite="WebIDL payment-method-id HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
+      <a class="logo" href="https://www.w3.org/"><img alt="W3C" width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C"></a> <h1 id="title" class="title p-name">Payment Method: Basic Card</h1>
+      
+      <h2>
+        W3C Working Draft
+        <time class="dt-published" datetime="2019-12-28">28 December 2019</time>
+      </h2>
+      <dl>
+        <dt>This version:</dt><dd>
+                <a class="u-url" href="https://www.w3.org/TR/2019/WD-payment-method-basic-card-20191228/">https://www.w3.org/TR/2019/WD-payment-method-basic-card-20191228/</a>
+              </dd><dt>Latest published version:</dt><dd>
+                <a href="https://www.w3.org/TR/payment-method-basic-card/">https://www.w3.org/TR/payment-method-basic-card/</a>
+              </dd>
+        <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/payment-method-basic-card/">https://w3c.github.io/payment-method-basic-card/</a></dd>
+        <dt>Test suite:</dt><dd><a href="https://w3c-test.org/payment-method-basic-card/">https://w3c-test.org/payment-method-basic-card/</a></dd>
+        
+        
+        <dt>Previous version:</dt><dd><a href="https://www.w3.org/TR/2016/WD-payment-method-basic-card-20160421/">https://www.w3.org/TR/2016/WD-payment-method-basic-card-20160421/</a></dd>
+        
+        <dt>Editors:</dt>
+        <dd class="p-author h-card vcard" data-editor-id="39125"><span class="p-name fn">Marcos Cáceres</span>
+            (Mozilla)
+          </dd><dd class="p-author h-card vcard" data-editor-id="52873"><span class="p-name fn">Domenic Denicola</span>
+            (Google)
+          </dd><dd class="p-author h-card vcard" data-editor-id="76588"><span class="p-name fn">Zach Koch</span>
+            (Google)
+          </dd><dd class="p-author h-card vcard" data-editor-id="88345"><span class="p-name fn">Roy McElmurry</span>
+            (Facebook)
+          </dd>
+        <dt>
+                Former editor:
+              </dt><dd class="p-author h-card vcard" data-editor-id="42763"><span class="p-name fn">Adrian Bateman</span>
+            (Microsoft Corporation)
+          
+          - Until <time datetime="2018-10-04">04 October 2018</time></dd>
+        
+        <dt>Participate:</dt><dd>
+      <a href="https://github.com/w3c/payment-method-basic-card/">GitHub w3c/payment-method-basic-card</a>
+    </dd><dd>
+      <a href="https://github.com/w3c/payment-method-basic-card/issues/">File a bug</a>
+    </dd><dd>
+      <a href="https://github.com/w3c/payment-method-basic-card/commits/gh-pages">Commit history</a>
+    </dd><dd>
+      <a href="https://github.com/w3c/payment-method-basic-card/pulls/">Pull requests</a>
+    </dd>
+      </dl>
+      
+      
+      
+      <p class="copyright">
+      <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+      ©
+      2019
+      
+      <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+      <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>,
+      <a href="https://ev.buaa.edu.cn/">Beihang</a>). 
+      W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+      <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a rel="license" href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules
+      apply.
+    </p>
+      <hr title="Separator for header">
+    </div>
+    <section id="abstract" class="introductory"><h2>Abstract</h2>
+      <p>
+        This specification describes data structures and formats, and a simple
+        processing model, to facilitate card-based payments on the Web. It is
+        used by other specifications to facilitate monetary transactions with a
+        "basic-card", such as credit, debit, or prepaid card.
+      </p>
+    </section>
+    <section id="sotd" class="introductory"><h2>Status of This Document</h2><p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at https://www.w3.org/TR/.</em></p>
+      <p>
+        This is a work in progress.
+      </p>
+    <p>
+      This document was published by the <a href="https://www.w3.org/Payments/WG/">Web Payments Working Group</a> as a
+      Working Draft.
+      
+    </p><p>
+      <a href="https://github.com/w3c/payment-method-basic-card/issues/">GitHub Issues</a> are preferred for
+            discussion of this specification.
+          
+      
+    </p><p>
+      Publication as a Working Draft does not imply endorsement by the
+      <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may be updated, replaced or
+      obsoleted by other documents at any time. It is inappropriate to cite this
+      document as other than work in progress.
+    </p><p>
+      
+        This document was produced by a group
+        operating under the
+        <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+       The group does not expect this document to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation.
+      
+                  <abbr title="World Wide Web Consortium">W3C</abbr> maintains a
+                  <a rel="disclosure" href="https://www.w3.org/2004/01/pp-impl/83744/status">public list of any patent disclosures</a>
+            made in connection with the deliverables of
+            the group; that page also includes
+            instructions for disclosing a patent. An individual who has actual
+            knowledge of a patent which the individual believes contains
+            <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a>
+            must disclose the information in accordance with
+            <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+          
+      
+    </p><p>
+                  This document is governed by the
+                  <a id="w3c_process_revision" href="https://www.w3.org/2019/Process-20190301/">1 March 2019 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+                </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>
+        Introduction
+      </a></li><li class="tocline"><a class="tocxref" href="#method-id"><bdi class="secno">2. </bdi>
+        Payment Method Identifier
+      </a></li><li class="tocline"><a class="tocxref" href="#model"><bdi class="secno">3. </bdi>
+        Model
+      </a></li><li class="tocline"><a class="tocxref" href="#basiccardrequest-dictionary"><bdi class="secno">4. </bdi>
+        <span data-dfn-type="dictionary" data-export="" data-idl="dictionary" data-title="BasicCardRequest" data-dfn-for=""><code>BasicCardRequest</code></span> dictionary
+      </a></li><li class="tocline"><a class="tocxref" href="#interfacing-with-a-payment-request"><bdi class="secno">5. </bdi>
+        Interfacing with a payment request
+      </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#steps-to-check-if-a-payment-can-be-made"><bdi class="secno">5.1 </bdi>
+          Steps to check if a payment can be made
+        </a></li><li class="tocline"><a class="tocxref" href="#steps-to-check-if-an-instrument-is-supported"><bdi class="secno">5.2 </bdi>
+          Steps to check if an instrument is supported
+        </a></li><li class="tocline"><a class="tocxref" href="#steps-to-respond-to-a-payment-request"><bdi class="secno">5.3 </bdi>
+          Steps to respond to a payment request
+        </a></li><li class="tocline"><a class="tocxref" href="#steps-for-when-a-user-changes-payment-method"><bdi class="secno">5.4 </bdi>
+          Steps for when a user changes payment method
+        </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#basiccardchangedetails-dictionary"><bdi class="secno">5.4.1 </bdi>
+            <span data-dfn-type="dictionary" data-export="" data-idl="dictionary" data-title="BasicCardChangeDetails" data-dfn-for=""><code>BasicCardChangeDetails</code></span> dictionary
+          </a></li></ol></li><li class="tocline"><a class="tocxref" href="#selecting-the-payment-handler"><bdi class="secno">5.5 </bdi>
+          Selecting the payment handler
+        </a></li><li class="tocline"><a class="tocxref" href="#applying-the-modifiers"><bdi class="secno">5.6 </bdi>
+          Applying the modifiers
+        </a></li></ol></li><li class="tocline"><a class="tocxref" href="#basiccardresponse-dictionary"><bdi class="secno">6. </bdi>
+        <span data-dfn-type="dictionary" data-export="" data-idl="dictionary" data-title="BasicCardResponse" data-dfn-for=""><code>BasicCardResponse</code></span> dictionary
+      </a></li><li class="tocline"><a class="tocxref" href="#basiccarderrors-dictionary"><bdi class="secno">7. </bdi>
+        <span data-dfn-type="dictionary" data-export="" data-idl="dictionary" data-title="BasicCardErrors" data-dfn-for=""><code>BasicCardErrors</code></span> dictionary
+      </a></li><li class="tocline"><a class="tocxref" href="#dependencies"><bdi class="secno">8. </bdi>
+        Dependencies
+      </a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">9. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#security"><bdi class="secno">10. </bdi>
+        Security and Privacy Considerations
+      </a></li><li class="tocline"><a class="tocxref" href="#idl-index"><bdi class="secno">A. </bdi>IDL Index</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">B. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">B.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">B.2 </bdi>Informative references</a></li></ol></li></ol></nav>
+    <section class="informative" id="introduction">
+      <h2 id="x1-introduction"><bdi class="secno">1. </bdi>
+        Introduction
+      <a class="self-link" aria-label="§" href="#introduction"></a></h2><p><em>This section is non-normative.</em></p>
+      <p>
+        This specification defines the "basic-card" payment method for use, for
+        instance, with the <cite><a href="https://www.w3.org/TR/payment-request/">Payment Request API</a></cite>. With it, merchants can
+        request the card <a href="#dfn-details" class="internalDFN" data-link-type="dfn">details</a> (card holder name, card number, etc.)
+        from the end user as an alternative to collecting the same information
+        through a <code><a data-xref-type="element" data-cite-path="forms.html" data-type="element" href="https://html.spec.whatwg.org/multipage/forms.html#the-form-element">form</a></code>.
+      </p>
+      <p>
+        The basic card payment method provides information to merchant websites
+        that can be used for multiple transactions over a potentially very long
+        period of time, typically on the order of several years at a time. At
+        the time of the development of this specification, it is commonplace
+        for merchant sites to store this information long-term to reduce the
+        friction of a user entering a credit card number for every future
+        purchase.
+      </p>
+      <p>
+        The decision whether to retain credit card information for future
+        transactions remains a matter of local policy for web sites; however,
+        the introduction of a programmatic way to retrieve credit card
+        information from a web browser affects some key factors that typically
+        motivate storage of such information.
+      </p>
+      <p>
+        Because the web browser will retain credit card information, and make
+        it available – subject to user approval – whenever a merchant needs it,
+        the friction that merchants seek to avoid is reduced. This can also
+        potentially reduce some liability considerations of storing information
+        on a persistent basis, such as financial liability that can result from
+        unauthorized access to the databases used to store credit card
+        information.
+      </p>
+      <p>
+        Additionally, web sites that call the <cite><a href="https://www.w3.org/TR/payment-request/">Payment Request API</a></cite> for each
+        transaction avoid the friction that can result when users’ credit card
+        numbers and/or expiration dates are updated. From a user’s perspective,
+        this avoids the hassle of having to update a large number of merchant
+        web sites any time they are issued a new card.
+      </p>
+      <p>
+        Finally, by letting the web browser determine user authentication
+        information, the merchant site is relieved of the duty of ensuring that
+        a time-local and sufficiently strong authentication has occurred.
+        Additionally, payment handlers can make use of local affordances, such
+        as biometrics and hardware tokens, to authenticate users in a way that
+        is more convenient, more secure, and lower friction than web sites
+        currently can.
+      </p>
+    </section>
+    <section id="method-id">
+      <h2 id="x2-payment-method-identifier"><bdi class="secno">2. </bdi>
+        Payment Method Identifier
+      <a class="self-link" aria-label="§" href="#method-id"></a></h2>
+      <p>
+        The <dfn data-abbr="PMI" data-lt="PMI|standardized payment method identifier" data-dfn-type="dfn" id="dfn-pmi">standardized payment method identifier</dfn> (<abbr title="standardized payment method identifier">PMI</abbr>)
+        for this specification is "<code><dfn data-dfn-type="dfn" id="dfn-basic-card">basic-card</dfn></code>".
+      </p>
+    </section>
+    <section id="model">
+      <h2 id="x3-model"><bdi class="secno">3. </bdi>
+        Model
+      <a class="self-link" aria-label="§" href="#model"></a></h2>
+      <p>
+        A <dfn data-dfn-type="dfn" data-plurals="cards" id="dfn-card">card</dfn> is a physical or virtual payment instrument that has
+        <a href="#dfn-details" class="internalDFN" data-link-type="dfn">details</a> and optionally is part of a <a href="#dfn-network" class="internalDFN" data-link-type="dfn">network</a>.
+      </p>
+      <p>
+        The <dfn data-dfn-type="dfn" id="dfn-details">details</dfn> of a <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a> are the <dfn data-abbr="" data-lt="PAN|primary account number" data-dfn-type="dfn" id="dfn-pan">primary account number</dfn> (<abbr title="primary account number">PAN</abbr>) [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7812-1" title="Identification cards - Identification of issuers - Part 1: Numbering system">ISO7812-1</a></cite>], <dfn data-dfn-type="dfn" id="dfn-card-holder-s-name">card holder's
+        name</dfn>, <dfn data-dfn-type="dfn" id="dfn-security-code">security code</dfn> (sometimes known as the CVV, CVC,
+        CVN, CVE or CID), <dfn data-dfn-type="dfn" id="dfn-expiry-month">expiry month</dfn>, <dfn data-dfn-type="dfn" id="dfn-expiry-year">expiry year</dfn>, and
+        optionally a <dfn data-dfn-type="dfn" id="dfn-billing-address">billing address</dfn>. These are represented as the
+        members of the <a data-xref-type="_IDL_" href="#dom-basiccardresponse" class="internalDFN" data-link-type="idl"><code><code>BasicCardResponse</code></code></a> dictionary.
+      </p>
+      <p>
+        A <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a> is identified as belonging to a <dfn data-dfn-type="dfn" data-plurals="networks" id="dfn-network">network</dfn> via
+        its issuer identification number [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7812-1" title="Identification cards - Identification of issuers - Part 1: Numbering system">ISO7812-1</a></cite>] (e.g., those belonging
+        to Visa start with a "4"). In an API, each network is represented by a
+        string from the <cite><a href="https://www.w3.org/Payments/card-network-ids">Card Network Identifiers Approved for use with Payment Request API</a></cite>.
+      </p>
+      <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Note</span><span class="issue-label">: Common issuer identification numbers (IIN)</span></div><aside class="">
+        <p>
+          <dfn data-abbr="" data-lt="IIN|Issuer identification numbers" data-dfn-type="dfn" id="dfn-iin">Issuer identification numbers</dfn> (<abbr title="Issuer identification numbers">IIN</abbr>) are maintained
+          by ISO but are not available to the general public. However,
+          Wikipedia maintains a list of the common <a href="https://en.wikipedia.org/wiki/Payment_card_number#Issuer_identification_number_.28IIN.29">
+          credit card issuer identification numbers</a>.
+        </p>
+      </aside></div>
+      <p>
+        A <dfn data-dfn-type="dfn" data-plurals="supported cards" id="dfn-supported-card">supported card</dfn> is a <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a> that when passed to the
+        <a href="#dfn-steps-to-check-if-an-instrument-is-supported" class="internalDFN" data-link-type="dfn">steps to check if an instrument is supported</a> together with a
+        list of <var>networks</var> returns true.
+      </p>
+      <p>
+        A payment handler's <dfn data-dfn-type="dfn" id="dfn-known-networks">known networks</dfn> are <a href="#dfn-network" class="internalDFN" data-link-type="dfn">networks</a> it
+        supports. A payment handler <em class="rfc2119" title="MAY">MAY</em> support zero or more networks from the
+        <cite><a href="https://www.w3.org/Payments/card-network-ids">Card Network Identifiers Approved for use with Payment Request API</a></cite>.
+      </p>
+    </section>
+    <aside class="mdn before wrapped"><div><button onclick="toggleMDNStatus(this.parentNode)" aria-label="Expand MDN details"><b>MDN</b></button><div>
+      <a title="The BasicCardRequest dictionary is a JavaScript object-structure that can be used in the Payment Request API. The properties of BasicCardRequest are defined in the Basic Card Payment spec)." href="https://developer.mozilla.org/en-US/docs/Web/API/BasicCardRequest">BasicCardRequest</a>
+    <p class="mdnsupport">
+    
+      <span class="chrome unknown">
+        <span class="browser-name">Chrome</span>
+        <span class="version">?</span>
+      </span>
+      <span class="chrome_android yes">
+        <span class="browser-name">Chrome Android</span>
+        <span class="version">57+</span>
+      </span>
+      <span class="edge yes">
+        <span class="browser-name">Edge</span>
+        <span class="version">Yes</span>
+      </span>
+      <span class="edge_mobile unknown">
+        <span class="browser-name">Edge Mobile</span>
+        <span class="version">?</span>
+      </span>
+      <span class="firefox yes">
+        <span class="browser-name">Firefox</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="firefox_android yes">
+        <span class="browser-name">Firefox Android</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="ie unknown">
+        <span class="browser-name">Internet Explorer</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera unknown">
+        <span class="browser-name">Opera</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera_android unknown">
+        <span class="browser-name">Opera Android</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari unknown">
+        <span class="browser-name">Safari</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari_ios unknown">
+        <span class="browser-name">Safari iOS</span>
+        <span class="version">?</span>
+      </span>
+      <span class="samsunginternet_android yes">
+        <span class="browser-name">Samsung Internet</span>
+        <span class="version">7.0+</span>
+      </span>
+      <span class="webview_android unknown">
+        <span class="browser-name">WebView Android</span>
+        <span class="version">?</span>
+      </span>
+  </p></div></div><div><button onclick="toggleMDNStatus(this.parentNode)" aria-label="Expand MDN details"><b>MDN</b></button><div>
+      <a title="The supportedNetworks property of the BasicCardRequest dictionary contains an array of DOMStrings representing the card networks that the retailer supports (e.g. amex, mastercard)." href="https://developer.mozilla.org/en-US/docs/Web/API/BasicCardRequest/supportedNetworks">BasicCardRequest/supportedNetworks</a>
+    <p class="mdnsupport">
+    
+      <span class="chrome unknown">
+        <span class="browser-name">Chrome</span>
+        <span class="version">?</span>
+      </span>
+      <span class="chrome_android yes">
+        <span class="browser-name">Chrome Android</span>
+        <span class="version">57+</span>
+      </span>
+      <span class="edge yes">
+        <span class="browser-name">Edge</span>
+        <span class="version">Yes</span>
+      </span>
+      <span class="edge_mobile unknown">
+        <span class="browser-name">Edge Mobile</span>
+        <span class="version">?</span>
+      </span>
+      <span class="firefox yes">
+        <span class="browser-name">Firefox</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="firefox_android yes">
+        <span class="browser-name">Firefox Android</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="ie unknown">
+        <span class="browser-name">Internet Explorer</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera unknown">
+        <span class="browser-name">Opera</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera_android unknown">
+        <span class="browser-name">Opera Android</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari unknown">
+        <span class="browser-name">Safari</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari_ios unknown">
+        <span class="browser-name">Safari iOS</span>
+        <span class="version">?</span>
+      </span>
+      <span class="samsunginternet_android yes">
+        <span class="browser-name">Samsung Internet</span>
+        <span class="version">7.0+</span>
+      </span>
+      <span class="webview_android unknown">
+        <span class="browser-name">WebView Android</span>
+        <span class="version">?</span>
+      </span>
+  </p></div></div></aside><section data-dfn-for="BasicCardRequest" id="basiccardrequest-dictionary">
+      <h2 id="x4-basiccardrequest-dictionary"><bdi class="secno">4. </bdi>
+        <dfn data-dfn-type="dictionary" data-export="" id="dom-basiccardrequest" data-idl="dictionary" data-title="BasicCardRequest" data-dfn-for=""><code>BasicCardRequest</code></dfn> dictionary
+      <a class="self-link" aria-label="§" href="#basiccardrequest-dictionary"></a></h2>
+      <pre class="idl def"><span data-idl="" class="idlDictionary" id="idl-def-basiccardrequest" data-title="BasicCardRequest">dictionary <a class="internalDFN idlID" data-link-for="" data-link-type="dictionary" href="#dom-basiccardrequest"><code>BasicCardRequest</code></a> {<span data-idl="" class="idlMember" id="idl-def-basiccardrequest-supportednetworks" data-title="supportedNetworks" data-dfn-for="BasicCardRequest"><span class="idlType">
+  <a data-xref-type="dfn" data-cite-path="" data-type="dfn" href="https://heycam.github.io/webidl/#idl-sequence">sequence</a>&lt;<a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a>&gt;</span> <a class="internalDFN idlName" data-link-for="BasicCardRequest" data-link-type="dict-member" href="#dom-basiccardrequest-supportednetworks"><code>supportedNetworks</code></a> = [];</span>
+};</span></pre>
+      <p>
+        The <a data-xref-type="_IDL_" href="#dom-basiccardrequest" class="internalDFN" data-link-type="idl"><code><code>BasicCardRequest</code></code></a> dictionary contains the following members:
+      </p>
+      <dl>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccardrequest-supportednetworks" data-idl="field" data-title="supportedNetworks" data-dfn-for="BasicCardRequest" data-type="sequence"><code>supportedNetworks</code></dfn> member
+        </dt>
+        <dd>
+          A sequence of identifiers for card networks that the merchant
+          accepts, derived from the <cite><a href="https://www.w3.org/Payments/card-network-ids">Card Network Identifiers Approved for use with Payment Request API</a></cite>. When the sequence
+          is empty, it means that all <a href="#dfn-network" class="internalDFN" data-link-type="dfn">networks</a> are supported.
+        </dd>
+      </dl>
+    </section>
+    <section id="interfacing-with-a-payment-request">
+      <h2 id="x5-interfacing-with-a-payment-request"><bdi class="secno">5. </bdi>
+        Interfacing with a payment request
+      <a class="self-link" aria-label="§" href="#interfacing-with-a-payment-request"></a></h2>
+      <section id="steps-to-check-if-a-payment-can-be-made">
+        <h3 id="x5-1-steps-to-check-if-a-payment-can-be-made"><bdi class="secno">5.1 </bdi>
+          Steps to check if a payment can be made
+        <a class="self-link" aria-label="§" href="#steps-to-check-if-a-payment-can-be-made"></a></h3>
+        <p>
+          The <dfn data-dfn-type="dfn" id="dfn-steps-to-check-if-a-payment-can-be-made">steps to check if a payment can be made</dfn> take a
+          <a data-xref-type="_IDL_" href="#dom-basiccardrequest" class="internalDFN" data-link-type="idl"><code><code>BasicCardRequest</code></code></a> <var data-type="BasicCardRequest">request</var> as input. The steps
+          return either true or false:
+        </p>
+        <ol class="algorithm">
+          <li>Let <var data-type="list<card>">cards</var> be a <a data-cite-path="" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a href="#dfn-card" class="internalDFN" data-link-type="dfn">cards</a>
+          associated with this payment handler.
+          </li>
+          <li>If <var data-type="list<card>">cards</var> <a data-link-for="list" data-xref-for="list" data-cite-path="" data-type="dfn" href="https://infra.spec.whatwg.org/#list-is-empty">is empty</a>, return false.
+          </li>
+          <li>Let <var data-type="sequence<DOMString>">networks</var> be an empty
+          <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><code>DOMString</code></a> sequence.
+          </li>
+          <li>If <var data-type="BasicCardRequest">request</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardRequest" data-xref-for="BasicCardRequest" href="#dom-basiccardrequest-supportednetworks" class="internalDFN" data-link-type="idl"><code><code>supportedNetworks</code></code></a> is present,
+          append each item in <var data-type="BasicCardRequest">request</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardRequest" data-xref-for="BasicCardRequest" href="#dom-basiccardrequest-supportednetworks" class="internalDFN" data-link-type="idl"><code><code>supportedNetworks</code></code></a>
+          to <var data-type="sequence<DOMString>">networks</var>.
+          </li>
+          <li><a data-link-for="list" data-xref-for="list" data-cite-path="" data-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate">For each</a> <var data-type="card">card</var> in <var data-type="list<card>">cards</var>:
+            <ol>
+              <li>Let <var data-type="boolean">isSupported</var> be the result of running the
+              <a href="#dfn-steps-to-check-if-an-instrument-is-supported" class="internalDFN" data-link-type="dfn">steps to check if an instrument is supported</a>, passing in
+              <var data-type="card">card</var> and <var data-type="sequence<DOMString>">networks</var>.
+              </li>
+              <li>If <var data-type="boolean">isSupported</var> is true, then return true.
+              </li>
+            </ol>
+          </li>
+          <li>Return false.
+          </li>
+        </ol>
+      </section>
+      <section id="steps-to-check-if-an-instrument-is-supported">
+        <h3 id="x5-2-steps-to-check-if-an-instrument-is-supported"><bdi class="secno">5.2 </bdi>
+          Steps to check if an instrument is supported
+        <a class="self-link" aria-label="§" href="#steps-to-check-if-an-instrument-is-supported"></a></h3>
+        <p>
+          The <dfn data-dfn-type="dfn" id="dfn-steps-to-check-if-an-instrument-is-supported">steps to check if an instrument is supported</dfn> take as
+          input a <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a> <var data-type="card">card</var> and a <a data-cite-path="" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a href="#dfn-network" class="internalDFN" data-link-type="dfn">network</a>
+          <var data-type="list<network>">networks</var>. It returns true if the <var data-type="card">card</var> is
+          supported, false otherwise.
+        </p>
+        <ol class="algorithm">
+          <li>If <var data-type="list<network>">networks</var> <a data-link-for="list" data-xref-for="list" data-cite-path="" data-type="dfn" href="https://infra.spec.whatwg.org/#list-is-empty">is empty</a>, return true.
+          </li>
+          <li>If <var data-type="list<network>">networks</var> includes the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>'s <a href="#dfn-network" class="internalDFN" data-link-type="dfn">network</a>, return
+          true. Otherwise, return false.
+          </li>
+        </ol>
+      </section>
+      <section id="steps-to-respond-to-a-payment-request">
+        <h3 id="x5-3-steps-to-respond-to-a-payment-request"><bdi class="secno">5.3 </bdi>
+          Steps to respond to a payment request
+        <a class="self-link" aria-label="§" href="#steps-to-respond-to-a-payment-request"></a></h3>
+        <p>
+          The <dfn data-dfn-type="dfn" id="dfn-steps-to-respond-to-a-payment-request">steps to respond to a payment request</dfn> are given by the
+          following algorithm. The steps take <a data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentrequest"><code>PaymentRequest</code></a>
+          <var data-type="PaymentRequest">request</var> as input. If the end user inputs or selects
+          a <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a> that meets the constraints of <a data-xref-type="_IDL_" href="#dom-basiccardrequest" class="internalDFN" data-link-type="idl"><code><code>BasicCardRequest</code></code></a>
+          <var data-type="BasicCardRequest">data</var> the algorithm returns a card as a
+          <a data-xref-type="_IDL_" href="#dom-basiccardresponse" class="internalDFN" data-link-type="idl"><code><code>BasicCardResponse</code></code></a>.
+        </p>
+        <ol class="algorithm">
+          <li>Let <var data-type="sequence<DOMString>">networks</var> be
+          <var data-type="BasicCardRequest">data</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardRequest" data-xref-for="BasicCardRequest" href="#dom-basiccardrequest-supportednetworks" class="internalDFN" data-link-type="idl"><code><code>supportedNetworks</code></code></a>, or an empty list if
+          <var data-type="BasicCardRequest">data</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardRequest" data-xref-for="BasicCardRequest" href="#dom-basiccardrequest-supportednetworks" class="internalDFN" data-link-type="idl"><code><code>supportedNetworks</code></code></a> is missing.
+          </li>
+          <li>Let <var data-type="BasicCardResponse">card</var> be a newly created
+          <a data-xref-type="_IDL_" href="#dom-basiccardresponse" class="internalDFN" data-link-type="idl"><code><code>BasicCardResponse</code></code></a> dictionary.
+          </li>
+          <li>Set <var data-type="BasicCardResponse">card</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardResponse" data-xref-for="BasicCardResponse" href="#dom-basiccardresponse-cardnumber" class="internalDFN" data-link-type="idl"><code><code>cardNumber</code></code></a> to a user provided,
+          or otherwise generated, string of digits of length between 10 to 19
+          items representing the <a href="#dfn-pan" class="internalDFN" data-link-type="dfn">primary account number</a>.
+          </li>
+          <li>While the <a href="#dfn-steps-to-check-if-an-instrument-is-supported" class="internalDFN" data-link-type="dfn">steps to check if an instrument is supported</a>
+          with <var data-type="BasicCardResponse">card</var>, <var data-type="sequence<DOMString>">networks</var> returns false, ask the user to correct the
+          card's <a href="#dfn-details" class="internalDFN" data-link-type="dfn">details</a>. Only when the <var data-type="BasicCardResponse">card</var> is a <a href="#dfn-supported-card" class="internalDFN" data-link-type="dfn">supported
+          card</a>, continue.
+          </li>
+          <li>If the <var data-type="BasicCardResponse">card</var> supports a <a href="#dfn-card-holder-s-name" class="internalDFN" data-link-type="dfn">card holder's name</a> and the user
+          chooses provide it, set <var data-type="BasicCardResponse">card</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardResponse" data-xref-for="BasicCardResponse" href="#dom-basiccardresponse-cardholdername" class="internalDFN" data-link-type="idl"><code><code>cardholderName</code></code></a>
+          to the <a href="#dfn-card-holder-s-name" class="internalDFN" data-link-type="dfn">card holder's name</a>.
+          </li>
+          <li>If the <var data-type="BasicCardResponse">card</var> supports a <a href="#dfn-security-code" class="internalDFN" data-link-type="dfn">security code</a> and the user
+          chooses provide it, set <var data-type="BasicCardResponse">card</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardResponse" data-xref-for="BasicCardResponse" href="#dom-basiccardresponse-cardsecuritycode" class="internalDFN" data-link-type="idl"><code><code>cardSecurityCode</code></code></a>
+          to a three or more digit string.
+          </li>
+          <li>If the <var data-type="BasicCardResponse">card</var> supports an <a href="#dfn-expiry-month" class="internalDFN" data-link-type="dfn">expiry month</a> and the user
+          chooses to provide it, set <var data-type="BasicCardResponse">card</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardResponse" data-xref-for="BasicCardResponse" href="#dom-basiccardresponse-expirymonth" class="internalDFN" data-link-type="idl"><code><code>expiryMonth</code></code></a>
+          to two-digit string ranging from "<code>01</code>" to "<code>12</code>".
+          </li>
+          <li>If the <var data-type="BasicCardResponse">card</var> supports an <a href="#dfn-expiry-year" class="internalDFN" data-link-type="dfn">expiry year</a> and the user chooses
+          provide it, set <var data-type="BasicCardResponse">card</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardResponse" data-xref-for="BasicCardResponse" href="#dom-basiccardresponse-expiryyear" class="internalDFN" data-link-type="idl"><code><code>expiryYear</code></code></a> to a
+          four-digit string in the range "<code>0000</code>" to "<code>9999</code>".
+          </li>
+          <li>If <var data-type="PaymentRequest">request</var>.<a href="https://www.w3.org/TR/payment-request/#dfn-options">[[options]]</a>["<a href="https://www.w3.org/TR/payment-request/#dom-paymentoptions-requestbillingaddress"><code>requestBillingAddress</code></a>"]
+          is true, or, optionally, the user agent determines that payment is
+          taking place in region where validation of billing addresses against
+          an address verification system is the norm:
+            <ol>
+              <li>Let <var data-type="list">redactList</var> be at least « "organization", "phone",
+              "recipient" ».
+              </li>
+              <li>Set <var data-type="BasicCardResponse">card</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardResponse" data-xref-for="BasicCardResponse" href="#dom-basiccardresponse-billingaddress" class="internalDFN" data-link-type="idl"><code><code>billingAddress</code></code></a> to the result
+              of running the steps to <a href="https://www.w3.org/TR/payment-request/#creating-a-paymentaddress-from-user-provided-input">
+                create a <code>PaymentAddress</code> from user-provided input</a> with
+                <var data-type="list">redactList</var>.
+              </li>
+            </ol>
+          </li>
+          <li>
+            <p>
+              Optionally, validate <var data-type="BasicCardResponse">card</var>'s <a href="#dfn-details" class="internalDFN" data-link-type="dfn">details</a> to make sure they
+              adhere to any additional <a href="#dfn-network" class="internalDFN" data-link-type="dfn">network</a> requirements and assist
+              the user in fixing any issues encountered.
+            </p>
+            <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span><span class="issue-label">: Validation of inputs</span></div><div class="">
+              <p>
+                The validation a user agent performs on the card's
+                <a href="#dfn-details" class="internalDFN" data-link-type="dfn">details</a> is a quality of implementation detail and
+                outside the scope of this specification. There is nevertheless
+                an expectation that user agents will make a best effort to
+                check that a card number is valid as per the Luhn algorithm
+                [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso7812-1" title="Identification cards - Identification of issuers - Part 1: Numbering system">ISO7812-1</a></cite>], check the length is correct , check that the
+                issuer identification number is correct for the selected
+                <a href="#dfn-network" class="internalDFN" data-link-type="dfn">network</a>, check that the expiry date on the card hasn't
+                lapsed, and so on.
+              </p>
+            </div></div>
+          </li>
+          <li>Return <var data-type="BasicCardResponse">card</var>.
+          </li>
+        </ol>
+      </section>
+      <section id="steps-for-when-a-user-changes-payment-method">
+        <h3 id="x5-4-steps-for-when-a-user-changes-payment-method"><bdi class="secno">5.4 </bdi>
+          Steps for when a user changes payment method
+        <a class="self-link" aria-label="§" href="#steps-for-when-a-user-changes-payment-method"></a></h3>
+        <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span></div><p class="">
+          When the end user explicitly switches from one card to another, these
+          steps cause an event to fire in the <cite><a href="https://www.w3.org/TR/payment-request/">Payment Request API</a></cite>. The
+          algorithm presupposes that the user agent is only presenting
+          <a href="#dfn-supported-card" class="internalDFN" data-link-type="dfn">supported cards</a> to the end user, by having filtered out
+          unsupported cards based on the initiating payment request's
+          <a data-xref-type="_IDL_" href="#dom-basiccardrequest" class="internalDFN" data-link-type="idl"><code><code>BasicCardRequest</code></code></a>'s <a data-xref-type="attribute|dict-member" data-link-for="BasicCardRequest" data-xref-for="BasicCardRequest" href="#dom-basiccardrequest-supportednetworks" class="internalDFN" data-link-type="idl"><code><code>supportedNetworks</code></code></a> values.
+        </p></div>
+        <p>
+          The <dfn data-dfn-type="dfn" id="dfn-steps-for-when-a-user-changes-payment-method">steps for when a user changes payment method</dfn> are as
+          follows. The steps take <a data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentrequest"><code>PaymentRequest</code></a>
+          <var data-type="PaymentRequest">request</var> as input. To mitigate fingerprinting
+          concerns, the user agent <em class="rfc2119" title="MUST NOT">MUST NOT</em> run these steps unless a user
+          explicitly switches to a different card by performing some user
+          action (e.g., by selecting a different card explicitly from a list of
+          cards). For cards that are preselected by default by the user agent,
+          any matching <a href="https://www.w3.org/TR/payment-request/#dom-paymentdetailsmodifier"><code>PaymentDetailsModifier</code></a>s
+          <a data-lt="apply the modifiers" href="#dfn-apply-the-modifiers" class="internalDFN" data-link-type="dfn">apply</a> instead (without the need
+          to run these steps).
+        </p>
+        <ol>
+          <li>Let <var data-type="BasicCardChangeDetails">methodDetails</var> be a newly created
+          <a data-xref-type="_IDL_" href="#dom-basiccardchangedetails" class="internalDFN" data-link-type="idl"><code><code>BasicCardChangeDetails</code></code></a> dictionary.
+          </li>
+          <li>From the <a href="#dfn-supported-card" class="internalDFN" data-link-type="dfn">supported cards</a> presented to the end user, let
+          <var>card</var> be the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a> the user selects.
+          </li>
+          <li>Set <var data-type="BasicCardChangeDetails">methodDetails</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardChangeDetails" data-xref-for="BasicCardChangeDetails" href="#dom-basiccardchangedetails-billingaddress" class="internalDFN" data-link-type="idl"><code><code>billingAddress</code></code></a> to
+          <code>null</code>.
+          </li>
+          <li>If <var data-type="PaymentRequest">request</var>.<a href="https://www.w3.org/TR/payment-request/#dfn-options">[[options]]</a>["<a href="https://www.w3.org/TR/payment-request/#dom-paymentoptions-requestshipping"><code>requestBillingAddress</code></a>"]
+          is <code>true</code>:
+            <ol>
+              <li>
+                <p>
+                  Let <var data-type="list">redactList</var> be at least « "addressLine",
+                  "organization", "phone", "recipient" ».
+                </p>
+                <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-2" aria-level="4"><span>Note</span><span class="issue-label">: Privacy of recipient information</span></div><div class="">
+                  <p>
+                    The <var data-type="list">redactList</var> optionally gives user agents the
+                    possibility to limit the amount of personal information
+                    about the recipient that the API shares with the merchant.
+                  </p>
+                  <p>
+                    For merchants, the resulting <a data-xref-type="_IDL_" data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentaddress"><code><code>PaymentAddress</code></code></a> object
+                    provides enough information to, for example, calculate tax,
+                    but, in most cases, not enough information to physically
+                    locate and uniquely identify the payer.
+                  </p>
+                  <p>
+                    Unfortunately, even with the <var data-type="list">redactList</var> recipient
+                    anonymity cannot be assured. This is because in some
+                    countries postal codes are so fine-grained that they can
+                    uniquely identify a recipient.
+                  </p>
+                </div></div>
+              </li>
+              <li>Let <var data-type="PaymentAddress">billingAddress</var> to the result of running
+              the steps to <a href="https://www.w3.org/TR/payment-request/#creating-a-paymentaddress-from-user-provided-input">
+                create a <code>PaymentAddress</code> from user-provided
+                input</a> with <var data-type="list">redactList</var>.
+              </li>
+              <li>Optionally, redact <var data-type="PaymentAddress">billingAddress</var>.<a href="https://www.w3.org/TR/payment-request/#dom-paymentaddress-postalcode"><code>postalCode</code></a>
+              to make it more privacy preserving, but providing enough detail
+              so that, for example, it can still be used to calculate tax.
+              </li>
+              <li>Set <var data-type="BasicCardChangeDetails">methodDetails</var>.<a data-xref-type="attribute|dict-member" data-link-for="BasicCardChangeDetails" data-xref-for="BasicCardChangeDetails" href="#dom-basiccardchangedetails-billingaddress" class="internalDFN" data-link-type="idl"><code><code>billingAddress</code></code></a>
+              to <var data-type="PaymentAddress">billingAddress</var>.
+              </li>
+            </ol>
+          </li>
+          <li>Run <var data-type="PaymentRequest">request</var>'s <a href="https://www.w3.org/TR/payment-request/#dfn-payment-method-changed-algorithm">payment method
+          changed algorithm</a> with <var data-type="BasicCardChangeDetails">methodDetails</var> and "basic-card".
+          </li>
+          <li>Let <var data-type="DOMString">networkIdentifier</var> be the <a href="#dfn-network" class="internalDFN" data-link-type="dfn">network</a> of the
+          selected instrument.
+          </li>
+          <li>If <a href="https://www.w3.org/TR/payment-request/#dom-paymentrequestupdateevent-updatewith">updateWith()</a>
+          was called, <a href="#dfn-apply-the-modifiers" class="internalDFN" data-link-type="dfn">apply the modifiers</a> using <var data-type="PaymentRequest">request</var> and
+          <var data-type="DOMString">networkIdentifier</var>.
+          </li>
+        </ol>
+        <section data-dfn-for="BasicCardChangeDetails" id="basiccardchangedetails-dictionary">
+          <h4 id="x5-4-1-basiccardchangedetails-dictionary"><bdi class="secno">5.4.1 </bdi>
+            <dfn data-dfn-type="dictionary" data-export="" id="dom-basiccardchangedetails" data-idl="dictionary" data-title="BasicCardChangeDetails" data-dfn-for=""><code>BasicCardChangeDetails</code></dfn> dictionary
+          <a class="self-link" aria-label="§" href="#basiccardchangedetails-dictionary"></a></h4>
+          <pre class="idl def"><span data-idl="" class="idlDictionary" id="idl-def-basiccardchangedetails" data-title="BasicCardChangeDetails">dictionary <a class="internalDFN idlID" data-link-for="" data-link-type="dictionary" href="#dom-basiccardchangedetails"><code>BasicCardChangeDetails</code></a> {<span data-idl="" class="idlMember" id="idl-def-basiccardchangedetails-billingaddress" data-title="billingAddress" data-dfn-for="BasicCardChangeDetails"><span class="idlType">
+  <a data-xref-type="_IDL_" data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentaddress"><code>PaymentAddress</code></a>?</span> <a class="internalDFN idlName" data-link-for="BasicCardChangeDetails" data-link-type="dict-member" href="#dom-basiccardchangedetails-billingaddress"><code>billingAddress</code></a> = null;</span>
+};</span></pre>
+          <dl>
+            <dt>
+              <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccardchangedetails-billingaddress" data-idl="field" data-title="billingAddress" data-dfn-for="BasicCardChangeDetails" data-type="PaymentAddress"><code>billingAddress</code></dfn> member
+            </dt>
+            <dd>
+              If the merchant requested the billing address, a redacted
+              <a data-xref-type="_IDL_" data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentaddress"><code><code>PaymentAddress</code></code></a> that represents the <a href="#dfn-billing-address" class="internalDFN" data-link-type="dfn">billing address</a>
+              associated with the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>. If the merchant does not request
+              the billing address, it's null.
+            </dd>
+          </dl>
+        </section>
+      </section>
+      <section id="selecting-the-payment-handler">
+        <h3 id="x5-5-selecting-the-payment-handler"><bdi class="secno">5.5 </bdi>
+          Selecting the payment handler
+        <a class="self-link" aria-label="§" href="#selecting-the-payment-handler"></a></h3>
+        <div class="note" role="note" id="issue-container-generatedID-3"><div role="heading" class="note-title marker" id="h-note-3" aria-level="4"><span>Note</span></div><div class="">
+          <p>
+            In the case where a payment request is made with multiple
+            applicable <a data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentmethoddata"><code>PaymentMethodData</code></a>s, this algorithm selects the
+            last applicable <a href="https://www.w3.org/TR/payment-request/#dfn-serializedmethoddata">[[serializedMethodData]]</a>
+            whose <abbr title="standardized payment method identifier">PMI</abbr> is "<code>basic-card</code>". (i.e., "the last one
+            wins").
+          </p>
+          <div class="example" id="example-1-last-one-wins">
+          <div class="marker">
+      <a class="self-link" href="#example-1-last-one-wins">Example<bdi> 1</bdi></a><span class="example-title">: Last one wins</span>
+    </div> <pre aria-busy="false"><code class="hljs javascript">  <span class="hljs-keyword">const</span> methodData = [
+  <span class="hljs-comment">// This one matches, but is ignored since one the follows also matches.</span>
+  {
+    <span class="hljs-attr">supportedMethods</span>: <span class="hljs-string">"basic-card"</span>,
+    <span class="hljs-attr">data</span>: {
+      <span class="hljs-attr">supportedNetworks</span>: [<span class="hljs-string">"visa"</span>, <span class="hljs-string">"mastercard"</span>],
+    },
+  },
+  <span class="hljs-comment">// ✅ This second one gets used!</span>
+  {
+    <span class="hljs-attr">supportedMethods</span>: <span class="hljs-string">"basic-card"</span>,
+    <span class="hljs-attr">data</span>: {
+      <span class="hljs-attr">supportedNetworks</span>: [<span class="hljs-string">"visa"</span>],
+    },
+  },
+  <span class="hljs-comment">// This one gets skipped, because it's not applicable to</span>
+  <span class="hljs-comment">// basic card.</span>
+  {
+    <span class="hljs-attr">supportedMethods</span>: <span class="hljs-string">"https://example.com/bobpay"</span>,
+  },
+];
+
+<span class="hljs-comment">// See above for which methodData gets picked.</span>
+<span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> PaymentRequest(methodData, details, options).show();</code></pre>
+        </div>
+        </div></div>
+        <p>
+          The <dfn data-dfn-type="dfn" id="dfn-steps-for-selecting-the-payment-handler">steps for selecting the payment handler</dfn> are given by
+          the following algorithm. These steps run when a payment UI is first
+          presented to the end-user, as a successful call to a
+          <a data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentrequest"><code>PaymentRequest</code></a>'s <a href="https://www.w3.org/TR/payment-request/#dom-paymentrequest-show"><code>show()</code></a>
+          method. The steps take a <a data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentrequest"><code>PaymentRequest</code></a>
+          <var data-type="PaymentRequest">request</var>.
+        </p>
+        <ol class="algorithm">
+          <li>Let <var data-type="BasicCardRequest">restrictions</var> be a newly created
+          <a data-xref-type="_IDL_" href="#dom-basiccardrequest" class="internalDFN" data-link-type="idl"><code><code>BasicCardRequest</code></code></a>.
+          </li>
+          <li>For each <a data-cite-path="" data-type="dfn" href="https://infra.spec.whatwg.org/#pair">pair</a> (<a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><code>DOMString</code></a> <var data-type="DOMString">id</var> /
+          <a data-cite-path="" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> <var data-type="string">data</var> of <var data-type="PaymentRequest">request</var>.<a href="https://www.w3.org/TR/payment-request/#dfn-serializedmethoddata"><code>[[serializedMethodData]]</code></a>
+          in reverse order:
+            <ol>
+              <li>If <var data-type="DOMString">id</var> is not <code>"basic-card"</code>, continue.
+              </li>
+              <li>Let <var data-type="object">object</var> be result of <a href="https://tc39.es/ecma262/#sec-json.parse">JSON-parsing</a> <var data-type="string">data</var>.
+              </li>
+              <li>If <var data-type="object">object</var> is <code>null</code>, break.
+              </li>
+              <li>Otherwise, set <var data-type="BasicCardRequest">restrictions</var> be the result
+              of <a data-lt="converted to an idl value" data-cite-path="" data-type="dfn" href="https://heycam.github.io/webidl/#dfn-convert-ecmascript-to-idl-value">converting</a> <var data-type="object">object</var> into a
+              <a data-xref-type="_IDL_" href="#dom-basiccardrequest" class="internalDFN" data-link-type="idl"><code><code>BasicCardRequest</code></code></a> dictionary.
+              </li>
+              <li>Break.
+              </li>
+            </ol>
+          </li>
+          <li>Apply <var data-type="BasicCardRequest">restrictions</var>'s <a data-xref-type="attribute|dict-member" data-link-for="BasicCardRequest" data-xref-for="BasicCardRequest" href="#dom-basiccardrequest-supportednetworks" class="internalDFN" data-link-type="idl"><code><code>supportedNetworks</code></code></a>
+          member to constrain the card type inputs of the payment UI. When the
+          sequence is empty, it means that all <a href="#dfn-network" class="internalDFN" data-link-type="dfn">networks</a> are supported.
+          </li>
+          <li>If a payment instrument is selected by default, <a href="#dfn-apply-the-modifiers" class="internalDFN" data-link-type="dfn">apply the
+          modifiers</a> using <var data-type="PaymentRequest">request</var> and passing the identifier for
+          <a href="#dfn-network" class="internalDFN" data-link-type="dfn">network</a> of the selected instrument.
+          </li>
+        </ol>
+      </section>
+      <section id="applying-the-modifiers">
+        <h3 id="x5-6-applying-the-modifiers"><bdi class="secno">5.6 </bdi>
+          Applying the modifiers
+        <a class="self-link" aria-label="§" href="#applying-the-modifiers"></a></h3>
+        <p>
+          The steps to <dfn data-dfn-type="dfn" id="dfn-apply-the-modifiers">apply the modifiers</dfn> are given by the
+          following algorithm. It takes a <a data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentrequest"><code>PaymentRequest</code></a>
+          <var data-type="PaymentRequest">request</var> and a string <var data-type="string">networkIdentifier</var> that
+          identifies a <a href="#dfn-network" class="internalDFN" data-link-type="dfn">network</a>:
+        </p>
+        <ol class="algorithm">
+          <li>Let <var data-type="number">index</var> be the length of <var data-type="PaymentRequest">request</var>.<a href="https://www.w3.org/TR/payment-request/#dfn-serializedmodifierdata"><code>[[serializedModifierData]]</code></a>.
+          </li>
+          <li>Let <var data-type="BasicCardRequest">restrictions</var> be a newly created
+          <a data-xref-type="_IDL_" href="#dom-basiccardrequest" class="internalDFN" data-link-type="idl"><code><code>BasicCardRequest</code></code></a>.
+          </li>
+          <li>For each <a data-cite-path="" data-type="dfn" href="https://infra.spec.whatwg.org/#pair">pair</a> (<a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><code>DOMString</code></a> <var data-type="DOMString">id</var> /
+          <a data-cite-path="" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> <var data-type="string">data</var>) of <var data-type="PaymentRequest">request</var><a href="https://www.w3.org/TR/payment-request/#dfn-serializedmodifierdata"><code>[[serializedModifierData]]</code></a>
+          in reverse order:
+            <ol>
+              <li>Decrement <var data-type="number">index</var> by 1.
+              </li>
+              <li>If <var data-type="DOMString">id</var> is not "<a href="#dfn-basic-card" class="internalDFN" data-link-type="dfn"><code>basic-card</code></a>", continue.
+              </li>
+              <li>Let <var data-type="object">object</var> be result of <a href="https://tc39.es/ecma262/#sec-json.parse">JSON-parsing</a> <var data-type="string">data</var>.
+              </li>
+              <li>If <var data-type="object">object</var> is <code>null</code>, break.
+              </li>
+              <li>Let <var data-type="BasicCardRequest">bcRequest</var> be the result of <a data-lt="converted
+              to an idl value" data-cite-path="" data-type="dfn" href="https://heycam.github.io/webidl/#dfn-convert-ecmascript-to-idl-value">converting</a> <var data-type="object">object</var> to a <a data-xref-type="_IDL_" href="#dom-basiccardrequest" class="internalDFN" data-link-type="idl"><code><code>BasicCardRequest</code></code></a>
+              dictionary.
+              </li>
+              <li>If <var data-type="BasicCardRequest">bcRequest</var>'s <a data-xref-type="attribute|dict-member" data-link-for="BasicCardRequest" data-xref-for="BasicCardRequest" href="#dom-basiccardrequest-supportednetworks" class="internalDFN" data-link-type="idl"><code><code>supportedNetworks</code></code></a> is
+              zero length, or <a data-xref-type="attribute|dict-member" data-link-for="BasicCardRequest" data-xref-for="BasicCardRequest" href="#dom-basiccardrequest-supportednetworks" class="internalDFN" data-link-type="idl"><code><code>supportedNetworks</code></code></a> includes
+              <var data-type="string">networkIdentifier</var>
+                <ol>
+                  <li>Set <var>restriction</var> to <var data-type="BasicCardRequest">bcRequest</var>
+                  </li>
+                  <li>Break.
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Let <var data-type="PaymentDetailsModifier">modifier</var> be the
+          <a data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentdetailsmodifier"><code>PaymentDetailsModifier</code></a> from <var data-type="PaymentRequest">request</var>.<a href="https://www.w3.org/TR/payment-request/#dfn-details">[[details]]</a>.<a href="https://www.w3.org/TR/payment-request/#dom-paymentdetailsbase-modifiers">modifiers</a> at
+          <var data-type="number">index</var>.
+          </li>
+          <li>If <var data-type="PaymentDetailsModifier">modifier</var>.<a href="https://www.w3.org/TR/payment-request/#dom-paymentdetailsmodifier-total"><code>total</code></a>
+          is present, update the presented UI with the updated total.
+          </li>
+          <li>If <var data-type="PaymentDetailsModifier">modifier</var>.<a href="https://www.w3.org/TR/payment-request/#dom-paymentdetailsmodifier-additionaldisplayitems"><code>additionalDisplayItems</code></a>
+          is present, update the presented UI with the additional display
+          items.
+          </li>
+        </ol>
+      </section>
+    </section>
+    <aside class="mdn before wrapped"><div><button onclick="toggleMDNStatus(this.parentNode)" aria-label="Expand MDN details"><b>MDN</b></button><div>
+      <a title="The BasicCardResponse dictionary (related to the Payment Request API, although defined in the Basic Card Payment spec) defines an object structure for payment response details such as the number/expiry date of the card used to make the payment, and the billing address." href="https://developer.mozilla.org/en-US/docs/Web/API/BasicCardResponse">BasicCardResponse</a>
+    <p class="mdnsupport">
+    
+      <span class="chrome unknown">
+        <span class="browser-name">Chrome</span>
+        <span class="version">?</span>
+      </span>
+      <span class="chrome_android yes">
+        <span class="browser-name">Chrome Android</span>
+        <span class="version">57+</span>
+      </span>
+      <span class="edge yes">
+        <span class="browser-name">Edge</span>
+        <span class="version">Yes</span>
+      </span>
+      <span class="edge_mobile unknown">
+        <span class="browser-name">Edge Mobile</span>
+        <span class="version">?</span>
+      </span>
+      <span class="firefox yes">
+        <span class="browser-name">Firefox</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="firefox_android yes">
+        <span class="browser-name">Firefox Android</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="ie unknown">
+        <span class="browser-name">Internet Explorer</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera unknown">
+        <span class="browser-name">Opera</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera_android unknown">
+        <span class="browser-name">Opera Android</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari unknown">
+        <span class="browser-name">Safari</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari_ios unknown">
+        <span class="browser-name">Safari iOS</span>
+        <span class="version">?</span>
+      </span>
+      <span class="samsunginternet_android yes">
+        <span class="browser-name">Samsung Internet</span>
+        <span class="version">7.0+</span>
+      </span>
+      <span class="webview_android unknown">
+        <span class="browser-name">WebView Android</span>
+        <span class="version">?</span>
+      </span>
+  </p></div></div><div><button onclick="toggleMDNStatus(this.parentNode)" aria-label="Expand MDN details"><b>MDN</b></button><div>
+      <a title="The cardNumber property of the BasicCardResponse dictionary contains the cardholder name of the card used to make the payment." href="https://developer.mozilla.org/en-US/docs/Web/API/BasicCardResponse/cardholderName">BasicCardResponse/cardholderName</a>
+    <p class="mdnsupport">
+    
+      <span class="chrome unknown">
+        <span class="browser-name">Chrome</span>
+        <span class="version">?</span>
+      </span>
+      <span class="chrome_android yes">
+        <span class="browser-name">Chrome Android</span>
+        <span class="version">57+</span>
+      </span>
+      <span class="edge yes">
+        <span class="browser-name">Edge</span>
+        <span class="version">Yes</span>
+      </span>
+      <span class="edge_mobile unknown">
+        <span class="browser-name">Edge Mobile</span>
+        <span class="version">?</span>
+      </span>
+      <span class="firefox yes">
+        <span class="browser-name">Firefox</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="firefox_android yes">
+        <span class="browser-name">Firefox Android</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="ie unknown">
+        <span class="browser-name">Internet Explorer</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera unknown">
+        <span class="browser-name">Opera</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera_android unknown">
+        <span class="browser-name">Opera Android</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari unknown">
+        <span class="browser-name">Safari</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari_ios unknown">
+        <span class="browser-name">Safari iOS</span>
+        <span class="version">?</span>
+      </span>
+      <span class="samsunginternet_android yes">
+        <span class="browser-name">Samsung Internet</span>
+        <span class="version">7.0+</span>
+      </span>
+      <span class="webview_android unknown">
+        <span class="browser-name">WebView Android</span>
+        <span class="version">?</span>
+      </span>
+  </p></div></div><div><button onclick="toggleMDNStatus(this.parentNode)" aria-label="Expand MDN details"><b>MDN</b></button><div>
+      <a title="The cardNumber property of the BasicCardResponse dictionary contains the number of the card used to make the payment." href="https://developer.mozilla.org/en-US/docs/Web/API/BasicCardResponse/cardNumber">BasicCardResponse/cardNumber</a>
+    <p class="mdnsupport">
+    
+      <span class="chrome unknown">
+        <span class="browser-name">Chrome</span>
+        <span class="version">?</span>
+      </span>
+      <span class="chrome_android yes">
+        <span class="browser-name">Chrome Android</span>
+        <span class="version">57+</span>
+      </span>
+      <span class="edge yes">
+        <span class="browser-name">Edge</span>
+        <span class="version">Yes</span>
+      </span>
+      <span class="edge_mobile unknown">
+        <span class="browser-name">Edge Mobile</span>
+        <span class="version">?</span>
+      </span>
+      <span class="firefox yes">
+        <span class="browser-name">Firefox</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="firefox_android yes">
+        <span class="browser-name">Firefox Android</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="ie unknown">
+        <span class="browser-name">Internet Explorer</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera unknown">
+        <span class="browser-name">Opera</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera_android unknown">
+        <span class="browser-name">Opera Android</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari unknown">
+        <span class="browser-name">Safari</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari_ios unknown">
+        <span class="browser-name">Safari iOS</span>
+        <span class="version">?</span>
+      </span>
+      <span class="samsunginternet_android yes">
+        <span class="browser-name">Samsung Internet</span>
+        <span class="version">7.0+</span>
+      </span>
+      <span class="webview_android unknown">
+        <span class="browser-name">WebView Android</span>
+        <span class="version">?</span>
+      </span>
+  </p></div></div><div><button onclick="toggleMDNStatus(this.parentNode)" aria-label="Expand MDN details"><b>MDN</b></button><div>
+      <a title="The expiryMonth property of the BasicCardResponse dictionary contains the expiry month of the card used to make the payment." href="https://developer.mozilla.org/en-US/docs/Web/API/BasicCardResponse/expiryMonth">BasicCardResponse/expiryMonth</a>
+    <p class="mdnsupport">
+    
+      <span class="chrome unknown">
+        <span class="browser-name">Chrome</span>
+        <span class="version">?</span>
+      </span>
+      <span class="chrome_android yes">
+        <span class="browser-name">Chrome Android</span>
+        <span class="version">57+</span>
+      </span>
+      <span class="edge yes">
+        <span class="browser-name">Edge</span>
+        <span class="version">Yes</span>
+      </span>
+      <span class="edge_mobile unknown">
+        <span class="browser-name">Edge Mobile</span>
+        <span class="version">?</span>
+      </span>
+      <span class="firefox yes">
+        <span class="browser-name">Firefox</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="firefox_android yes">
+        <span class="browser-name">Firefox Android</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="ie unknown">
+        <span class="browser-name">Internet Explorer</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera unknown">
+        <span class="browser-name">Opera</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera_android unknown">
+        <span class="browser-name">Opera Android</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari unknown">
+        <span class="browser-name">Safari</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari_ios unknown">
+        <span class="browser-name">Safari iOS</span>
+        <span class="version">?</span>
+      </span>
+      <span class="samsunginternet_android yes">
+        <span class="browser-name">Samsung Internet</span>
+        <span class="version">7.0+</span>
+      </span>
+      <span class="webview_android unknown">
+        <span class="browser-name">WebView Android</span>
+        <span class="version">?</span>
+      </span>
+  </p></div></div><div><button onclick="toggleMDNStatus(this.parentNode)" aria-label="Expand MDN details"><b>MDN</b></button><div>
+      <a title="The expiryYear property of the BasicCardResponse dictionary contains the expiry year of the card used to make the payment." href="https://developer.mozilla.org/en-US/docs/Web/API/BasicCardResponse/expiryYear">BasicCardResponse/expiryYear</a>
+    <p class="mdnsupport">
+    
+      <span class="chrome unknown">
+        <span class="browser-name">Chrome</span>
+        <span class="version">?</span>
+      </span>
+      <span class="chrome_android yes">
+        <span class="browser-name">Chrome Android</span>
+        <span class="version">57+</span>
+      </span>
+      <span class="edge yes">
+        <span class="browser-name">Edge</span>
+        <span class="version">Yes</span>
+      </span>
+      <span class="edge_mobile unknown">
+        <span class="browser-name">Edge Mobile</span>
+        <span class="version">?</span>
+      </span>
+      <span class="firefox yes">
+        <span class="browser-name">Firefox</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="firefox_android yes">
+        <span class="browser-name">Firefox Android</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="ie unknown">
+        <span class="browser-name">Internet Explorer</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera unknown">
+        <span class="browser-name">Opera</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera_android unknown">
+        <span class="browser-name">Opera Android</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari unknown">
+        <span class="browser-name">Safari</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari_ios unknown">
+        <span class="browser-name">Safari iOS</span>
+        <span class="version">?</span>
+      </span>
+      <span class="samsunginternet_android yes">
+        <span class="browser-name">Samsung Internet</span>
+        <span class="version">7.0+</span>
+      </span>
+      <span class="webview_android unknown">
+        <span class="browser-name">WebView Android</span>
+        <span class="version">?</span>
+      </span>
+  </p></div></div><div><button onclick="toggleMDNStatus(this.parentNode)" aria-label="Expand MDN details"><b>MDN</b></button><div>
+      <a title="The cardSecurityCode property of the BasicCardResponse dictionary contains the security code of the card used to make the payment." href="https://developer.mozilla.org/en-US/docs/Web/API/BasicCardResponse/cardSecurityCode">BasicCardResponse/cardSecurityCode</a>
+    <p class="mdnsupport">
+    
+      <span class="chrome unknown">
+        <span class="browser-name">Chrome</span>
+        <span class="version">?</span>
+      </span>
+      <span class="chrome_android yes">
+        <span class="browser-name">Chrome Android</span>
+        <span class="version">57+</span>
+      </span>
+      <span class="edge yes">
+        <span class="browser-name">Edge</span>
+        <span class="version">Yes</span>
+      </span>
+      <span class="edge_mobile unknown">
+        <span class="browser-name">Edge Mobile</span>
+        <span class="version">?</span>
+      </span>
+      <span class="firefox yes">
+        <span class="browser-name">Firefox</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="firefox_android yes">
+        <span class="browser-name">Firefox Android</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="ie unknown">
+        <span class="browser-name">Internet Explorer</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera unknown">
+        <span class="browser-name">Opera</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera_android unknown">
+        <span class="browser-name">Opera Android</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari unknown">
+        <span class="browser-name">Safari</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari_ios unknown">
+        <span class="browser-name">Safari iOS</span>
+        <span class="version">?</span>
+      </span>
+      <span class="samsunginternet_android yes">
+        <span class="browser-name">Samsung Internet</span>
+        <span class="version">7.0+</span>
+      </span>
+      <span class="webview_android unknown">
+        <span class="browser-name">WebView Android</span>
+        <span class="version">?</span>
+      </span>
+  </p></div></div><div><button onclick="toggleMDNStatus(this.parentNode)" aria-label="Expand MDN details"><b>MDN</b></button><div>
+      <a title="The billingAddress property of the BasicCardResponse dictionary contains the billing address of the card used to make the payment." href="https://developer.mozilla.org/en-US/docs/Web/API/BasicCardResponse/billingAddress">BasicCardResponse/billingAddress</a>
+    <p class="mdnsupport">
+    
+      <span class="chrome unknown">
+        <span class="browser-name">Chrome</span>
+        <span class="version">?</span>
+      </span>
+      <span class="chrome_android yes">
+        <span class="browser-name">Chrome Android</span>
+        <span class="version">57+</span>
+      </span>
+      <span class="edge yes">
+        <span class="browser-name">Edge</span>
+        <span class="version">Yes</span>
+      </span>
+      <span class="edge_mobile unknown">
+        <span class="browser-name">Edge Mobile</span>
+        <span class="version">?</span>
+      </span>
+      <span class="firefox yes">
+        <span class="browser-name">Firefox</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="firefox_android yes">
+        <span class="browser-name">Firefox Android</span>
+        <span class="version">56+</span>
+      </span>
+      <span class="ie unknown">
+        <span class="browser-name">Internet Explorer</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera unknown">
+        <span class="browser-name">Opera</span>
+        <span class="version">?</span>
+      </span>
+      <span class="opera_android unknown">
+        <span class="browser-name">Opera Android</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari unknown">
+        <span class="browser-name">Safari</span>
+        <span class="version">?</span>
+      </span>
+      <span class="safari_ios unknown">
+        <span class="browser-name">Safari iOS</span>
+        <span class="version">?</span>
+      </span>
+      <span class="samsunginternet_android yes">
+        <span class="browser-name">Samsung Internet</span>
+        <span class="version">7.0+</span>
+      </span>
+      <span class="webview_android unknown">
+        <span class="browser-name">WebView Android</span>
+        <span class="version">?</span>
+      </span>
+  </p></div></div></aside><section data-dfn-for="BasicCardResponse" id="basiccardresponse-dictionary">
+      <h2 id="x6-basiccardresponse-dictionary"><bdi class="secno">6. </bdi>
+        <dfn data-dfn-type="dictionary" data-export="" id="dom-basiccardresponse" data-idl="dictionary" data-title="BasicCardResponse" data-dfn-for=""><code>BasicCardResponse</code></dfn> dictionary
+      <a class="self-link" aria-label="§" href="#basiccardresponse-dictionary"></a></h2>
+      <pre class="idl def"><span data-idl="" class="idlDictionary" id="idl-def-basiccardresponse" data-title="BasicCardResponse">dictionary <a class="internalDFN idlID" data-link-for="" data-link-type="dictionary" href="#dom-basiccardresponse"><code>BasicCardResponse</code></a> {<span data-idl="" class="idlMember" id="idl-def-basiccardresponse-cardnumber" data-title="cardNumber" data-dfn-for="BasicCardResponse">
+  required<span class="idlType"> <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-cardnumber"><code>cardNumber</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-basiccardresponse-cardholdername" data-title="cardholderName" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-cardholdername"><code>cardholderName</code></a> = "";</span><span data-idl="" class="idlMember" id="idl-def-basiccardresponse-cardsecuritycode" data-title="cardSecurityCode" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-cardsecuritycode"><code>cardSecurityCode</code></a> = "";</span><span data-idl="" class="idlMember" id="idl-def-basiccardresponse-expirymonth" data-title="expiryMonth" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-expirymonth"><code>expiryMonth</code></a> = "";</span><span data-idl="" class="idlMember" id="idl-def-basiccardresponse-expiryyear" data-title="expiryYear" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-expiryyear"><code>expiryYear</code></a> = "";</span><span data-idl="" class="idlMember" id="idl-def-basiccardresponse-billingaddress" data-title="billingAddress" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentaddress"><code>PaymentAddress</code></a>?</span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-billingaddress"><code>billingAddress</code></a> = null;</span>
+};</span></pre>
+      <dl>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccardresponse-cardholdername" data-idl="field" data-title="cardholderName" data-dfn-for="BasicCardResponse" data-type="DOMString"><code>cardholderName</code></dfn> member
+        </dt>
+        <dd>
+          The <a href="#dfn-card-holder-s-name" class="internalDFN" data-link-type="dfn">card holder's name</a> as it appears on the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>.
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccardresponse-cardnumber" data-idl="field" data-title="cardNumber" data-dfn-for="BasicCardResponse" data-type="DOMString"><code>cardNumber</code></dfn> member
+        </dt>
+        <dd>
+          The <a href="#dfn-pan" class="internalDFN" data-link-type="dfn">primary account number</a> for the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a> as a string of
+          digits that ranges from 10 to 19 digits.
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccardresponse-expirymonth" data-idl="field" data-title="expiryMonth" data-dfn-for="BasicCardResponse" data-type="DOMString"><code>expiryMonth</code></dfn> member
+        </dt>
+        <dd>
+          A two-digit string for the <a href="#dfn-expiry-month" class="internalDFN" data-link-type="dfn">expiry month</a> of the card in the
+          range "<code>01</code>" to "<code>12</code>".
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccardresponse-expiryyear" data-idl="field" data-title="expiryYear" data-dfn-for="BasicCardResponse" data-type="DOMString"><code>expiryYear</code></dfn> member
+        </dt>
+        <dd>
+          A four-digit string for the <a href="#dfn-expiry-year" class="internalDFN" data-link-type="dfn">expiry year</a> of the card in the
+          range "<code>0000</code>" to "<code>9999</code>".
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccardresponse-cardsecuritycode" data-idl="field" data-title="cardSecurityCode" data-dfn-for="BasicCardResponse" data-type="DOMString"><code>cardSecurityCode</code></dfn> member
+        </dt>
+        <dd>
+          A three or more digit string for the <a href="#dfn-security-code" class="internalDFN" data-link-type="dfn">security code</a> of the
+          <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>.
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccardresponse-billingaddress" data-idl="field" data-title="billingAddress" data-dfn-for="BasicCardResponse" data-type="PaymentAddress"><code>billingAddress</code></dfn> member
+        </dt>
+        <dd>
+          A <a data-xref-type="_IDL_" data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentaddress"><code><code>PaymentAddress</code></code></a> that represents the <a href="#dfn-billing-address" class="internalDFN" data-link-type="dfn">billing address</a>
+          associated with the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>, or null.
+        </dd>
+      </dl>
+    </section>
+    <section data-dfn-for="BasicCardErrors" id="basiccarderrors-dictionary">
+      <h2 id="x7-basiccarderrors-dictionary"><bdi class="secno">7. </bdi>
+        <dfn data-dfn-type="dictionary" data-export="" id="dom-basiccarderrors" data-idl="dictionary" data-title="BasicCardErrors" data-dfn-for=""><code>BasicCardErrors</code></dfn> dictionary
+      <a class="self-link" aria-label="§" href="#basiccarderrors-dictionary"></a></h2>
+      <p>
+        When <a href="https://www.w3.org/TR/payment-request/#retry-method">retrying</a> a request
+        for payment, a developer can pass a <a data-xref-type="_IDL_" href="#dom-basiccarderrors" class="internalDFN" data-link-type="idl"><code><code>BasicCardErrors</code></code></a> dictionary for
+        the value of the <a href="https://www.w3.org/TR/payment-request/#paymentvalidationerrors-dictionary"><code>PaymentValidationErrors</code></a>'s
+        <a href="https://www.w3.org/TR/payment-request/#dom-paymentvalidationerrors-paymentmethod"><code>paymentMethod</code></a>
+        member.
+      </p>
+      <pre class="idl def"><span data-idl="" class="idlDictionary" id="idl-def-basiccarderrors" data-title="BasicCardErrors">dictionary <a class="internalDFN idlID" data-link-for="" data-link-type="dictionary" href="#dom-basiccarderrors"><code>BasicCardErrors</code></a> {<span data-idl="" class="idlMember" id="idl-def-basiccarderrors-cardnumber" data-title="cardNumber" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-cardnumber"><code>cardNumber</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-basiccarderrors-cardholdername" data-title="cardholderName" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-cardholdername"><code>cardholderName</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-basiccarderrors-cardsecuritycode" data-title="cardSecurityCode" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-cardsecuritycode"><code>cardSecurityCode</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-basiccarderrors-expirymonth" data-title="expiryMonth" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-expirymonth"><code>expiryMonth</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-basiccarderrors-expiryyear" data-title="expiryYear" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-expiryyear"><code>expiryYear</code></a>;</span><span data-idl="" class="idlMember" id="idl-def-basiccarderrors-billingaddress" data-title="billingAddress" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-addresserrors"><code>AddressErrors</code></a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-billingaddress"><code>billingAddress</code></a>;</span>
+};</span></pre>
+      <dl>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccarderrors-cardholdername" data-idl="field" data-title="cardholderName" data-dfn-for="BasicCardErrors" data-type="DOMString"><code>cardholderName</code></dfn> member
+        </dt>
+        <dd>
+          Validation error for the <a href="#dfn-card-holder-s-name" class="internalDFN" data-link-type="dfn">card holder's name</a>.
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccarderrors-cardnumber" data-idl="field" data-title="cardNumber" data-dfn-for="BasicCardErrors" data-type="DOMString"><code>cardNumber</code></dfn> member
+        </dt>
+        <dd>
+          Validation error for the <a href="#dfn-pan" class="internalDFN" data-link-type="dfn">primary account number</a> for the
+          <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>.
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccarderrors-expirymonth" data-idl="field" data-title="expiryMonth" data-dfn-for="BasicCardErrors" data-type="DOMString"><code>expiryMonth</code></dfn> member
+        </dt>
+        <dd>
+          Validation error for the <a href="#dfn-expiry-month" class="internalDFN" data-link-type="dfn">expiry month</a> of the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>.
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccarderrors-expiryyear" data-idl="field" data-title="expiryYear" data-dfn-for="BasicCardErrors" data-type="DOMString"><code>expiryYear</code></dfn> member
+        </dt>
+        <dd>
+          Validation error for the <a href="#dfn-expiry-year" class="internalDFN" data-link-type="dfn">expiry year</a> of the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>.
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccarderrors-cardsecuritycode" data-idl="field" data-title="cardSecurityCode" data-dfn-for="BasicCardErrors" data-type="DOMString"><code>cardSecurityCode</code></dfn> member
+        </dt>
+        <dd>
+          Validation error for the <a href="#dfn-security-code" class="internalDFN" data-link-type="dfn">security code</a> of the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>.
+        </dd>
+        <dt>
+          <dfn data-dfn-type="dict-member" data-export="" id="dom-basiccarderrors-billingaddress" data-idl="field" data-title="billingAddress" data-dfn-for="BasicCardErrors" data-type="AddressErrors"><code>billingAddress</code></dfn> member
+        </dt>
+        <dd>
+          A <a data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-addresserrors"><code>AddressErrors</code></a> dictionary that represents validation errors
+          with the <a href="#dfn-billing-address" class="internalDFN" data-link-type="dfn">billing address</a> associated with the <a href="#dfn-card" class="internalDFN" data-link-type="dfn">card</a>.
+        </dd>
+      </dl>
+    </section>
+    <section id="dependencies">
+      <h2 id="x8-dependencies"><bdi class="secno">8. </bdi>
+        Dependencies
+      <a class="self-link" aria-label="§" href="#dependencies"></a></h2>
+      <p>
+        This specification relies on WebIDL definitions defined in other
+        specifications.
+      </p>
+      <dl>
+        <dt>
+          Payment Request API
+        </dt>
+        <dd>
+          The <code><dfn data-dfn-type="dfn" id="dfn-paymentaddress" data-no-export=""><a href="https://www.w3.org/TR/payment-request/#dom-paymentaddress">PaymentAddress</a></dfn></code>
+          interface, <code><dfn data-dfn-type="dfn" id="dfn-paymentmethoddata" data-no-export=""><a href="https://www.w3.org/TR/payment-request/#dom-paymentmethoddata">PaymentMethodData</a></dfn></code>
+          dictionary, <code><dfn data-dfn-type="dfn" id="dfn-paymentdetailsmodifier" data-no-export=""><a href="https://www.w3.org/TR/payment-request/#dom-paymentdetailsmodifier">PaymentDetailsModifier</a></dfn></code>
+          dictionary, <code><dfn data-dfn-type="dfn" id="dfn-paymentrequest" data-no-export=""><a href="https://www.w3.org/TR/payment-request/#dom-paymentrequest">PaymentRequest</a></dfn></code>
+          interface, <code><dfn data-dfn-type="dfn" id="dfn-paymentmethodchangeevent" data-no-export=""><a href="https://www.w3.org/TR/payment-request/#dom-paymentmethodchangeevent">PaymentMethodChangeEvent</a></dfn></code>
+          interface and its <code><dfn data-dfn-type="dfn" id="dfn-methoddetails" data-no-export=""><a href="https://www.w3.org/TR/payment-request/#dom-paymentmethodchangeevent-methoddetails">methodDetails</a></dfn></code>
+          attribute, and the <code><dfn data-dfn-type="dfn" id="dfn-addresserrors" data-no-export=""><a href="https://www.w3.org/TR/payment-request/#dom-addresserrors">AddressErrors</a></dfn></code>
+          dictionary are defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-payment-request" title="Payment Request API">payment-request</a></cite>].
+        </dd>
+      </dl>
+    </section>
+    <section id="conformance"><h2 id="x9-conformance"><bdi class="secno">9. </bdi>Conformance<a class="self-link" aria-label="§" href="#conformance"></a></h2><p>
+      As well as sections marked as non-normative, all authoring guidelines,
+      diagrams, examples, and notes in this specification are non-normative.
+      Everything else in this specification is normative.
+    </p><p>
+            The key words <em class="rfc2119">MAY</em>, <em class="rfc2119">MUST</em>, and <em class="rfc2119">MUST NOT</em> in this document
+            are to be interpreted as described in
+            <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>
+            [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">RFC2119</a></cite>]
+            [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8174" title="Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words">RFC8174</a></cite>] when, and only when, they appear
+            in all capitals, as shown here.
+          </p>
+      <p>
+        There is only one class of product that can claim conformance to this
+        specification: a <dfn data-dfn-type="dfn" id="dfn-payment-handler">payment handler</dfn>.
+      </p>
+      <p>
+        A conforming <a href="#dfn-payment-handler" class="internalDFN" data-link-type="dfn">payment handler</a> <em class="rfc2119" title="MUST">MUST</em>:
+      </p>
+      <ul>
+        <li data-tests="payment-request-canmakepayment-method.https.html">when
+        queried, claim to support the "<a href="#dfn-basic-card" class="internalDFN" data-link-type="dfn"><code>basic-card</code></a>" <a href="#dfn-pmi" class="internalDFN" data-link-type="dfn">standardized
+        payment method identifier</a>.
+        </li>
+        <li data-tests="empty-data-manual.https.html">return <a data-xref-type="_IDL_" href="#dom-basiccardresponse" class="internalDFN" data-link-type="idl"><code><code>BasicCardResponse</code></code></a>s whose members are formatted per their definition
+        in this specification.
+        </li>
+      </ul>
+    </section>
+    <section id="security" class="informative">
+      <h2 id="x10-security-and-privacy-considerations"><bdi class="secno">10. </bdi>
+        Security and Privacy Considerations
+      <a class="self-link" aria-label="§" href="#security"></a></h2><p><em>This section is non-normative.</em></p>
+      <p>
+        Due to differences in quality of implementation and the end user's
+        ability to input data into unconstrained input fields, merchants are
+        expected to revalidate all <a data-xref-type="_IDL_" href="#dom-basiccardresponse" class="internalDFN" data-link-type="idl"><code><code>BasicCardResponse</code></code></a> returned by APIs that
+        make use of this specification.
+      </p>
+      <p>
+        In particular, merchants need to treat the values of any <a href="#dfn-details" class="internalDFN" data-link-type="dfn">details</a>
+        with the same scrutiny that they would apply to a [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>] <code>input</code>
+        element, by, for example, sanitizing all the members of a
+        <a data-xref-type="_IDL_" href="#dom-basiccardresponse" class="internalDFN" data-link-type="idl"><code><code>BasicCardResponse</code></code></a> before rendering them anywhere.
+      </p>
+      <p>
+        Depending on jurisdiction, users of this specification (implementers,
+        merchants, payment processors, etc.) can be subject to <dfn data-abbr="PCI DSS" data-lt="PCI DSS|Payment Card Industry Data Security Standard Compliance" data-dfn-type="dfn" id="dfn-pci-dss">Payment Card Industry Data Security Standard Compliance</dfn> (<abbr title="Payment Card Industry Data Security Standard Compliance">PCI DSS</abbr>)
+        or other regulations. Discussion of those considerations are outside
+        the scope of this document.
+      </p>
+    </section>
+    <section id="idl-index" class="appendix"><h2 id="a-idl-index"><bdi class="secno">A. </bdi>IDL Index<a class="self-link" aria-label="§" href="#idl-index"></a></h2><pre class="idl def" id="actual-idl-index"><span data-idl="" class="idlDictionary" data-title="BasicCardRequest">dictionary <a class="internalDFN idlID" data-link-for="" data-link-type="dictionary" href="#dom-basiccardrequest"><code>BasicCardRequest</code></a> {<span data-idl="" class="idlMember" data-title="supportedNetworks" data-dfn-for="BasicCardRequest"><span class="idlType">
+  <a data-xref-type="dfn" data-cite-path="" data-type="dfn" href="https://heycam.github.io/webidl/#idl-sequence">sequence</a>&lt;<a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a>&gt;</span> <a class="internalDFN idlName" data-link-for="BasicCardRequest" data-link-type="dict-member" href="#dom-basiccardrequest-supportednetworks"><code>supportedNetworks</code></a> = [];</span>
+};</span>
+
+<span data-idl="" class="idlDictionary" data-title="BasicCardChangeDetails">dictionary <a class="internalDFN idlID" data-link-for="" data-link-type="dictionary" href="#dom-basiccardchangedetails"><code>BasicCardChangeDetails</code></a> {<span data-idl="" class="idlMember" data-title="billingAddress" data-dfn-for="BasicCardChangeDetails"><span class="idlType">
+  <a data-xref-type="_IDL_" data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentaddress"><code>PaymentAddress</code></a>?</span> <a class="internalDFN idlName" data-link-for="BasicCardChangeDetails" data-link-type="dict-member" href="#dom-basiccardchangedetails-billingaddress"><code>billingAddress</code></a> = null;</span>
+};</span>
+
+<span data-idl="" class="idlDictionary" data-title="BasicCardResponse">dictionary <a class="internalDFN idlID" data-link-for="" data-link-type="dictionary" href="#dom-basiccardresponse"><code>BasicCardResponse</code></a> {<span data-idl="" class="idlMember" data-title="cardNumber" data-dfn-for="BasicCardResponse">
+  required<span class="idlType"> <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-cardnumber"><code>cardNumber</code></a>;</span><span data-idl="" class="idlMember" data-title="cardholderName" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-cardholdername"><code>cardholderName</code></a> = "";</span><span data-idl="" class="idlMember" data-title="cardSecurityCode" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-cardsecuritycode"><code>cardSecurityCode</code></a> = "";</span><span data-idl="" class="idlMember" data-title="expiryMonth" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-expirymonth"><code>expiryMonth</code></a> = "";</span><span data-idl="" class="idlMember" data-title="expiryYear" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-expiryyear"><code>expiryYear</code></a> = "";</span><span data-idl="" class="idlMember" data-title="billingAddress" data-dfn-for="BasicCardResponse"><span class="idlType">
+  <a data-xref-type="_IDL_" data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-paymentaddress"><code>PaymentAddress</code></a>?</span> <a class="internalDFN idlName" data-link-for="BasicCardResponse" data-link-type="dict-member" href="#dom-basiccardresponse-billingaddress"><code>billingAddress</code></a> = null;</span>
+};</span>
+
+<span data-idl="" class="idlDictionary" data-title="BasicCardErrors">dictionary <a class="internalDFN idlID" data-link-for="" data-link-type="dictionary" href="#dom-basiccarderrors"><code>BasicCardErrors</code></a> {<span data-idl="" class="idlMember" data-title="cardNumber" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-cardnumber"><code>cardNumber</code></a>;</span><span data-idl="" class="idlMember" data-title="cardholderName" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-cardholdername"><code>cardholderName</code></a>;</span><span data-idl="" class="idlMember" data-title="cardSecurityCode" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-cardsecuritycode"><code>cardSecurityCode</code></a>;</span><span data-idl="" class="idlMember" data-title="expiryMonth" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-expirymonth"><code>expiryMonth</code></a>;</span><span data-idl="" class="idlMember" data-title="expiryYear" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-cite-path="" data-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-expiryyear"><code>expiryYear</code></a>;</span><span data-idl="" class="idlMember" data-title="billingAddress" data-dfn-for="BasicCardErrors"><span class="idlType">
+  <a data-xref-type="_IDL_" data-link-type="dfn" href="https://www.w3.org/TR/payment-request/#dom-addresserrors"><code>AddressErrors</code></a></span> <a class="internalDFN idlName" data-link-for="BasicCardErrors" data-link-type="dict-member" href="#dom-basiccarderrors-billingaddress"><code>billingAddress</code></a>;</span>
+};</span></pre></section>
+  
+
+<section id="references" class="appendix">
+      <h2 id="b-references"><bdi class="secno">B. </bdi>References<a class="self-link" aria-label="§" href="#references"></a></h2>
+      
+    <section id="normative-references">
+        <h3 id="b-1-normative-references"><bdi class="secno">B.1 </bdi>Normative references<a class="self-link" aria-label="§" href="#normative-references"></a></h3>
+      <dl class="bibliography">
+        <dt id="bib-card-network-ids">[card-network-ids]</dt><dd><a href="https://www.w3.org/Payments/card-network-ids"><cite>Card Network Identifiers Approved for use with Payment Request API</cite></a>.  W3C. URL: <a href="https://www.w3.org/Payments/card-network-ids">https://www.w3.org/Payments/card-network-ids</a></dd><dt id="bib-ecma-262">[ecma-262]</dt><dd><a href="https://tc39.es/ecma262/"><cite>ECMAScript Language Specification</cite></a>.  Ecma International. URL: <a href="https://tc39.es/ecma262/">https://tc39.es/ecma262/</a></dd><dt id="bib-infra">[infra]</dt><dd><a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a></dd><dt id="bib-iso7812-1">[ISO7812-1]</dt><dd><a href="https://www.iso.org/standard/70484.html"><cite>Identification cards - Identification of issuers - Part 1: Numbering system</cite></a>.  ISO/IEC 7812-1: Identification cards - Identification of issuers - Part 1. 1 January 2017. ISO 7812-1:2017. URL: <a href="https://www.iso.org/standard/70484.html">https://www.iso.org/standard/70484.html</a></dd><dt id="bib-payment-request">[payment-request]</dt><dd><a href="https://www.w3.org/TR/payment-request/"><cite>Payment Request API</cite></a>. Adrian Bateman; Zach Koch; Roy McElmurry; Domenic Denicola; Marcos Caceres.  W3C. 25 August 2017. W3C Working Draft. URL: <a href="https://www.w3.org/TR/payment-request/">https://www.w3.org/TR/payment-request/</a></dd><dt id="bib-rfc2119">[RFC2119]</dt><dd><a href="https://tools.ietf.org/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a></dd><dt id="bib-rfc8174">[RFC8174]</dt><dd><a href="https://tools.ietf.org/html/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc8174">https://tools.ietf.org/html/rfc8174</a></dd><dt id="bib-webidl">[WebIDL]</dt><dd><a href="https://heycam.github.io/webidl/"><cite>Web IDL</cite></a>. Boris Zbarsky.  W3C. 15 December 2016. W3C Editor's Draft. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a></dd>
+      </dl></section><section id="informative-references">
+        <h3 id="b-2-informative-references"><bdi class="secno">B.2 </bdi>Informative references<a class="self-link" aria-label="§" href="#informative-references"></a></h3>
+      <dl class="bibliography">
+        <dt id="bib-html">[HTML]</dt><dd><a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a></dd>
+      </dl></section></section><p role="navigation" id="back-to-top"><a href="#title"><abbr title="Back to Top">↑</abbr></a></p><script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>
