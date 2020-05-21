@@ -1,14 +1,7 @@
 <h2>hello there</h2>
 <button onclick="geo()">Do the geo</button>
 <script>
-  function geo() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        confirm.log(position);
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
-  }
+    function geo() {
+        navigator.geolocation.getCurrentPosition(console.log, console.error);
+    }
 </script>
