@@ -1,6 +1,7 @@
 {
     "name": "The App",
     "description": "none",
+    "display": "fullscreen",
     "icons": [{
       "src": "icon.png",
       "sizes": "192x192"
