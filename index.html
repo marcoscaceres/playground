@@ -1980,24 +1980,24 @@ standalone</span><span class="pun">.</span><span class=
             [<cite><a href="#bib-CSP3" class="bibref">CSP3</a></cite>].
           </p>
           <div class="example">
-      <p>
-        The <a data-link-type="dfn" class="internalDFN" href=
-        "#dfn-manifest-src">manifest-src</a> and <a data-link-type="dfn"
-        class="internalDFN" href="#dfn-default-src">default-src</a>
-        directives govern the origins from which a <a data-link-type=
-        "dfn" class="internalDFN" href="#dfn-user-agent">user agent</a>
-        can fetch a manifest. As with other directives, by default the
-        <a data-link-type="dfn" class="internalDFN" href=
-        "#dfn-manifest-src">manifest-src</a> directive is <code>*</code>,
-        meaning that a user agent can, [<cite><a href="#bib-CORS" class=
-        "bibref">CORS</a></cite>] permitting, fetch the manifest
-        cross-domain. Remote origins (e.g., a <abbr title=
-        "content delivery network">CDN</abbr>) wanting to host manifests
-        for various web applications will need to include the appropriate
-        [<cite><a href="#bib-CORS" class="bibref">CORS</a></cite>]
-        response header in their HTTP response (e.g.,
-        <code>Access-Control-Allow-Origin: https://example.com</code>).
-      </p>
+            <p>
+              The <a data-link-type="dfn" class="internalDFN" href=
+              "#dfn-manifest-src">manifest-src</a> and <a data-link-type="dfn"
+              class="internalDFN" href="#dfn-default-src">default-src</a>
+              directives govern the origins from which a <a data-link-type=
+              "dfn" class="internalDFN" href="#dfn-user-agent">user agent</a>
+              can fetch a manifest. As with other directives, by default the
+              <a data-link-type="dfn" class="internalDFN" href=
+              "#dfn-manifest-src">manifest-src</a> directive is <code>*</code>,
+              meaning that a user agent can, [<cite><a href="#bib-CORS" class=
+              "bibref">CORS</a></cite>] permitting, fetch the manifest
+              cross-domain. Remote origins (e.g., a <abbr title=
+              "content delivery network">CDN</abbr>) wanting to host manifests
+              for various web applications will need to include the appropriate
+              [<cite><a href="#bib-CORS" class="bibref">CORS</a></cite>]
+              response header in their HTTP response (e.g.,
+              <code>Access-Control-Allow-Origin: https://example.com</code>).
+            </p>
             <figure id=
             "fig-for-a-html-document-csp3-s-manifest-src-directive-controls-the-sources-from-which-a-html-document-can-load-a-manifest-from.-the-same-csp-policy-s-img-src-directive-controls-where-the-icon-s-images-can-be-fetched-from.x"
             class="example">
