@@ -1982,23 +1982,21 @@ standalone</span><span class="pun">.</span><span class=
           <div class="example">
             <p>
               The <a data-link-type="dfn" class="internalDFN" href=
-              "#dfn-manifest-src">manifest-src</a>
-              and <a data-link-type="dfn" class="internalDFN" href=
-              "#dfn-default-src">default-src</a>
+              "#dfn-manifest-src">manifest-src</a> and <a data-link-type="dfn"
+              class="internalDFN" href="#dfn-default-src">default-src</a>
               directives govern the origins from which a <a data-link-type=
               "dfn" class="internalDFN" href="#dfn-user-agent">user agent</a>
               can fetch a manifest. As with other directives, by default the
               <a data-link-type="dfn" class="internalDFN" href=
-              "#dfn-manifest-src">manifest-src</a>
-              directive is <code>*</code>, meaning that a user agent can,
+              "#dfn-manifest-src">manifest-src</a> directive is <code>*</code>,
+              meaning that a user agent can, [<cite><a href="#bib-CORS" class=
+              "bibref">CORS</a></cite>] permitting, fetch the manifest
+              cross-domain. Remote origins (e.g., a <abbr title=
+              "content delivery network">CDN</abbr>) wanting to host manifests
+              for various web applications will need to include the appropriate
               [<cite><a href="#bib-CORS" class="bibref">CORS</a></cite>]
-              permitting, fetch the manifest cross-domain. Remote origins
-              (e.g., a <abbr title="content delivery network">CDN</abbr>)
-              wanting to host manifests for various web applications will need
-              to include the appropriate [<cite><a href="#bib-CORS" class=
-              "bibref">CORS</a></cite>] response header in their HTTP response
-              (e.g., <code>Access-Control-Allow-Origin:
-              https://example.com</code>).
+              response header in their HTTP response (e.g.,
+              <code>Access-Control-Allow-Origin: https://example.com</code>).
             </p>
             <figure id=
             "fig-for-a-html-document-csp3-s-manifest-src-directive-controls-the-sources-from-which-a-html-document-can-load-a-manifest-from.-the-same-csp-policy-s-img-src-directive-controls-where-the-icon-s-images-can-be-fetched-from.x"
@@ -2011,8 +2009,7 @@ standalone</span><span class="pun">.</span><span class=
                 [<cite><a href="#bib-HTML" class="bibref">HTML</a></cite>]
                 document, [<cite><a href="#bib-CSP3" class=
                 "bibref">CSP3</a></cite>]'s <a data-link-type="dfn" class=
-                "internalDFN" href=
-                "#dfn-manifest-src">manifest-src</a>
+                "internalDFN" href="#dfn-manifest-src">manifest-src</a>
                 directive controls the sources from which a [<cite><a href=
                 "#bib-HTML" class="bibref">HTML</a></cite>] document can load a
                 manifest from. The same CSP policy's <code>img-src</code>
@@ -2903,8 +2900,8 @@ standalone</span><span class="pun">.</span><span class=
           href="#dfn-top-level-browsing-context">top-level browsing
           contexts</a> of the web application. The possible values are those of
           the <a data-link-type="dfn" class="internalDFN" href=
-          "#dfn-orientationlocktype">OrientationLockType</a>
-          enum defined in [<cite><a href="#bib-SCREEN-ORIENTATION" class=
+          "#dfn-orientationlocktype">OrientationLockType</a> enum defined in
+          [<cite><a href="#bib-SCREEN-ORIENTATION" class=
           "bibref">SCREEN-ORIENTATION</a></cite>].
         </p>
         <p>
@@ -2930,10 +2927,10 @@ standalone</span><span class="pun">.</span><span class=
           "#bib-SCREEN-ORIENTATION" class=
           "bibref">SCREEN-ORIENTATION</a></cite>]'s <a data-link-type="dfn"
           class="internalDFN" href=
-          "#dfn-orientationlocktype">OrientationLockType</a>,
-          it is <em title="OPTIONAL" class="rfc2119">OPTIONAL</em> for a user
-          agent to implement the [<cite><a href="#bib-SCREEN-ORIENTATION"
-          class="bibref">SCREEN-ORIENTATION</a></cite>] API. Supporting the
+          "#dfn-orientationlocktype">OrientationLockType</a>, it is <em title=
+          "OPTIONAL" class="rfc2119">OPTIONAL</em> for a user agent to
+          implement the [<cite><a href="#bib-SCREEN-ORIENTATION" class=
+          "bibref">SCREEN-ORIENTATION</a></cite>] API. Supporting the
           [<cite><a href="#bib-SCREEN-ORIENTATION" class=
           "bibref">SCREEN-ORIENTATION</a></cite>] API is, of course, <em title=
           "RECOMMENDED" class="rfc2119">RECOMMENDED</em>.
@@ -2998,11 +2995,11 @@ standalone</span><span class="pun">.</span><span class=
           </li>
           <li>If <var>value</var> is not one of the <a data-link-type="dfn"
           class="internalDFN" href=
-          "#dfn-orientationlocktype">OrientationLockType</a>
-          enum values, or <var>value</var> is unsupported by the user agent, or
-          the <var>value</var> <a data-link-type="dfn" class="internalDFN"
-            href="#dfn-cannot-be-used-together">cannot be used together</a>
-            with <var>display mode:</var>
+          "#dfn-orientationlocktype">OrientationLockType</a> enum values, or
+          <var>value</var> is unsupported by the user agent, or the
+          <var>value</var> <a data-link-type="dfn" class="internalDFN" href=
+          "#dfn-cannot-be-used-together">cannot be used together</a> with <var>
+            display mode:</var>
             <ol>
               <li>
                 <a data-link-type="dfn" class="internalDFN" href=
