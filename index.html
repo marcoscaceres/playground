@@ -238,6 +238,7 @@
     <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD" rel=
     "stylesheet">
     <!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]-->
+
     <script type="application/json" id="initialUserConfig">
     {
     "doRDFa": false,
@@ -322,11 +323,11 @@
   </head>
   <body id="respecDocument" role="document" class="h-entry toc-sidebar">
     <div id="respecHeader" role="contentinfo" class="head">
-            <p>
-              <a class="logo" href="http://www.w3.org/"><img src=
-              "https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" width="72"
-              height="48"></a>
-            </p>
+      <p>
+        <a class="logo" href="http://www.w3.org/"><img src=
+        "https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" width="72"
+        height="48"></a>
+      </p>
       <h1 class="title p-name" id="title">
         Web App Manifest
       </h1>
@@ -1579,8 +1580,7 @@
               </div>
               <pre style="" class="highlight prettyprint prettyprinted">
               <span class=
-              "com">/* applies when the window is fullscreen */</span><span class=
-              "pln">
+"com">/* applies when the window is fullscreen */</span><span class="pln">
 </span><span class="lit">@media</span><span class=
 "pln"> all </span><span class="kwd">and</span><span class=
 "pln"> </span><span class="pun">(</span><span class=
@@ -1644,13 +1644,13 @@
             </div>
             <pre style="" class="highlight prettyprint prettyprinted">
             <span class="lit">@media</span><span class=
-            "pln"> all </span><span class="kwd">and</span><span class=
-            "pln"> </span><span class="pun">(</span><span class=
-            "pln">display</span><span class="pun">-</span><span class=
-            "pln">mode</span><span class="pun">:</span><span class=
-            "pln"> minimal</span><span class="pun">-</span><span class=
-            "pln">ui</span><span class="pun">)</span><span class=
-            "pln"> </span><span class="pun">{</span><span class="pln">
+"pln"> all </span><span class="kwd">and</span><span class=
+"pln"> </span><span class="pun">(</span><span class=
+"pln">display</span><span class="pun">-</span><span class=
+"pln">mode</span><span class="pun">:</span><span class=
+"pln"> minimal</span><span class="pun">-</span><span class=
+"pln">ui</span><span class="pun">)</span><span class="pln"> </span><span class=
+"pun">{</span><span class="pln">
   </span><span class="com">/* ... */</span><span class="pln">
 </span><span class="pun">}</span><span class="pln">
 </span><span class="lit">@media</span><span class=
@@ -1674,11 +1674,10 @@
             </div>
             <pre style="" class="highlight prettyprint prettyprinted">
             <span class="kwd">const</span><span class=
-            "pln"> standalone </span><span class="pun">=</span><span class=
-            "pln"> matchMedia</span><span class="pun">(</span><span class=
-            "pln"> </span><span class=
-            "str">'(display-mode: standalone)'</span><span class=
-            "pln"> </span><span class="pun">);</span><span class="pln">
+"pln"> standalone </span><span class="pun">=</span><span class=
+"pln"> matchMedia</span><span class="pun">(</span><span class=
+"pln"> </span><span class="str">'(display-mode: standalone)'</span><span class=
+"pln"> </span><span class="pun">);</span><span class="pln">
 
 standalone</span><span class="pun">.</span><span class=
 "pln">onchange </span><span class="pun">=</span><span class=
@@ -1941,8 +1940,8 @@ standalone</span><span class="pun">.</span><span class=
             </p>
             <pre style="" class="highlight prettyprint prettyprinted">
             <span class="pln">HTTP</span><span class="pun">/</span><span class=
-            "lit">1.1</span><span class="pln"> </span><span class=
-            "lit">200</span><span class="pln"> OK
+"lit">1.1</span><span class="pln"> </span><span class=
+"lit">200</span><span class="pln"> OK
 </span><span class="typ">Cache</span><span class="pun">-</span><span class=
 "typ">Control</span><span class="pun">:</span><span class=
 "pln"> max</span><span class="pun">-</span><span class=
@@ -1983,14 +1982,14 @@ standalone</span><span class="pun">.</span><span class=
           <div class="example">
             <p>
               The <a data-link-type="dfn" class="internalDFN" href=
-              "#dfn-manifest-src"><code><code>manifest-src</code></code></a>
+              "#dfn-manifest-src">manifest-src</a>
               and <a data-link-type="dfn" class="internalDFN" href=
-              "#dfn-default-src"><code><code>default-src</code></code></a>
+              "#dfn-default-src">default-src</a>
               directives govern the origins from which a <a data-link-type=
               "dfn" class="internalDFN" href="#dfn-user-agent">user agent</a>
               can fetch a manifest. As with other directives, by default the
               <a data-link-type="dfn" class="internalDFN" href=
-              "#dfn-manifest-src"><code><code>manifest-src</code></code></a>
+              "#dfn-manifest-src">manifest-src</a>
               directive is <code>*</code>, meaning that a user agent can,
               [<cite><a href="#bib-CORS" class="bibref">CORS</a></cite>]
               permitting, fetch the manifest cross-domain. Remote origins
@@ -2013,7 +2012,7 @@ standalone</span><span class="pun">.</span><span class=
                 document, [<cite><a href="#bib-CSP3" class=
                 "bibref">CSP3</a></cite>]'s <a data-link-type="dfn" class=
                 "internalDFN" href=
-                "#dfn-manifest-src"><code><code>manifest-src</code></code></a>
+                "#dfn-manifest-src">manifest-src</a>
                 directive controls the sources from which a [<cite><a href=
                 "#bib-HTML" class="bibref">HTML</a></cite>] document can load a
                 manifest from. The same CSP policy's <code>img-src</code>
@@ -2904,7 +2903,7 @@ standalone</span><span class="pun">.</span><span class=
           href="#dfn-top-level-browsing-context">top-level browsing
           contexts</a> of the web application. The possible values are those of
           the <a data-link-type="dfn" class="internalDFN" href=
-          "#dfn-orientationlocktype"><code><code>OrientationLockType</code></code></a>
+          "#dfn-orientationlocktype">OrientationLockType</a>
           enum defined in [<cite><a href="#bib-SCREEN-ORIENTATION" class=
           "bibref">SCREEN-ORIENTATION</a></cite>].
         </p>
@@ -2931,7 +2930,7 @@ standalone</span><span class="pun">.</span><span class=
           "#bib-SCREEN-ORIENTATION" class=
           "bibref">SCREEN-ORIENTATION</a></cite>]'s <a data-link-type="dfn"
           class="internalDFN" href=
-          "#dfn-orientationlocktype"><code><code>OrientationLockType</code></code></a>,
+          "#dfn-orientationlocktype">OrientationLockType</a>,
           it is <em title="OPTIONAL" class="rfc2119">OPTIONAL</em> for a user
           agent to implement the [<cite><a href="#bib-SCREEN-ORIENTATION"
           class="bibref">SCREEN-ORIENTATION</a></cite>] API. Supporting the
@@ -2999,7 +2998,7 @@ standalone</span><span class="pun">.</span><span class=
           </li>
           <li>If <var>value</var> is not one of the <a data-link-type="dfn"
           class="internalDFN" href=
-          "#dfn-orientationlocktype"><code><code>OrientationLockType</code></code></a>
+          "#dfn-orientationlocktype">OrientationLockType</a>
           enum values, or <var>value</var> is unsupported by the user agent, or
           the <var>value</var> <a data-link-type="dfn" class="internalDFN"
             href="#dfn-cannot-be-used-together">cannot be used together</a>
