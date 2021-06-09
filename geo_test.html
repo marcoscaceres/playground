@@ -9,9 +9,20 @@
       iframe.onload = r;
     });
 
+
+
     // steal the window.
     const win = iframe.contentWindow;
     const geo = win.navigator.geolocation;
+
+    // queue up some position watchers...
+    console.log(geo.watchPosition(console.log, console.error));
+    console.log(geo.watchPosition(console.log, console.error));
+    console.log(geo.watchPosition(console.log, console.error));
+    geo.getCurrentPosition(console.log, console.error)
+    geo.getCurrentPosition(console.log, console.error)
+    geo.getCurrentPosition(console.log, console.error)
+
 
     // make doc no longer fully active
     iframe.remove();
@@ -19,7 +30,7 @@
     // try to use geolocation
 
     try {
-      console.log("watchPosition", geo.watchPosition(console.log, console.log));
+      console.log("watchPosition", geo.watchPosition(console.log, console.error));
     } catch (err) {
       console.log(err);
     }
@@ -27,7 +38,7 @@
     try {
       console.log(
         "getCurrentPosition",
-        geo.getCurrentPosition(console.log, console.log)
+        geo.getCurrentPosition(console.log, console.error)
       );
     } catch (err) {
       console.log(err);
