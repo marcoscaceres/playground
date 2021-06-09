@@ -2,7 +2,7 @@
 <script>
   async function runTest() {
     const iframe = document.createElement("iframe");
-    iframe.src = "/empty.html";
+    iframe.src = "empty.html";
     document.body.appendChild(iframe);
     console.log("loading iframe");
     await new Promise((r) => {
