@@ -16,5 +16,5 @@ jobs:
       - uses: peter-evans/create-pull-request@v3
         with:
           title: "chore(tidy): tidy up document"
-          commit-message: "Tidy document using tidy-html5"
+          commit-message: "Tidied up document using tidy-html5"
           branch: html-tidy

@@ -1,0 +1,53 @@
+<h2>hi</h2>
+<script>
+  async function runTest() {
+    const iframe = document.createElement("iframe");
+    iframe.src = "/empty.html";
+    document.body.appendChild(iframe);
+    console.log("loading iframe");
+    await new Promise((r) => {
+      iframe.onload = r;
+    });
+
+    // steal the window.
+    const win = iframe.contentWindow;
+    const geo = win.navigator.geolocation;
+
+    // make doc no longer fully active
+    iframe.remove();
+
+    // try to use geolocation
+
+    try {
+      console.log("watchPosition", geo.watchPosition(console.log, console.log));
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      console.log(
+        "getCurrentPosition",
+        geo.getCurrentPosition(console.log, console.log)
+      );
+    } catch (err) {
+      console.log(err);
+    }
+    // re-attach
+    console.log("reattach");
+    document.body.appendChild(iframe);
+
+    // and we are back!
+    iframe.contentWindow.navigator.geolocation.getCurrentPosition(
+      console.log,
+      console.error
+    );
+    iframe.contentWindow.navigator.geolocation.watchPosition(
+      console.log,
+      console.error
+    );
+
+    console.log("done");
+  }
+
+  runTest();
+</script>
