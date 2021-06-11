@@ -1,5 +1,19 @@
 <h2>Gamepad</h2>
 <script>
+  // Check events!
+  const iframe = document.createElement("iframe");
+  const win = iframe.contentWindow;
+  const bad = (ev) => console.log("Event on non-fully active frame!", ev);
+  const good = (ev) => console.log("This is ok!", ev);
+  win.addEventListener("gamepadconnected", bad);
+  win.addEventListener("gamepaddisconnected", bad);
+  document.body.appendChild(iframe);
+  iframe.remove();
+
+  // This is ok
+  window.addEventListener("gamepadconnected", good);
+  window.addEventListener("gamepaddisconnected", good);
+
   async function runTest() {
     const iframe = document.createElement("iframe");
     iframe.src = "empty.html";
@@ -10,8 +24,10 @@
     });
 
     // Prevent invalidation of Navigator
-    const gamepadGetter = iframe.contentWindow.navigator.getGamepads.bind(navigator);
-    console.log("Still active, we get", gamepadGetter())
+    const win = iframe.contentWindow;
+    const gamepadGetter =
+      iframe.contentWindow.navigator.getGamepads.bind(navigator);
+    console.log("Still active, we get", gamepadGetter());
     // make doc no longer fully active
     iframe.remove();
 
@@ -28,11 +44,20 @@
 
     // and we are back!
     console.log("re-attached", iframe.contentWindow.navigator.getGamepads());
+
+    //remove it again...
+    iframe.contentWindow.addEventListener(
+      "gamepadconnected",
+      console.log
+    );
+
+    iframe.contentWindow.addEventListener(
+      "gamepaddisconnected",
+      console.log
+    );
+    iframe.remove();
     console.log("done");
   }
-
 </script>
 
-<button onclick="runTest()">
-Activate the gamepad - then press me
-</button>
+<button onclick="runTest()">Activate the gamepad - then press me</button>
