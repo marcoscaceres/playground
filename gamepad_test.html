@@ -1,20 +1,8 @@
 <h2>Gamepad</h2>
 <script>
-  // Check events!
-  const iframe = document.createElement("iframe");
-  const win = iframe.contentWindow;
-  document.body.appendChild(iframe);
   const bad = (ev) => console.log("Event on non-fully active frame!", ev);
   const good = (ev) => console.log("This is ok!", ev);
-  win.addEventListener("gamepadconnected", bad);
-  win.addEventListener("gamepaddisconnected", bad);
-  iframe.remove();
-
-  // This is ok
-  window.addEventListener("gamepadconnected", good);
-  window.addEventListener("gamepaddisconnected", good);
-
-  async function runTest() {
+  async function attachIframe() {
     const iframe = document.createElement("iframe");
     iframe.src = "empty.html";
     document.body.appendChild(iframe);
@@ -22,7 +10,23 @@
     await new Promise((r) => {
       iframe.onload = r;
     });
+    return iframe;
+  }
 
+  // Check events!
+  attachIframe().then((iframe) => {
+    document.body.appendChild(iframe);
+    const win = iframe.contentWindow;
+    win.addEventListener("gamepadconnected", bad);
+    win.addEventListener("gamepaddisconnected", bad);
+    iframe.remove();
+  });
+  // This is ok
+  window.addEventListener("gamepadconnected", good);
+  window.addEventListener("gamepaddisconnected", good);
+
+  async function runTest() {
+    const iframe = await attachIframe();
     // Prevent invalidation of Navigator
     const win = iframe.contentWindow;
     const gamepadGetter =
@@ -46,15 +50,9 @@
     console.log("re-attached", iframe.contentWindow.navigator.getGamepads());
 
     //remove it again...
-    iframe.contentWindow.addEventListener(
-      "gamepadconnected",
-      console.log
-    );
+    iframe.contentWindow.addEventListener("gamepadconnected", console.log);
 
-    iframe.contentWindow.addEventListener(
-      "gamepaddisconnected",
-      console.log
-    );
+    iframe.contentWindow.addEventListener("gamepaddisconnected", console.log);
     iframe.remove();
     console.log("done");
   }
