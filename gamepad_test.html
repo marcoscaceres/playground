@@ -1,0 +1,38 @@
+<h2>Gamepad</h2>
+<script>
+  async function runTest() {
+    const iframe = document.createElement("iframe");
+    iframe.src = "empty.html";
+    document.body.appendChild(iframe);
+    console.log("loading iframe");
+    await new Promise((r) => {
+      iframe.onload = r;
+    });
+
+    // Prevent invalidation of Navigator
+    const gamepadGetter = iframe.contentWindow.navigator.getGamepads.bind(navigator);
+    console.log("Still active, we get", gamepadGetter())
+    // make doc no longer fully active
+    iframe.remove();
+
+    // try to use gamepad
+
+    try {
+      console.log("Inactive document", gamepadGetter());
+    } catch (err) {
+      console.log(err);
+    }
+
+    // re-attach
+    document.body.appendChild(iframe);
+
+    // and we are back!
+    console.log("re-attached", iframe.contentWindow.navigator.getGamepads());
+    console.log("done");
+  }
+
+</script>
+
+<button onclick="runTest()">
+Activate the gamepad - then press me
+</button>
