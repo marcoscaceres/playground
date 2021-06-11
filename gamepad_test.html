@@ -3,11 +3,11 @@
   // Check events!
   const iframe = document.createElement("iframe");
   const win = iframe.contentWindow;
+  document.body.appendChild(iframe);
   const bad = (ev) => console.log("Event on non-fully active frame!", ev);
   const good = (ev) => console.log("This is ok!", ev);
   win.addEventListener("gamepadconnected", bad);
   win.addEventListener("gamepaddisconnected", bad);
-  document.body.appendChild(iframe);
   iframe.remove();
 
   // This is ok
