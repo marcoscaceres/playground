@@ -19,7 +19,7 @@
 
   async function runTest() {
     navigator.geolocation.watchPosition((position)=>{
-      console.log("MAIN document", position.coords)
+      console.log("MAIN document", position.coords.latitude, position.coords.longitude);
     })
 
     const iframe = document.createElement("iframe");
