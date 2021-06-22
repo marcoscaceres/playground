@@ -70,11 +70,17 @@
 
     // and we are back!
     iframe.contentWindow.navigator.geolocation.getCurrentPosition(
-      console.log,
+      (position) => {
+        console.log("Hello from re-attached frame");
+        console.log(position);
+      },
       console.error
     );
     iframe.contentWindow.navigator.geolocation.watchPosition(
-      console.log,
+      (position) => {
+        console.log("Hello from re-attached frame");
+        console.log(position);
+      },
       console.error
     );
 
