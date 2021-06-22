@@ -9,11 +9,11 @@
   const consoleLog = document.getElementById("log");
   const errorLog = document.getElementById("error");
   console.log = (...stuff) => {
-    consoleLog.innerHTML += stuff.join(", ");
+    consoleLog.innerHTML += stuff.join(", ") + "<br>";
     log(...stuff);
   }
   console.error = (...stuff) => {
-    errorLog.innerHTML += stuff.join(", ");
+    errorLog.innerHTML += stuff.join(", ") + "<br>";
     error(...stuff);
   }
 
