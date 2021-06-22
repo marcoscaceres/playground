@@ -1,5 +1,22 @@
 <h2>hi</h2>
+<section>
+  <output id="log" style="color: green; border: 1px solid green;"></output>
+  <output id="error" style="color: red; border: 1px solid red;"></output>
+</section>
 <script>
+  const log = console.log;
+  const error = console.error;
+  const consoleLog = document.getElementById("log");
+  const errorLog = document.getElementById("error");
+  console.log = (...stuff) => {
+    consoleLog.innerHTML += stuff.join(", ");
+    log(...stuff);
+  }
+  console.error = (...stuff) => {
+    errorLog.innerHTML += stuff.join(", ");
+    error(...stuff);
+  }
+
   async function runTest() {
     const iframe = document.createElement("iframe");
     iframe.src = "empty.html";
