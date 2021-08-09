@@ -1,13 +1,20 @@
-<link rel="manifest" href="manifest.json">
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="manifest" href="manifest.json" />
 
 <h1>I'm just an app!</h1>
 
 <script>
-  function openPopup(){
-    window.open('popup.html', 'popup', 'width=400,height=400');
+  function openPopup(url) {
+    window.open(url, "popup", "width=400,height=400");
   }
 </script>
 
-<button onclick="openPopup()">
-  Open a popup.
+<button onclick="openPopup('popup.html')">
+  Open in scope same origin popup.
+</button>
+
+<button onclick="openPopup('https://google.com')">
+  Open cross-origin popup.
 </button>
