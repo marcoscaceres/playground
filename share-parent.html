@@ -9,7 +9,7 @@ window.onload = function() {
   const nav = contentWindow.navigator;
   const shareButton = contentDocument.getElementById('share-button');
   shareButton.onclick = async function() {
-    iframe.remove();
+    
     console.log("Can share:", nav.canShare({text: "hello"}));
     const p = nav.share({ url: 'hello' });
     console.log(p)
