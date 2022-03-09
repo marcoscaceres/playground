@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width" name="viewport" />
+    <title>Chairs Meeting - TPAC 2022 Planning</title>
+    <link
+      rel="stylesheet"
+      href="https://www.w3.org/Talks/Tools/Shower3-1/slides.css"
+    />
+    <script
+      src="https://www.w3.org/Talks/Tools/Shower3-1/shower.js"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body class="shower">
+    <div class="progress">
+      <!-- Remove this element if you don't want a progress bar -->
+    </div>
+
+    <section class="slide cover clear" id="start">
+      <h1>ClearSpec updates</h1>
+      <p>March 15, 2022</p>
+    </section>
+
+    <section class="slide">
+      <h2>Logistics</h2>
+      <ul>
+        <li>
+          <a href="https://www.w3.org/Consortium/cepc/">Code of Conduct</a>
+        </li>
+        <li>Identify a scribe to take minutes on IRC</li>
+        <li>The presentation part will get video recorded</li>
+        <li>
+          Use <a href="https://irc.w3.org/">IRC</a>
+          <code>#chairs</code> (preferred) or raise hand in Zoom for queuing
+        </li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Audiences vary</h2>
+      <ul>
+        <li>Web Developers</li>
+        <li>Implementers</li>
+        <li>Other specification writers/collaborators</li>
+        <li>General public</li>
+      </ul>
+      <p>Everyone has different requirements...</p>
+    </section>
+
+    <section class="slide">
+      <h2>Use cases</h2>
+      <ul>
+        <li>Entering at top of spec (e.g., Google search).</li>
+        <li>
+          Entering to some part of the spec (e.g., MDN, link from another spec).
+        </li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Current solutions - Caniuse</h2>
+      <figure>
+        <img
+          src="https://user-images.githubusercontent.com/870154/157382459-2c9e77d9-4fa3-44b6-98ee-a353fdd26e56.png"
+          alt="Can i use info at top of spec"
+        />
+      </figure>
+    </section>
+
+    <section class="slide">
+      <h2>Current solution - MDN boxes</h2>
+      <figure>
+        <img
+          src="https://user-images.githubusercontent.com/870154/157381806-bb9740e9-f1b8-4a68-9f2b-f14daaa87443.png"
+          alt="inline MDN boxes"
+          width="150"
+        />
+      </figure>
+    </section>
+
+    <section class="slide">
+      <h2>Current solution - Web Platform Test results</h2>
+      <figure>
+        <img
+          src="https://user-images.githubusercontent.com/870154/157384328-026f73f1-edc8-4e9f-806c-f7922f5d1413.png"
+          alt=""
+        />
+      </figure>
+    </section>
+
+    <section class="slide">
+      <h2>Caniuse - showing data from caniuse.com</h2>
+      <figure>
+        <img
+          src="https://user-images.githubusercontent.com/870154/157382459-2c9e77d9-4fa3-44b6-98ee-a353fdd26e56.png"
+          alt="Can i use info at top of spec"
+          height="50"
+        />
+      </figure>
+      <div class="columns two">
+        <div>
+          <h3>Pros</h3>
+          <ul>
+            <li>Targeted at Web Developers</li>
+            <li>Backed by MDN data.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Cons</h3>
+          <ul>
+            <li>"support" is sometimes subjective.</li>
+            <li>Data is not always backed by Web Platform Test data.</li>
+            <li>Not super useful for implementers.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>MDN boxes</h2>
+      <div class="columns two">
+        <div>
+          <h3>Pros</h3>
+          <ul>
+            <li>Fit for purpose</li>
+            <li></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Cons</h3>
+          <ul>
+            <li>Are for specific parts of a spec.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Web Platform Test Results</h2>
+      <div class="columns two">
+        <div>
+          <h3>Pros</h3>
+          <ul>
+            <li>Reflects what's tested in spec</li>
+            <li>Targeted at spec authors and implementers</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Cons</h3>
+          <ul>
+            <li>Confusing for web developers</li>
+            <li>Limited! Doesn't cover mobile devices</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Full MDN compat tables</h2>
+      <p>Optimal solution looks like MDN's solution:</p>
+      <figure>
+        <img
+          src="https://user-images.githubusercontent.com/870154/152919536-bcc8b597-d48d-4e81-a5e6-2460510d54b9.png"
+        />
+      </figure>
+    </section>
+
+    <section class="slide">
+      <h2>Challenges</h2>
+      <div class="columns two">
+        <ul>
+          <li>Different audiences has different needs.</li>
+          <li>Very "browser" specific.</li>
+        </ul>
+        <ul>
+          <li>Static (TR documents) vs dynamic (compat) data.</li>
+        </ul>
+      </div>
+    </section>
+  </body>
+</html>
