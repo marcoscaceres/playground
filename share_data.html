@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta viewport="width=device-width, initial-scale=1">
+<title>Share data URL with Share API</title>
+<h1>Share data URL</h1>
+<button id="share">Share</button>
+<output id="out">...</output>
+<script>
+    document.getElementById("share").addEventListener("click", async () => {
+        const out = document.getElementById("out");
+        const data = {
+            title: "Share data URL with Share API",
+            url: "data:text/plain,Hello, world!",
+        };
+        // check if we can share
+        if (!navigator.canShare(data)) {
+            out.textContent = "Cannot share data:";
+            return;
+        }
+
+        try {
+            await navigator.share(data);
+            out.textContent = "Share succeeded";
+        } catch (e) {
+            out.textContent = `Share failed: ${e}`;
+        }
+    });
+</script>
