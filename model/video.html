@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<script>
+    function run(){
+        try {
+            const output = document.getElementById('output');
+            output.innerHTML += HTMLModelElement ? 'Model Supported' : 'Model not supported';
+            output.innerHTML += "<br>"    
+        } catch(err) {
+            output.innerHTML += err;
+        }
+        output.innerHTML += "width" in HTMLModelElement.prototype ? 'width Supported' : 'width not supported';
+        output.innerHTML += "<br>"
+        output.innerHTML += "height" in HTMLModelElement.prototype ? 'height Supported' : 'height not supported';
+        foo()
+    }
+    function foo(){
+        const output = document.getElementById('out-width');
+        output.innerHTML = "<br>"
+        output.innerHTML += "width" in HTMLVideoElement.prototype ? 'width Supported' : 'width not supported';
+        try {
+            const model = document.querySelector('model[width][height]');
+            output.innerHTML = 'width: ' + model.width + ' height: ' + model.height + "<br>";
+            model.width = "500";
+            output.innerHTML += 'width: ' + model.width + ' height: ' + model.height + "<br>";
+        } catch (err) {
+            output.innerHTML = err;
+        }
+    }
+</script>
+<title>Video and model</title>
+<body onload="run()">
+<h1>
+    Video and model
+</h1>
+<h2>
+    Support for model
+</h2>
+<output id="output">
+    Loading<br>
+</output>
+<h2>
+    Video
+</h2>
+<video style="border: 1px solid red;">
+</video>
+<h2>
+    Video and poster
+</h2>
+<dl>
+    <dt>
+        Video with poster, but no dimensions
+    </dt>
+    <dd>
+        <video style="border: 1px solid red;" poster="poster.png"></video>
+    </dd>
+    <dt>
+        Video with poster and dimensions (400wx200h)
+    </dt>
+    <dd>
+        <video style="border: 1px solid red;" poster="poster.png" width="400" height="200"></video>
+    </dd>
+</dl>
+
+
+<h2>
+    Model
+</h2>
+<dl>
+    <dt>
+        Model with no dimensions
+    </dt>
+    <dd>
+        <model style="border: 1px solid red;"></model>
+    </dd>
+    <dt>
+        Model with dimensions (400wx200h)
+    </dt>
+    <dd>
+        <model id="sizes" style="border: 1px solid red;" width="400" height="200"></model>
+        <output id="out-width">
+            ddddd
+        </output>
+        <button onclick="changeSize()">
+            Change size via .width and .height IDL attributes
+        </button> 
+        <script>
+            function changeSize(){
+                const model = document.querySelector('model#sizes');
+                model.width = "800";
+                model.height = "500";
+                //model.style.width = "800px"
+                const output = document.getElementById('out-width');
+                output.innerHTML = 'width: ' + model.width + ' height: ' + model.height + "<br>";
+            }
+        </script>
+    </dd>
+    <dd>
+        <model id="sizes-attr" style="border: 1px solid red;" width="400" height="200"></model>
+        <output id="out-width-attr">
+            out-width-attr
+        </output>
+        <button onclick="changeSizeAtt()">
+            Change size via width and height content attributes
+        </button> 
+        <script>
+            function changeSizeAtt(){
+                const model = document.querySelector('model#sizes-attr');
+                model.setAttribute("width", "800");
+                model.setAttribute("height", "500");
+                const output = document.getElementById('out-width-attr');
+                output.innerHTML = 'idl width: ' + model.width + ' idl height: ' + model.height + "<br>";
+                output.innerHTML = 'content width: ' + model.getAttribute("width") + ' content height: ' + model.getAttribute("height") + "<br>";
+            }
+        </script>
+    </dd>
+    <dt>
+     Model showing model.usdz (no dimensions)
+    </dt>
+    <dd>
+        <model style="border: 1px solid red;" src="model.usdz"></model>
+    </dd>
+    <dt>
+        Model showing model.usdz (400wx200h) set by style attribute
+    </dt>
+    <dd>
+        <model style="border: 1px solid red; width: 400px; height: 200px;" src="model.usdz" id=""></model>
+    </dd>
+</dl>
+</body>

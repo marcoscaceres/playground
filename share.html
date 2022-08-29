@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Web Share API</title>
+    </head>
+    <h1></h1>
+    <p>
+        Sharing an image and text using the Web Share API.
+        <button id="share">Share</button>
+        <output id="output"></output>
+    </p>
+    <script>
+        const shareButton = document.getElementById('share');
+        const output = document.getElementById('output');
+        shareButton.addEventListener('click', async () => {
+            const image = document.getElementById('image');
+            // get image data from image
+            const blob = await fetch("image.png").then(r => r.blob());
+            // share image and text
+            const file = new File([blob], 'image.png', { type: 'image/png' });
+            try {
+                const data = {
+                    title: 'Web Share API',
+                    text: 'Check out the Web Share API!',
+                    files: [file]
+                }
+                const canShare = navigator.canShare(data);
+                console.log("canShare", canShare);
+                output.innerHTML += "canShare: " + canShare + "<br>";
+                await navigator.share(data);
+                output.innerHTML += "Shared successfully<br>";
+            } catch (err) {
+                console.log('Share failed:', err);
+                output.innerHTML += "Share failed: " + err + "<br>";
+            }
+            output.innerHTML += "done<br>";
+        });
+    </script>
+</html>
