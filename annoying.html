@@ -1,0 +1,22 @@
+<script>
+  function getOppositeOrientation() {
+    return screen.orientation.type.startsWith("landscape")
+      ? "portrait"
+      : "landscape";
+  }
+
+  async function annoying() {
+    try {
+      await document.documentElement.requestFullscreen();
+      screen.orientation.onchange = async () => {
+        // the event will fire again ... and again...
+        await screen.orientation.lock(getOppositeOrientation());
+      };
+      await screen.orientation.lock(getOppositeOrientation());
+    } catch (err) {
+      document.body.innerHTML += `<p>${err}</p>`;
+    }
+  }
+</script>
+
+<button onclick="annoying()">Enjoy..</button>
