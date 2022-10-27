@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta viewport="width=device-width, initial-scale=1">
 <script>
   function getOppositeOrientation() {
     return screen.orientation.type.startsWith("landscape")
@@ -14,7 +17,7 @@
       };
       await screen.orientation.lock(getOppositeOrientation());
     } catch (err) {
-      document.body.innerHTML += `<p>${err}</p>`;
+      document.body.innerHTML += `<pre>${err} ${err.stack}</pre>`;
     }
   }
 </script>
