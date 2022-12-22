@@ -20,9 +20,9 @@
         notificationButton.addEventListener("click", async () => {
             try {
                 const permission = await Notification.requestPermission();
-                output.textContent = `Notification permission: ${permission}`;
+                output.innerHTML = `<br>Notification permission: ${permission}`;
             } catch (e) {
-                output.textContent = `Error: ${e.message}`;
+                output.innerHTML = `<br>Error: ${e.message}`;
             }
         });
         badgeInput.addEventListener("change", async () => {
@@ -30,32 +30,34 @@
                 switch (true) {
                   case badgeInput.value === "":
                     await navigator.clearAppBadge();
-                    output.textContent = `Success. Cleared badge.`;
+                    output.innerHTML = `<br>Success. Cleared badge.`;
                     break;
                   case badgeInput.value === "0":
                     await navigator.setAppBadge(0);
-                    output.textContent = `Success. Set badge to 0 (cleared).`;
+                    output.innerHTML = `<br>Success. Set badge to 0 (cleared).`;
                     break;
                   case parseInt(badgeInput.value) < 0:
                     await navigator.setAppBadge();
-                    output.textContent = `Success. Set badge to flag.`;
+                    output.innerHTML = `<br>Success. Set badge to flag.`;
                     break
                   default:
                     await navigator.setAppBadge(badgeInput.value);
-                    output.textContent = `Success. Set badge to ${badgeInput.value}.`;
+                    output.innerHTML = `<br>Success. Set badge to ${badgeInput.value}.`;
                 }
             } catch (e) {
-                output.textContent = `Error: ${e.message}`;
+                output.innerHTML = `<br>Error: ${e.message}`;
             }
         });
         // register service worker
         window.onload = async () => {
             try {
                 const reg = await navigator.serviceWorker.register("sw.js");
-                output.textContent += `Service worker registered. Scope: ${reg.scope}`;
+                output.innerHTML += `Service worker registered.`;
             } catch (e) {
-                output.textContent += `Service worker registration failed: ${e.message}`;
+                output.innerHTML += `Service worker registration failed: ${e.message}`;
             }
+            const {state} = await navigator.permissions.query({name: "notifications"});
+            output.innerHTML += `Notifications permission is "${state}".`;
         };
     </script>
 </body>
