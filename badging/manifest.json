@@ -1,11 +1,13 @@
 {
   "name": "badger",
-  "display-mode": "standalone",
+  "display": "standalone",
   "icons": [
     {
       "src": "icon.png",
-      "width": 192,
-      "height": 192
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
     }
-  ]
+  ],
+  "start_url": "./index.html"
 }
