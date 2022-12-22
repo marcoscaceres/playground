@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<title>Application badge API test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+    <h2>Badger</h2>
+    <input type="number" id="badge" value="1" />
+    <button id="set">Set</button>
+    <output id="output">...idle...</output>
+    <script>
+        const setButton = document.getElementById("set");
+        const badgeInput = document.getElementById("badge");
+        const output = document.getElementById("output");
+        setButton.addEventListener("click", async () => {
+            try {
+                navigator.setAppBadge(parseInt(badgeInput.value, 10));
+                output.textContent += `Success. Set badge to ${badgeInput.value}.`;
+            } catch (e) {
+                output.textContent += `Error: ${e.message}`;
+            }
+        });
+    </script>
+</body>
