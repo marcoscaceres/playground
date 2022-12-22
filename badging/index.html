@@ -7,10 +7,24 @@
 <body>
     <h2>Badger</h2>
     <input type="number" id="badge" value="1" />
-    <output id="output">...idle...</output>
+    <div>
+      <output id="output">...idle...</output>
+    </div>
+    <div>
+      <button id="notification">Request notifications permission</button>
+    </div>
     <script>
         const badgeInput = document.getElementById("badge");
         const output = document.getElementById("output");
+        const notificationButton = document.getElementById("notification");
+        notificationButton.addEventListener("click", async () => {
+            try {
+                const permission = await Notification.requestPermission();
+                output.textContent = `Notification permission: ${permission}`;
+            } catch (e) {
+                output.textContent = `Error: ${e.message}`;
+            }
+        });
         badgeInput.addEventListener("change", async () => {
             try {
                 switch (true) {
