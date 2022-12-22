@@ -1,4 +1,9 @@
 {
   "name": "badger",
-  "display-mode": "standalone"
+  "display-mode": "standalone",
+  "icons": [
+    {
+      "src": "icon.png"
+    }
+  ]
 }

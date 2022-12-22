@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <title>Application badge API test</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="manifest" href="manifest.json" />
 <body>
     <h2>Badger</h2>
     <input type="number" id="badge" value="1" />
@@ -19,5 +19,14 @@
                 output.textContent += `Error: ${e.message}`;
             }
         });
+        // register service worker
+        window.onload = async () => {
+            try {
+                const reg = await navigator.serviceWorker.register("sw.js");
+                output.textContent += `Service worker registered. Scope: ${reg.scope}`;
+            } catch (e) {
+                output.textContent += `Service worker registration failed: ${e.message}`;
+            }
+        };
     </script>
 </body>
