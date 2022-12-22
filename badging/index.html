@@ -5,18 +5,16 @@
 <body>
     <h2>Badger</h2>
     <input type="number" id="badge" value="1" />
-    <button id="set">Set</button>
     <output id="output">...idle...</output>
     <script>
-        const setButton = document.getElementById("set");
         const badgeInput = document.getElementById("badge");
         const output = document.getElementById("output");
-        setButton.addEventListener("click", async () => {
+        badgeInput.addEventListener("change", async () => {
             try {
                 navigator.setAppBadge(parseInt(badgeInput.value, 10));
-                output.textContent += `Success. Set badge to ${badgeInput.value}.`;
+                output.textContent = `Success. Set badge to ${badgeInput.value}.`;
             } catch (e) {
-                output.textContent += `Error: ${e.message}`;
+                output.textContent = `Error: ${e.message}`;
             }
         });
         // register service worker
