@@ -11,8 +11,23 @@
         const output = document.getElementById("output");
         badgeInput.addEventListener("change", async () => {
             try {
-                navigator.setAppBadge(parseInt(badgeInput.value, 10));
-                output.textContent = `Success. Set badge to ${badgeInput.value}.`;
+                switch (true) {
+                  case badgeInput.value === "":
+                    await navigator.clearAppBadge();
+                    output.textContent = `Success. Cleared badge.`;
+                    break;
+                  case badgeInput.value === "0":
+                    await navigator.setAppBadge(0);
+                    output.textContent = `Success. Set badge to 0 (cleared).`;
+                    break;
+                  case parseInt(badgeInput.value) < 0:
+                    await navigator.setAppBadge();
+                    output.textContent = `Success. Set badge to flag.`;
+                    break
+                  default:
+                    await navigator.setAppBadge(badgeInput.value);
+                    output.textContent = `Success. Set badge to ${badgeInput.value}.`;
+                }
             } catch (e) {
                 output.textContent = `Error: ${e.message}`;
             }

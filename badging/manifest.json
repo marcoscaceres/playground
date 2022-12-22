@@ -3,7 +3,9 @@
   "display-mode": "standalone",
   "icons": [
     {
-      "src": "icon.png"
+      "src": "icon.png",
+      "width": 192,
+      "height": 192
     }
   ]
 }
