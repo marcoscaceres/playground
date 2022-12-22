@@ -1,17 +1,15 @@
 <!DOCTYPE html>
+<meta charset="utf-8">
 <title>Application badge API test</title>
 <meta name="theme-color" content="red" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="apple-touch-icon" href="icon.png" />
 <link rel="manifest" href="manifest.json" />
 <body>
-    <h2>Badger</h2>
-    <input type="number" id="badge" value="1" />
+    <h1>Badger 🦡</h1>
+    <input type="number" id="badge" value="1" /><button id="notification" hidden>Request notifications permission</button>
     <div>
       <output id="output">...idle...</output>
-    </div>
-    <div>
-      <button id="notification">Request notifications permission</button>
     </div>
     <script>
         const badgeInput = document.getElementById("badge");
@@ -52,12 +50,15 @@
         window.onload = async () => {
             try {
                 const reg = await navigator.serviceWorker.register("sw.js");
-                output.innerHTML += `Service worker registered.`;
+                output.innerHTML += `<br>Service worker registered.`;
             } catch (e) {
-                output.innerHTML += `Service worker registration failed: ${e.message}`;
+                output.innerHTML += `<br>Service worker registration failed: ${e.message}`;
             }
             const {state} = await navigator.permissions.query({name: "notifications"});
-            output.innerHTML += `Notifications permission is "${state}".`;
+            output.innerHTML += `<br>Notifications permission is "${state}".`;
+            if (state === "prompt") {
+                notificationButton.hidden = false;
+            }
         };
     </script>
 </body>
