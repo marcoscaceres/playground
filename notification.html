@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <title>Notification API Example</title>
+    <style>
+      /* Style the button */
+      .notification-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        font-size: 16px;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Style the button on hover */
+      .notification-btn:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="notification-btn" onclick="showNotification()">Notify me</button>
+    <script>
+      async function showNotification() {
+        if (!("Notification" in window)) {
+          alert("This browser does not support desktop notification");
+        } else {
+          const permission = await Notification.requestPermission();
+          if (permission === "granted") {
+            const notification = new Notification("Hello, world!");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
