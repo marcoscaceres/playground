@@ -1,80 +1,114 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <title>Application badge API test</title>
 <meta name="theme-color" content="red" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="apple-touch-icon" href="icon.png" />
 <link rel="manifest" href="manifest.json" />
 <body>
-    <h1>Badger 🦡</h1>
-    <input type="number" id="badge" value="1" /><button id="notification" hidden>Request notifications permission</button>
-    <button id="timed">Timed!</button>
-    <div>
-      <output id="output">...idle...</output>
-    </div>
-    <script>
-        const badgeInput = document.getElementById("badge");
-        const output = document.getElementById("output");
-        const notificationButton = document.getElementById("notification");
-        const timedButton = document.getElementById("timed");
-        timedButton.addEventListener("click", async () => {
-           setInterval(async () => {
-              const value = Math.floor(Math.abs(Math.sin(Date.now() / 1000) * 101));
-             await navigator.setAppBadge(value);
-             output.innerHTML = `<br>Success. Set badge to ${value}.`;
-           }, 4)
-        });
-        notificationButton.addEventListener("click", async () => {
-            try {
-                const permission = await Notification.requestPermission();
-                output.innerHTML = `<br>Notification permission: ${permission}`;
-            } catch (e) {
-                output.innerHTML = `<br>Error: ${e.message}`;
-            }
-        });
-        badgeInput.addEventListener("change", async () => {
-            try {
-                switch (true) {
-                  case badgeInput.value === "":
-                    await navigator.clearAppBadge();
-                    output.innerHTML = `<br>Success. Cleared badge.`;
-                    break;
-                  case badgeInput.value === "0":
-                    await navigator.setAppBadge(0);
-                    output.innerHTML = `<br>Success. Set badge to 0 (cleared).`;
-                    break;
-                  case parseInt(badgeInput.value) < 0:
-                    await navigator.setAppBadge();
-                    output.innerHTML = `<br>Success. Set badge to flag.`;
-                    break
-                  default:
-                    await navigator.setAppBadge(badgeInput.value);
-                    output.innerHTML = `<br>Success. Set badge to ${badgeInput.value}.`;
-                }
-            } catch (e) {
-                output.innerHTML = `<br>Error: ${e.message}`;
-            }
-        });
+  <h1>Badger 🦡</h1>
+  <input type="number" id="badge" value="1" /><button id="notification" hidden>
+    Request notifications permission
+  </button>
+  <button id="timed" data-interval="">Timed!</button>
+  <button id="clear">Clear</button>
+  <button id="flag">Flag</button>
+  <div>
+    <output id="output">...idle...</output>
+  </div>
+  <script>
+    const badgeInput = document.getElementById("badge");
+    const output = document.getElementById("output");
+    const notificationButton = document.getElementById("notification");
+    const timedButton = document.getElementById("timed");
+    const clearButton = document.getElementById("clear");
+    const flagButton = document.getElementById("flag");
+    timedButton.addEventListener("click", async () => {
+      if (timedButton.dataset.interval) {
+        clearInterval(timedButton.dataset.interval);
+        timedButton.dataset.interval = "";
+        output.innerHTML = `Timer stopped.`;
+        return;
+      }
+      timedButton.dataset.interval = setInterval(async () => {
+        const value = Math.floor(Math.abs(Math.sin(Date.now() / 1000) * 101));
+        await navigator.setAppBadge(value);
+        output.innerHTML = `<br>Success. Set badge to ${value}.`;
+      }, 4);
+    });
 
+    notificationButton.addEventListener("click", async () => {
+      try {
+        const permission = await Notification.requestPermission();
+        output.innerHTML = `<br>Notification permission: ${permission}`;
+      } catch (e) {
+        output.innerHTML = `<br>Error: ${e.message}`;
+      }
+    });
 
-        // register service worker
-        window.onload = async () => {
-            try {
-                const reg = await navigator.serviceWorker.register("sw.js");
-                output.innerHTML += `<br>Service worker registered.`;
-            } catch (e) {
-                output.innerHTML += `<br>Service worker registration failed: ${e.message}`;
-            }
-            const {state} = await navigator.permissions.query({name: "notifications"});
-            output.innerHTML += `<br>Notifications permission is "${state}".`;
-            if (state === "prompt") {
-                notificationButton.hidden = false;
-            }
-        };
-    </script>
-    <h2>
-      Cross origin badge
-    </h2>
-    <iframe src="https://marcoscaceres-remote.github.io/playground-remote/badging/" height="500">
-    </iframe>
+    clearButton.addEventListener("click", async () => {
+      try {
+        await navigator.clearAppBadge();
+        output.innerHTML = `<br>Success. Cleared badge.`;
+      } catch (e) {
+        output.innerHTML = `<br>Error: ${e.message}`;
+      }
+    });
+
+    flagButton.addEventListener("click", async () => {
+      try {
+        await navigator.setAppBadge();
+        output.innerHTML = `<br>Success. Set badge to flag.`;
+      } catch (e) {
+        output.innerHTML = `<br>Error: ${e.message}`;
+      }
+    });
+
+    badgeInput.addEventListener("change", async () => {
+      try {
+        switch (true) {
+          case badgeInput.value === "":
+            await navigator.clearAppBadge();
+            output.innerHTML = `<br>Success. Cleared badge.`;
+            break;
+          case badgeInput.value === "0":
+            await navigator.setAppBadge(0);
+            output.innerHTML = `<br>Success. Set badge to 0 (cleared).`;
+            break;
+          case parseInt(badgeInput.value) < 0:
+            await navigator.setAppBadge();
+            output.innerHTML = `<br>Success. Set badge to flag.`;
+            break;
+          default:
+            await navigator.setAppBadge(badgeInput.value);
+            output.innerHTML = `<br>Success. Set badge to ${badgeInput.value}.`;
+        }
+      } catch (e) {
+        output.innerHTML = `<br>Error: ${e.message}`;
+      }
+    });
+
+    // register service worker
+    window.onload = async () => {
+      try {
+        const reg = await navigator.serviceWorker.register("sw.js");
+        output.innerHTML += `<br>Service worker registered.`;
+      } catch (e) {
+        output.innerHTML += `<br>Service worker registration failed: ${e.message}`;
+      }
+      const { state } = await navigator.permissions.query({
+        name: "notifications",
+      });
+      output.innerHTML += `<br>Notifications permission is "${state}".`;
+      if (state === "prompt") {
+        notificationButton.hidden = false;
+      }
+    };
+  </script>
+  <h2>Cross origin badge</h2>
+  <iframe
+    src="https://marcoscaceres-remote.github.io/playground-remote/badging/"
+    height="500"
+  >
+  </iframe>
 </body>
