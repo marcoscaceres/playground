@@ -7,15 +7,28 @@
 <link rel="manifest" href="manifest.json" />
 <body>
   <h1>Badger 🦡</h1>
-  <input type="number" id="badge" value="1" /><button id="notification" hidden>
-    Request notifications permission
-  </button>
-  <button id="timed" data-interval="">Timed!</button>
-  <button id="clear">Clear</button>
-  <button id="flag">Flag</button>
-  <div>
-    <output id="output">...idle...</output>
-  </div>
+  <form onsubmit="">
+    <fieldset>
+      <button id="notification" hidden>Request notifications permission</button> (state <output id="permission-state">...</output>)
+    </fieldset>
+    <fieldset>
+      <label>
+        Number:
+        <input type="number" id="badge" value="1" />
+      </label>
+    </fieldset>
+    <fieldset>
+      <label> JSON: <input type="text" id="json" /> </label>
+    </fieldset>
+    <fieldset>
+      <button id="flag">Flag</button>
+      <button id="timed" data-interval="">Timed!</button>
+      <button id="clear">Clear</button>
+    </fieldset>
+    <div>
+      <output id="output">...idle...</output>
+    </div>
+  </form>
   <script>
     const badgeInput = document.getElementById("badge");
     const output = document.getElementById("output");
@@ -23,18 +36,48 @@
     const timedButton = document.getElementById("timed");
     const clearButton = document.getElementById("clear");
     const flagButton = document.getElementById("flag");
+    const jsonInput = document.getElementById("json");
+    const permissionState = document.getElementById("permission-state");
     timedButton.addEventListener("click", async () => {
       if (timedButton.dataset.interval) {
         clearInterval(timedButton.dataset.interval);
         timedButton.dataset.interval = "";
+        timedButton.textContent = "Timed!";
         output.innerHTML = `Timer stopped.`;
         return;
       }
+      timedButton.textContent = "Stop timer";
       timedButton.dataset.interval = setInterval(async () => {
         const value = Math.floor(Math.abs(Math.sin(Date.now() / 1000) * 101));
         await navigator.setAppBadge(value);
         output.innerHTML = `<br>Success. Set badge to ${value}.`;
       }, 4);
+    });
+    // show notification permission state
+    window.addEventListener("load", async () => {
+      const { state } = await navigator.permissions.query({
+        name: "notifications",
+      });
+      if (state === "prompt") {
+        notificationButton.hidden = false;
+      }
+      const permission = await navigator.permissions.query({ name: "notifications"});
+      permissionState.innerText = `"${state}"`;
+    });
+
+    // prevent form submission
+    document.querySelector("form").addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
+    jsonInput.addEventListener("change", async () => {
+      try {
+        const json = JSON.parse(jsonInput.value);
+        await navigator.setAppBadge(json);
+        output.innerHTML = `<br>Success. Set badge to ${json}.`;
+      } catch (e) {
+        output.innerHTML = `<br>Error: ${e.message}`;
+      }
     });
 
     notificationButton.addEventListener("click", async () => {
@@ -96,19 +139,12 @@
       } catch (e) {
         output.innerHTML += `<br>Service worker registration failed: ${e.message}`;
       }
-      const { state } = await navigator.permissions.query({
-        name: "notifications",
-      });
-      output.innerHTML += `<br>Notifications permission is "${state}".`;
-      if (state === "prompt") {
-        notificationButton.hidden = false;
-      }
     };
   </script>
   <h2>Cross origin badge</h2>
   <iframe
     src="https://marcoscaceres-remote.github.io/playground-remote/badging/"
-    height="500"
+    height="300"
   >
   </iframe>
 </body>
