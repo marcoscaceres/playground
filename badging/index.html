@@ -9,7 +9,8 @@
   <h1>Badger 🦡</h1>
   <form onsubmit="">
     <fieldset>
-      <button id="notification" hidden>Request notifications permission</button> (state <output id="permission-state">...</output>)
+      <button id="notification" hidden>Request notifications permission</button>
+      (state <output id="permission-state">...</output>)
     </fieldset>
     <fieldset>
       <label>
@@ -38,7 +39,9 @@
     const flagButton = document.getElementById("flag");
     const jsonInput = document.getElementById("json");
     const permissionState = document.getElementById("permission-state");
-    timedButton.addEventListener("click", async () => {
+    timedButton.addEventListener("click", manageTimer);
+
+    async function manageTimer() {
       if (timedButton.dataset.interval) {
         clearInterval(timedButton.dataset.interval);
         timedButton.dataset.interval = "";
@@ -49,10 +52,17 @@
       timedButton.textContent = "Stop timer";
       timedButton.dataset.interval = setInterval(async () => {
         const value = Math.floor(Math.abs(Math.sin(Date.now() / 1000) * 101));
-        await navigator.setAppBadge(value);
+        try {
+          await navigator.setAppBadge(value);
+        } catch (e) {
+          output.innerHTML = `<br>Error: ${e.message} trying to run on timer.`;
+          clearInterval(timedButton.dataset.interval);
+          return;
+        }
         output.innerHTML = `<br>Success. Set badge to ${value}.`;
       }, 4);
-    });
+    }
+
     // show notification permission state
     window.addEventListener("load", async () => {
       const { state } = await navigator.permissions.query({
@@ -61,7 +71,9 @@
       if (state === "prompt") {
         notificationButton.hidden = false;
       }
-      const permission = await navigator.permissions.query({ name: "notifications"});
+      const permission = await navigator.permissions.query({
+        name: "notifications",
+      });
       permissionState.innerText = `"${state}"`;
     });
 
@@ -90,9 +102,16 @@
     });
 
     clearButton.addEventListener("click", async () => {
+      let didStopTimer = false;
+      if (timedButton.dataset.interval) {
+        await manageTimer();
+        didStopTimer = true;
+      }
       try {
         await navigator.clearAppBadge();
-        output.innerHTML = `<br>Success. Cleared badge.`;
+        output.innerHTML = `<br>Success. Cleared badge${
+          didStopTimer ? " and stopped timer." : ""
+        }.`;
       } catch (e) {
         output.innerHTML = `<br>Error: ${e.message}`;
       }
