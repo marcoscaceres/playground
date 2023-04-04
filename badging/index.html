@@ -9,7 +9,7 @@
   <h1>Badger 🦡</h1>
   <form onsubmit="">
     <fieldset>
-      <button id="notification" hidden>Request notifications permission</button>
+      <button id="notification" disabled>Request notifications permission</button>
       (state <output id="permission-state">...</output>)
     </fieldset>
     <fieldset>
@@ -69,7 +69,7 @@
         name: "notifications",
       });
       if (state === "prompt") {
-        notificationButton.hidden = false;
+        notificationButton.disabled = false;
       }
       const permission = await navigator.permissions.query({
         name: "notifications",
