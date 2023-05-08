@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Example</title>
+</head>
+<body>
+    <button id="notifyBtn">Show Notification</button>
+    <output id="output"></output>
+
+    <script>
+        document.getElementById('notifyBtn').addEventListener('click', function() {
+            try {
+                const notification = new Notification('Hi!');
+            } catch (error) {
+                document.getElementById('output').innerText = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
