@@ -10,10 +10,10 @@
     <output id="output"></output>
 
     <script>
-        document.getElementById('notifyBtn').addEventListener('click', function() {
+        document.getElementById('notifyBtn').addEventListener('click', async function() {
             try {
                 const notification = new Notification('Hi!');
-                notification.show();
+                await notification.show();
             } catch (error) {
                 document.getElementById('output').innerText = 'Error: ' + error.message;
             }
