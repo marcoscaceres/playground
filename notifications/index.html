@@ -13,6 +13,7 @@
         document.getElementById('notifyBtn').addEventListener('click', function() {
             try {
                 const notification = new Notification('Hi!');
+                notification.show();
             } catch (error) {
                 document.getElementById('output').innerText = 'Error: ' + error.message;
             }
