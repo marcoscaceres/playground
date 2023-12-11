@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modern Service Worker Test with Query Strings</title>
+</head>
+<body>
+    <h1>Modern Service Worker Push Subscription Test</h1>
+    <button id="registerWorker1">Register Service Worker 1</button>
+    <button id="registerWorker2">Register Service Worker 2</button>
+
+    <script type="module">
+        const registerWorker = async (queryParam) => {
+            try {
+                const registration = await navigator.serviceWorker.register(`serviceWorker.js?${queryParam}`);
+                console.log(`Service Worker Registered with query: ${queryParam}`, registration);
+                // Register push subscription for the worker here
+            } catch (error) {
+                console.error('Registration failed:', error);
+            }
+        };
+
+        document.getElementById('registerWorker1').onclick = () => registerWorker('worker=1');
+        document.getElementById('registerWorker2').onclick = () => registerWorker('worker=2');
+    </script>
+</body>
+</html>
