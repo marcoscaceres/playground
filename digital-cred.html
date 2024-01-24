@@ -139,9 +139,8 @@
       The `IdentityRequestOptions` dictionary
     </h2>
     <p>
-      The {{IdentityRequestOptions}} dictionary handles requests in a [=digital
-      credential/request protocol=] agnostic manner, while also handling
-      cryptographic requirements.
+      The {{IdentityRequestOptions}} dictionary is used to specify options when
+      requesting a digital identity credential.
     </p>
     <pre class="idl">
     dictionary IdentityRequestOptions {
@@ -164,6 +163,11 @@
     <h2>
       The `IdentityRequestProvider` dictionary
     </h2>
+    <p>
+      The {{IdentityRequestProvider}} dictionary is used to specify a
+      [=digital credential/request protocol=] specific provider, while also handling
+      cryptographic requirements.
+    </p>
     <pre class="idl">
     dictionary IdentityRequestProvider {
       required DOMString protocol;
