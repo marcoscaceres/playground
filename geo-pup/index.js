@@ -1,34 +1,24 @@
 import puppeteer from "puppeteer";
 
 async function run() {
-  // Launch the browser
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
-  // Permission for geolocation access
   const context = await browser.defaultBrowserContext();
-  await context.overridePermissions(
-    "https://marcoscaceres.github.io",
-    ["geolocation"]
-  );
+  await context.overridePermissions("https://marcoscaceres.github.io", [
+    "geolocation",
+  ]);
+
+  // Set the geolocation
+  await page.setGeolocation({ latitude: 37.7749, longitude: -122.4194 });
 
   // Navigate to the test page
   await page.goto("https://marcoscaceres.github.io/playground/geo-pup");
 
-  // Set new geolocation: latitude, longitude _after_ load
-  await page.setGeolocation({
-    latitude: 37.7749,
-    longitude: -122.4194,
-  });
-
-
-  // Assuming the page displays latitude and longitude in elements with IDs 'latitude' and 'longitude'
-  const latitude = await page.evaluate(
-    () => document.getElementById("latitude")?.textContent
-  );
-  const longitude = await page.evaluate(
-    () => document.getElementById("longitude")?.textContent
-  );
+  const { latitude, longitude } = await page.evaluate(() => ({
+    latitude: document.getElementById("latitude")?.textContent,
+    longitude: document.getElementById("longitude")?.textContent,
+  }));
 
   console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
