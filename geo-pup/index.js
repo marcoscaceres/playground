@@ -8,12 +8,12 @@ async function run() {
   // Permission for geolocation access
   const context = await browser.defaultBrowserContext();
   await context.overridePermissions(
-    "http://marcoscaceres.github.io/playground/geo-pup",
+    "https://marcoscaceres.github.io",
     ["geolocation"]
   );
 
   // Navigate to the test page
-  await page.goto("http://marcoscaceres.github.io/playground/geo-pup");
+  await page.goto("https://marcoscaceres.github.io/playground/geo-pup");
 
   // Set new geolocation: latitude, longitude _after_ load
   await page.setGeolocation({
