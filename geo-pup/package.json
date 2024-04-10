@@ -1,0 +1,15 @@
+{
+  "name": "geo-pup",
+  "version": "1.0.0",
+  "description": "test geolocation in puppeteer",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marcos Caceres",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "puppeteer": "^latest"
+  }
+}

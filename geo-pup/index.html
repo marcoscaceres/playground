@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Test</title>
+</head>
+<body>
+    <h1>Geolocation Test Page</h1>
+    <p>Latitude: <span id="latitude">Waiting...</span></p>
+    <p>Longitude: <span id="longitude">Waiting...</span></p>
+
+    <script>
+        // Function to display the latitude and longitude
+        function showPosition(position) {
+            document.getElementById('latitude').textContent = position.coords.latitude;
+            document.getElementById('longitude').textContent = position.coords.longitude;
+        }
+
+        // Function to handle errors
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        // Check if Geolocation is supported
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    </script>
+</body>
+</html>
