@@ -6,5 +6,5 @@
       "src": "icon.png",
       "sizes": "192x192"
     }],
-    "theme_color": "red"
+    "theme_color": "hsla(100, 100%, 50%, 0.5)"
   }
