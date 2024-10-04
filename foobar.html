@@ -3,22 +3,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <script>
-  async function click() {
-    const protocol = "austroads-request-forwarding-v2";
+  async function handleClick() {
+    const protocol = "austroads";
     const request = {
       deviceRequest: "a",
       encryptionInfo: "b",
     };
 
-    await navigator.identity.get({
+    const option = {
       digital: {
-        providers: [{ request, protocol }],
+        providers: [{ protocol, request }],
       },
       mediation: "required",
-    });
+    };
+    try {
+      await navigator.identity.get(option);
+    } catch (err) {
+      console.log(err);
+      const out = document.querySelector("output");
+      out.innerHTML = Date.now() + ": " + err + "<br>" + out.innerHTML;
+    }
   }
+  console.log("hellos");
 </script>
-<h1>
-    Click the button below to trigger the identity request
-</h1>
-<button onclick="click()">Click me</button>
+
+<h1>Click the button below to trigger the identity request</h1>
+<button onclick="handleClick()">Click me</button>
+<br />
+<output id="out"></output>
