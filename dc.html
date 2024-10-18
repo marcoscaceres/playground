@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Credentials API Test - x</title>
+  </head>
+  <body>
+    <h1>Digital Credentials API Test</h1>
+    <button id="getCredential">Get Digital Credential fun</button>
+
+    <script>
+      function fakeConsole() {
+        const console = {
+          log: function () {
+            const output = document.querySelector("output");
+            output.textContent = `Console log: ${JSON.stringify(
+              arguments
+            )} (${new Date().toLocaleTimeString()})`;
+          },
+          error: function () {
+            const output = document.querySelector("output");
+            output.textContent = `Console error: ${JSON.stringify(
+              arguments
+            )} (${new Date().toLocaleTimeString()})`;
+          },
+        };
+        return console;
+      }
+
+      document
+        .getElementById("getCredential")
+        .addEventListener("click", async () => {
+          const console = fakeConsole();
+          const requestObj = {
+            vp_query_info:
+              "eyJjcmVkZW50aWFscyI6IHsiYSI6IHsiZm9ybWF0IjogIm1zb19tZG9jIiwgIm1zb19tZG9jIjogeyJkb2N0eXBlX3ZhbHVlcyI6ICJvcmcuaXNvLjE4MDEzLjUuMS5tREwifSwgImNsYWltcyI6IFt7Im5hbWVzcGFjZSI6ICJvcmcuaXNvLjE4MDEzLjUuMSIsICJjbGFpbV9uYW1lIjogImdpdmVuX25hbWUiIH0sIHsibmFtZXNwYWNlIjogIm9yZy5pc28uMTgwMTMuNS4xIiwgImNsYWltX25hbWUiOiAiZG9jdW1lbnRfbnVtYmVyIn1dfX19Cg==",
+            response_encryption:
+              "eyJyZXNwb25zZV9tb2RlIjogInczY19kY19tZG9jXzEiLCAibm9uY2UiOiAiYXZvRFVWV1FvV2VQbmk2RzQ1UGZXQSIsICJqd2tzIjogeyJrZXlzIjogW3sia3R5IjogIkVDIiwgImNydiI6ICJQLTI1NiIsICJ4IjogIktLbTFpUGV1T2I5YkRKZWVKRUw0UWxkWWxXdlk3Rl9LOGVaa21ZZFM5UHciLCAieSI6ICJwdlR5eEpxTEloUDRwWGJCTmRaYXF1SkE1STRYMEZDajZXMV9oNXRXVWk0In1dfX0=",
+            verifier_authentications: [
+              [
+                "verifier_authentication_example",
+                "eyJhbGciOiAiRVMyNTYiLCAieDVjIjogIlZHaHBjMmx6Ym05MFlXTmxjblJwWm1sallYUmwifQ..iXpUwMEe9SpQilW6JJrl999Ev_efw7t7lDpJ45f9G8UvBKoEOv5LMef7jpr4HaOB-dK-iz5iCyi5bWpeLN3r8A",
+              ],
+            ],
+          };
+          try {
+            console.log("Getting credential");
+            const credentialRequestOptions = {
+              mediation: "required",
+              digital: {
+                providers: [
+                  {
+                    protocol: "openid4vp",
+                    request: JSON.stringify(requestObj),
+                  },
+                ],
+              },
+            };
+            const credential = await navigator.identity.get(
+              credentialRequestOptions
+            );
+            console.log(`A ${credential.protocol} Credential appeared with data: ${credential.data}`);
+          } catch (err) {
+            console.error(
+              "Error getting credential:",
+              `${err.name}: ${err.message} ${err.stack}`
+            );
+          }
+        });
+    </script>
+  </body>
+  <output></output>
+</html>
