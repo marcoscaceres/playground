@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hovercard Pattern Demo — No interesttarget needed</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  line-height: 1.6;
+  color: #1d1d1f;
+}
+h1 { font-size: 1.4rem; }
+p { color: #555; }
+
+.chip-wrap { position: relative; display: inline-block; margin: 0.25rem; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 99px;
+  border: 1px solid #ddd;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.chip:hover { background: #e8e8ed; }
+
+.chip-info-btn {
+  display: none;
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 0.6rem;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  z-index: 1;
+}
+
+@media (hover: none) {
+  .chip-info-btn { display: inline-flex; }
+}
+
+.person-popover {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  background: #fff;
+  min-width: 200px;
+  max-width: 280px;
+  position-anchor: inherit;
+  inset-area: bottom span-right;
+  position-try-fallbacks: flip-block;
+}
+.person-popover::backdrop { background: transparent; }
+
+.popover-name { font-weight: 600; display: block; }
+.popover-handle { color: #666; font-size: 0.85rem; display: block; }
+.popover-org { color: #888; font-size: 0.85rem; display: block; margin-bottom: 0.3rem; }
+.popover-role {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.popover-note { display: block; margin-top: 0.4rem; font-style: italic; font-size: 0.85rem; color: #666; }
+
+.demo-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: #fafafa;
+}
+.demo-section h2 { font-size: 1.1rem; margin: 0 0 1rem; }
+
+code { background: #f0f0f0; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85rem; }
+pre {
+  background: #1d1d1f;
+  color: #f5f5f7;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+
+<h1>Hovercard Pattern: <code>popover</code> + <code>@media (hover: none)</code></h1>
+<p>
+  This demonstrates hovercards that work on both desktop (hover to show) and
+  touch devices (tap ⓘ to show), using only existing web platform primitives.
+  No <code>interesttarget</code> attribute. No <code>::interest-button</code> pseudo-element.
+</p>
+
+<div class="demo-section">
+  <h2>Contributors</h2>
+
+  <span class="chip-wrap">
+    <a href="https://github.com/jyasskin" class="chip"
+       style="anchor-name: --pop-alice"
+       onmouseenter="document.getElementById('pop-alice').showPopover()"
+       onmouseleave="setTimeout(()=>{const p=document.getElementById('pop-alice');if(!p.dataset.hovering)p.hidePopover()},100)">
+      Alice Chen
+    </a>
+    <button type="button" class="chip-info-btn" popovertarget="pop-alice" aria-label="Show profile for Alice Chen">ⓘ</button>
+    <div class="person-popover" id="pop-alice" popover
+         aria-label="Profile: Alice Chen"
+         style="position-anchor: --pop-alice"
+         onmouseenter="this.dataset.hovering='true'"
+         onmouseleave="this.hidePopover();delete this.dataset.hovering">
+      <span class="popover-name">Alice Chen</span>
+      <span class="popover-handle">@alicechen</span>
+      <span class="popover-org">Example Corp</span>
+      <span class="popover-role">Spec Editor</span>
+      <span class="popover-note">Leading the credential management work.</span>
+    </div>
+  </span>
+
+  <span class="chip-wrap">
+    <a href="https://github.com/nicolo-ribaudo" class="chip"
+       style="anchor-name: --pop-bob"
+       onmouseenter="document.getElementById('pop-bob').showPopover()"
+       onmouseleave="setTimeout(()=>{const p=document.getElementById('pop-bob');if(!p.dataset.hovering)p.hidePopover()},100)">
+      Bob Martinez
+    </a>
+    <button type="button" class="chip-info-btn" popovertarget="pop-bob" aria-label="Show profile for Bob Martinez">ⓘ</button>
+    <div class="person-popover" id="pop-bob" popover
+         aria-label="Profile: Bob Martinez"
+         style="position-anchor: --pop-bob"
+         onmouseenter="this.dataset.hovering='true'"
+         onmouseleave="this.hidePopover();delete this.dataset.hovering">
+      <span class="popover-name">Bob Martinez</span>
+      <span class="popover-handle">@bobm</span>
+      <span class="popover-org">Browser Co</span>
+      <span class="popover-role">Implementer</span>
+      <span class="popover-note">Working on the WebIDL bindings.</span>
+    </div>
+  </span>
+
+  <span class="chip-wrap">
+    <button type="button" class="chip"
+       style="anchor-name: --pop-carol"
+       popovertarget="pop-carol"
+       onmouseenter="document.getElementById('pop-carol').showPopover()"
+       onmouseleave="setTimeout(()=>{const p=document.getElementById('pop-carol');if(!p.dataset.hovering)p.hidePopover()},100)">
+      Carol Wu
+    </button>
+    <button type="button" class="chip-info-btn" popovertarget="pop-carol" aria-label="Show profile for Carol Wu">ⓘ</button>
+    <div class="person-popover" id="pop-carol" popover
+         aria-label="Profile: Carol Wu"
+         style="position-anchor: --pop-carol"
+         onmouseenter="this.dataset.hovering='true'"
+         onmouseleave="this.hidePopover();delete this.dataset.hovering">
+      <span class="popover-name">Carol Wu</span>
+      <span class="popover-handle">@carolwu</span>
+      <span class="popover-org">Standards Org</span>
+      <span class="popover-role">WG Chair</span>
+      <span class="popover-note">Chairing the accessibility task force.</span>
+    </div>
+  </span>
+</div>
+
+<h2>How it works</h2>
+<ul>
+  <li><strong>Desktop:</strong> Hover over a name to see the card. Move to the card to interact with it. Move away to dismiss.</li>
+  <li><strong>Touch/spatial:</strong> The ⓘ button appears (via <code>@media (hover: none)</code>). Tap it to show the card. Tap elsewhere to dismiss.</li>
+</ul>
+
+<h2>The code</h2>
+<pre>&lt;style&gt;
+  .chip-info-btn { display: none; }
+  @media (hover: none) {
+    .chip-info-btn { display: inline-flex; }
+  }
+&lt;/style&gt;
+
+&lt;span class="chip-wrap"&gt;
+  &lt;a href="/profile" class="chip"
+     style="anchor-name: --pop-id"
+     onmouseenter="document.getElementById('pop-id').showPopover()"
+     onmouseleave="setTimeout(()=&gt;{
+       const p=document.getElementById('pop-id');
+       if(!p.dataset.hovering) p.hidePopover()
+     }, 100)"&gt;
+    Alice Chen
+  &lt;/a&gt;
+  &lt;button class="chip-info-btn"
+          popovertarget="pop-id"
+          aria-label="Show profile"&gt;ⓘ&lt;/button&gt;
+  &lt;div id="pop-id" popover
+       style="position-anchor: --pop-id"
+       onmouseenter="this.dataset.hovering='true'"
+       onmouseleave="this.hidePopover();
+                     delete this.dataset.hovering"&gt;
+    &lt;!-- card content --&gt;
+  &lt;/div&gt;
+&lt;/span&gt;</pre>
+
+<p>
+  <strong>Key points:</strong> The <code>&lt;button&gt;</code> is a real HTML element (focusable, in the a11y tree,
+  standard behavior). It's conditionally shown only on non-hover devices. The <code>popover</code> attribute
+  handles light-dismiss. Anchor positioning handles placement. No new web platform features required.
+</p>
+
+</body>
+</html>
