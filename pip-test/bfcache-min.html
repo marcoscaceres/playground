@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PiP not cleaned up after bfcache restore — reduced test case</title>
+</head>
+<body>
+  <h1>Picture-in-Picture / bfcache reduced test case</h1>
+  <p>Steps: (1) click <b>Play</b>; (2) click <b>Enter PiP</b> and confirm the floating
+  PiP window appears; (3) navigate to any other URL in this tab. Safari warns
+  that the PiP video will be closed, so choose <b>Leave Page</b>; (4) click the
+  browser <b>Back</b> button. On restore, the log below reports the state.</p>
+
+  <video id="v" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop muted playsinline width="320"></video>
+  <p>
+    <button id="enter">Enter PiP</button>
+    <button id="exit">Exit PiP</button>
+  </p>
+  <pre id="out"></pre>
+
+  <script>
+    const v = document.getElementById('v');
+    const out = document.getElementById('out');
+    const log = m => { out.textContent += m + '\n'; };
+
+    document.getElementById('enter').onclick = () =>
+      v.requestPictureInPicture().catch(e => log('requestPictureInPicture() rejected: ' + e));
+
+    document.getElementById('exit').onclick = async () => {
+      log('exitPictureInPicture() called');
+      try { await document.exitPictureInPicture(); log('  -> resolved'); }
+      catch (e) { log('  -> rejected: ' + e); }
+    };
+
+    v.addEventListener('enterpictureinpicture', () => log('enterpictureinpicture'));
+    v.addEventListener('leavepictureinpicture', () => log('leavepictureinpicture'));
+
+    // Read-only lifecycle probe. On bfcache restore (persisted=true) this reports
+    // whether PiP state is consistent: a closed window should NOT leave
+    // pictureInPictureElement set with webkitPresentationMode 'inline'.
+    addEventListener('pageshow', e => {
+      log('--- pageshow ---');
+      log('persisted=' + e.persisted +
+          '  pictureInPictureElement=' + (document.pictureInPictureElement ? document.pictureInPictureElement.id : null) +
+          '  webkitPresentationMode (WebKit-only)=' + v.webkitPresentationMode);
+    });
+  </script>
+</body>
+</html>
