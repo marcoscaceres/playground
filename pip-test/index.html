@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Picture-in-Picture Test Bench</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; margin: 1rem 2rem; background: #111; color: #eee; }
+    h1 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    p { margin: 0 0 1rem; color: #aaa; font-size: 0.9rem; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+
+    section { background: #1e1e1e; border-radius: 8px; padding: 1rem; }
+    section h2 { font-size: 0.95rem; margin: 0 0 0.75rem; color: #ccc; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    video { width: 100%; max-width: 360px; border-radius: 4px; display: block; background: #000; }
+
+    .btn-group { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+
+    button {
+      cursor: pointer;
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: #333;
+      color: #eee;
+      transition: background 0.15s;
+    }
+    button:hover { background: #444; }
+    button.primary { background: #0a84ff; color: #fff; }
+    button.primary:hover { background: #0070d9; }
+    button.danger { background: #ff453a; color: #fff; }
+    button.danger:hover { background: #d93b31; }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    #log {
+      font-family: ui-monospace, monospace;
+      font-size: 0.8rem;
+      background: #0a0a0a;
+      border-radius: 4px;
+      padding: 0.75rem;
+      height: 280px;
+      overflow-y: auto;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .log-info   { color: #4af; }
+    .log-event  { color: #4f4; }
+    .log-warn   { color: #fa4; }
+    .log-error  { color: #f44; }
+
+    #pip-status {
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      background: #333;
+    }
+    #pip-status.active { background: #1a5f1a; color: #4f4; }
+
+    #iframe-container { margin-top: 0.75rem; }
+    #test-iframe { width: 100%; height: 140px; border: 1px solid #333; border-radius: 4px; background: #000; }
+
+    .scenario { margin-bottom: 0.5rem; }
+    .scenario label { font-size: 0.85rem; color: #bbb; display: block; margin-bottom: 0.25rem; }
+  </style>
+</head>
+<body>
+  <h1>Picture-in-Picture Test Bench</h1>
+  <p>Tests exit PiP behavior across browser/iframe/document destruction scenarios. See <a style="color:#4af" href="https://github.com/w3c/picture-in-picture/pull/260">#260</a>.</p>
+
+  <div class="grid">
+    <!-- Left: Video + PiP controls -->
+    <section>
+      <h2>Video</h2>
+      <video id="video" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop muted></video>
+      <div id="pip-status">PiP: inactive</div>
+      <div class="btn-group">
+        <button id="btn-enter-pip" class="primary">Enter PiP</button>
+        <button id="btn-exit-pip" disabled>Exit PiP</button>
+      </div>
+
+      <h2 style="margin-top:1rem">Destruction Scenarios</h2>
+
+      <div class="scenario">
+        <label>Window / Document</label>
+        <div class="btn-group">
+          <button id="btn-open-popup">Open popup + enter PiP there</button>
+          <button id="btn-close-popup" disabled class="danger">Close popup window</button>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <label>iframe</label>
+        <div class="btn-group">
+          <button id="btn-create-iframe">Create iframe</button>
+          <button id="btn-pip-in-iframe" disabled>Enter PiP in iframe</button>
+          <button id="btn-remove-iframe" disabled class="danger">Remove iframe from DOM</button>
+          <button id="btn-navigate-iframe" disabled class="danger">Navigate iframe away</button>
+        </div>
+        <div id="iframe-container"></div>
+      </div>
+
+      <div class="scenario">
+        <label>Document navigation (this page)</label>
+        <div class="btn-group">
+          <button id="btn-navigate-self" class="danger">Navigate this document</button>
+          <button id="btn-reload" class="danger">Reload page</button>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <label>disablePictureInPicture</label>
+        <div class="btn-group">
+          <button id="btn-disable-pip">Set disablePictureInPicture</button>
+          <button id="btn-enable-pip">Clear disablePictureInPicture</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Event log -->
+    <section>
+      <h2>Event Log</h2>
+      <button id="btn-clear-log" style="float:right;margin-top:-2.2rem;font-size:0.75rem">Clear</button>
+      <div id="log"></div>
+
+      <h2 style="margin-top:1rem">PiP Window Info</h2>
+      <div id="pip-info" style="font-family:monospace;font-size:0.8rem;color:#aaa">No active PiP window</div>
+    </section>
+  </div>
+
+  <script>
+    'use strict';
+
+    const log = document.getElementById('log');
+    const pipStatus = document.getElementById('pip-status');
+    const pipInfo = document.getElementById('pip-info');
+    const video = document.getElementById('video');
+
+    let currentPipWindow = null;
+    let popupWindow = null;
+    let testIframe = null;
+
+    // ---- Logging ----
+
+    function entry(msg, cls = 'info') {
+      const t = new Date().toLocaleTimeString('en', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: 3 });
+      const line = document.createElement('div');
+      line.className = `log-${cls}`;
+      line.textContent = `${t}  ${msg}`;
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    document.getElementById('btn-clear-log').onclick = () => log.innerHTML = '';
+
+    // ---- PiP helpers ----
+
+    function onPipEnter(pipWin, label = 'this document') {
+      currentPipWindow = pipWin;
+      updateStatus(true);
+      entry(`[leavepictureinpicture] entered PiP (from ${label})`, 'event');
+      updateInfo();
+
+      pipWin.addEventListener('pagehide', () => {
+        entry('[pip window] pagehide', 'event');
+        updateStatus(false);
+        currentPipWindow = null;
+        updateInfo();
+      });
+      pipWin.addEventListener('resize', () => entry('[pip window] resize', 'event'));
+    }
+
+    function updateStatus(active) {
+      pipStatus.textContent = active ? 'PiP: ACTIVE' : 'PiP: inactive';
+      pipStatus.className = active ? 'active' : '';
+      document.getElementById('btn-exit-pip').disabled = !active;
+    }
+
+    function updateInfo() {
+      if (!currentPipWindow) { pipInfo.textContent = 'No active PiP window'; return; }
+      pipInfo.textContent = [
+        `width: ${currentPipWindow.width}`,
+        `height: ${currentPipWindow.height}`,
+      ].join('\n');
+    }
+
+    // ---- Video events ----
+
+    video.addEventListener('enterpictureinpicture', e => {
+      entry('[video] enterpictureinpicture', 'event');
+      onPipEnter(e.pictureInPictureWindow, 'this document');
+    });
+
+    video.addEventListener('leavepictureinpicture', () => {
+      entry('[video] leavepictureinpicture', 'event');
+      updateStatus(false);
+      currentPipWindow = null;
+      updateInfo();
+    });
+
+    // ---- Enter / Exit PiP ----
+
+    document.getElementById('btn-enter-pip').onclick = async () => {
+      entry('requestPictureInPicture() called', 'info');
+      try {
+        await video.requestPictureInPicture();
+      } catch (err) {
+        entry(`requestPictureInPicture() rejected: ${err}`, 'error');
+      }
+    };
+
+    document.getElementById('btn-exit-pip').onclick = async () => {
+      entry('document.exitPictureInPicture() called', 'info');
+      try {
+        await document.exitPictureInPicture();
+        entry('exitPictureInPicture() resolved', 'info');
+      } catch (err) {
+        entry(`exitPictureInPicture() rejected: ${err}`, 'error');
+      }
+    };
+
+    // ---- Popup window scenario ----
+
+    document.getElementById('btn-open-popup').onclick = () => {
+      entry('Opening popup window…', 'info');
+      popupWindow = window.open('', 'pip-popup', 'width=640,height=480,toolbar=0,menubar=0');
+      if (!popupWindow) { entry('Popup blocked!', 'error'); return; }
+
+      popupWindow.document.write(`<!DOCTYPE html><html><head><title>PiP Popup</title></head><body style="background:#000;margin:0">
+        <video id="v" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop muted style="width:100%"></video>
+        <script>
+          const v = document.getElementById('v');
+          v.addEventListener('enterpictureinpicture', e => opener.postMessage({type:'enterpip'}, '*'));
+          v.addEventListener('leavepictureinpicture', () => opener.postMessage({type:'leavepip'}, '*'));
+          window.enterPiP = () => v.requestPictureInPicture().catch(err => opener.postMessage({type:'error', msg: String(err)}, '*'));
+        <\/script>
+      </body></html>`);
+      popupWindow.document.close();
+
+      entry('Popup opened, will enter PiP after load', 'info');
+      popupWindow.addEventListener('load', () => {
+        popupWindow.enterPiP();
+        document.getElementById('btn-close-popup').disabled = false;
+      });
+
+      popupWindow.addEventListener('beforeunload', () => entry('[popup] beforeunload', 'warn'));
+      popupWindow.addEventListener('unload', () => entry('[popup] unload', 'warn'));
+    };
+
+    window.addEventListener('message', e => {
+      if (e.source !== popupWindow) return;
+      if (e.data.type === 'enterpip') entry('[popup video] enterpictureinpicture', 'event');
+      if (e.data.type === 'leavepip') entry('[popup video] leavepictureinpicture', 'event');
+      if (e.data.type === 'error') entry(`[popup] error: ${e.data.msg}`, 'error');
+    });
+
+    document.getElementById('btn-close-popup').onclick = () => {
+      if (!popupWindow || popupWindow.closed) { entry('Popup already closed', 'warn'); return; }
+      entry('Closing popup window…', 'warn');
+      popupWindow.close();
+      document.getElementById('btn-close-popup').disabled = true;
+    };
+
+    // ---- iframe scenario ----
+
+    document.getElementById('btn-create-iframe').onclick = () => {
+      if (testIframe) { entry('iframe already exists', 'warn'); return; }
+      entry('Creating iframe…', 'info');
+      testIframe = document.createElement('iframe');
+      testIframe.id = 'test-iframe';
+      testIframe.src = 'iframe.html';
+      document.getElementById('iframe-container').appendChild(testIframe);
+
+      testIframe.addEventListener('load', () => {
+        entry('[iframe] loaded', 'info');
+        document.getElementById('btn-pip-in-iframe').disabled = false;
+        document.getElementById('btn-remove-iframe').disabled = false;
+        document.getElementById('btn-navigate-iframe').disabled = false;
+      });
+    };
+
+    document.getElementById('btn-pip-in-iframe').onclick = () => {
+      if (!testIframe || !testIframe.contentWindow) { entry('No iframe', 'error'); return; }
+      entry('Asking iframe to enter PiP…', 'info');
+      testIframe.contentWindow.postMessage({ type: 'enter-pip' }, '*');
+    };
+
+    window.addEventListener('message', e => {
+      if (!testIframe || e.source !== testIframe.contentWindow) return;
+      if (e.data.type === 'enterpip') entry('[iframe video] enterpictureinpicture', 'event');
+      if (e.data.type === 'leavepip') entry('[iframe video] leavepictureinpicture', 'event');
+      if (e.data.type === 'error') entry(`[iframe] error: ${e.data.msg}`, 'error');
+    });
+
+    document.getElementById('btn-remove-iframe').onclick = () => {
+      if (!testIframe) { entry('No iframe to remove', 'warn'); return; }
+      entry('Removing iframe from DOM…', 'warn');
+      testIframe.remove();
+      testIframe = null;
+      document.getElementById('btn-pip-in-iframe').disabled = true;
+      document.getElementById('btn-remove-iframe').disabled = true;
+      document.getElementById('btn-navigate-iframe').disabled = true;
+    };
+
+    document.getElementById('btn-navigate-iframe').onclick = () => {
+      if (!testIframe) { entry('No iframe', 'warn'); return; }
+      entry('Navigating iframe to about:blank…', 'warn');
+      testIframe.src = 'about:blank';
+    };
+
+    // ---- disablePictureInPicture ----
+
+    document.getElementById('btn-disable-pip').onclick = () => {
+      video.disablePictureInPicture = true;
+      entry('video.disablePictureInPicture = true', 'warn');
+    };
+
+    document.getElementById('btn-enable-pip').onclick = () => {
+      video.disablePictureInPicture = false;
+      entry('video.disablePictureInPicture = false', 'info');
+    };
+
+    // ---- Navigate this document ----
+
+    document.getElementById('btn-navigate-self').onclick = () => {
+      entry('Navigating this document to about:blank in 1s…', 'warn');
+      setTimeout(() => { location.href = 'about:blank'; }, 1000);
+    };
+
+    document.getElementById('btn-reload').onclick = () => {
+      entry('Reloading in 1s…', 'warn');
+      setTimeout(() => location.reload(), 1000);
+    };
+
+    // ---- document-level PiP events ----
+
+    document.addEventListener('enterpictureinpicture', e => {
+      entry('[document] enterpictureinpicture', 'event');
+    });
+
+    // ---- Init ----
+
+    entry('PiP test bench ready. Browser: ' + navigator.userAgent.match(/(Chrome|Safari|Firefox)\/[\d.]+/)?.[0], 'info');
+    entry(`document.pictureInPictureEnabled = ${document.pictureInPictureEnabled}`, 'info');
+  </script>
+</body>
+</html>

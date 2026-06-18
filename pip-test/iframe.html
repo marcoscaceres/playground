@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PiP iframe</title>
+  <style>
+    body { margin: 0; background: #000; display: flex; align-items: center; justify-content: center; height: 100%; }
+    video { width: 100%; display: block; }
+  </style>
+</head>
+<body>
+  <video id="v" src="https://www.w3schools.com/html/mov_bbb.mp4" controls loop muted></video>
+  <script>
+    'use strict';
+    const v = document.getElementById('v');
+
+    v.addEventListener('enterpictureinpicture', () => parent.postMessage({ type: 'enterpip' }, '*'));
+    v.addEventListener('leavepictureinpicture', () => parent.postMessage({ type: 'leavepip' }, '*'));
+
+    window.addEventListener('message', async e => {
+      if (e.data.type !== 'enter-pip') return;
+      try {
+        await v.requestPictureInPicture();
+      } catch (err) {
+        parent.postMessage({ type: 'error', msg: String(err) }, '*');
+      }
+    });
+  </script>
+</body>
+</html>
