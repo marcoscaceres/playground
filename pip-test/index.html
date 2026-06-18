@@ -108,6 +108,15 @@
       </div>
 
       <div class="scenario">
+        <label>iframe — parent holds PictureInPictureWindow ref</label>
+        <div class="btn-group">
+          <button id="btn-grab-ref" disabled>Grab ref from iframe</button>
+          <button id="btn-probe-ref" disabled>Probe held ref</button>
+        </div>
+        <div id="held-ref-info" style="font-family:monospace;font-size:0.8rem;color:#888;margin-top:0.4rem">No held ref</div>
+      </div>
+
+      <div class="scenario">
         <label>Document navigation (this page)</label>
         <div class="btn-group">
           <button id="btn-navigate-self" class="danger">Navigate this document</button>
@@ -146,6 +155,7 @@
     let currentPipWindow = null;
     let popupWindow = null;
     let testIframe = null;
+    let heldIframePipWindow = null;
 
     // ---- Logging ----
 
@@ -294,10 +304,40 @@
 
     window.addEventListener('message', e => {
       if (!testIframe || e.source !== testIframe.contentWindow) return;
-      if (e.data.type === 'enterpip') entry('[iframe video] enterpictureinpicture', 'event');
+      if (e.data.type === 'enterpip') {
+        entry('[iframe video] enterpictureinpicture', 'event');
+        document.getElementById('btn-grab-ref').disabled = false;
+      }
       if (e.data.type === 'leavepip') entry('[iframe video] leavepictureinpicture', 'event');
       if (e.data.type === 'error') entry(`[iframe] error: ${e.data.msg}`, 'error');
     });
+
+    document.getElementById('btn-grab-ref').onclick = () => {
+      if (!testIframe || !testIframe.contentWindow) { entry('No iframe contentWindow to grab from', 'error'); return; }
+      const w = testIframe.contentWindow.pipWindow;
+      if (!w) { entry('iframe.contentWindow.pipWindow is null — PiP not active in iframe?', 'error'); return; }
+      heldIframePipWindow = w;
+      document.getElementById('btn-probe-ref').disabled = false;
+      const info = probeRef(heldIframePipWindow);
+      entry(`[held ref] grabbed: ${info}`, 'event');
+      document.getElementById('held-ref-info').textContent = info;
+    };
+
+    function probeRef(ref) {
+      if (!ref) return 'null';
+      try {
+        return `PictureInPictureWindow { width: ${ref.width}, height: ${ref.height} }`;
+      } catch (err) {
+        return `threw: ${err}`;
+      }
+    }
+
+    document.getElementById('btn-probe-ref').onclick = () => {
+      if (!heldIframePipWindow) { entry('No held ref', 'warn'); return; }
+      const info = probeRef(heldIframePipWindow);
+      entry(`[held ref] probe after destruction: ${info}`, 'warn');
+      document.getElementById('held-ref-info').textContent = info;
+    };
 
     document.getElementById('btn-remove-iframe').onclick = () => {
       if (!testIframe) { entry('No iframe to remove', 'warn'); return; }
@@ -307,12 +347,14 @@
       document.getElementById('btn-pip-in-iframe').disabled = true;
       document.getElementById('btn-remove-iframe').disabled = true;
       document.getElementById('btn-navigate-iframe').disabled = true;
+      entry('[held ref] iframe removed — probe the held ref now to check behaviour', 'warn');
     };
 
     document.getElementById('btn-navigate-iframe').onclick = () => {
       if (!testIframe) { entry('No iframe', 'warn'); return; }
       entry('Navigating iframe to about:blank…', 'warn');
       testIframe.src = 'about:blank';
+      entry('[held ref] iframe navigated — probe the held ref now to check behaviour', 'warn');
     };
 
     // ---- disablePictureInPicture ----

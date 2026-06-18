@@ -14,8 +14,14 @@
     'use strict';
     const v = document.getElementById('v');
 
-    v.addEventListener('enterpictureinpicture', () => parent.postMessage({ type: 'enterpip' }, '*'));
-    v.addEventListener('leavepictureinpicture', () => parent.postMessage({ type: 'leavepip' }, '*'));
+    v.addEventListener('enterpictureinpicture', e => {
+      window.pipWindow = e.pictureInPictureWindow;
+      parent.postMessage({ type: 'enterpip' }, '*');
+    });
+    v.addEventListener('leavepictureinpicture', () => {
+      window.pipWindow = null;
+      parent.postMessage({ type: 'leavepip' }, '*');
+    });
 
     window.addEventListener('message', async e => {
       if (e.data.type !== 'enter-pip') return;
