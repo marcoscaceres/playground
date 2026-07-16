@@ -131,6 +131,14 @@
           <button id="btn-enable-pip">Clear disablePictureInPicture</button>
         </div>
       </div>
+
+      <div class="scenario">
+        <label>User activation — two APIs, one click (<a style="color:#4af" href="https://github.com/w3c/picture-in-picture/issues/261">#261</a>)</label>
+        <div class="btn-group">
+          <button id="btn-pip-then-gdm">requestPiP → getDisplayMedia</button>
+          <button id="btn-gdm-then-pip">getDisplayMedia → requestPiP</button>
+        </div>
+      </div>
     </section>
 
     <!-- Right: Event log -->
@@ -367,6 +375,42 @@
     document.getElementById('btn-enable-pip').onclick = () => {
       video.disablePictureInPicture = false;
       entry('video.disablePictureInPicture = false', 'info');
+    };
+
+    // ---- Two APIs, one click (#261) ----
+    // Both requestPictureInPicture() and getDisplayMedia() consume transient
+    // user activation. Fire both synchronously in one gesture (no await between
+    // them, or the second lands in a later task where activation has expired
+    // regardless of consumption). Tests whether the first consumes activation
+    // and makes the second reject. Chrome/Safari currently allow it; the spec
+    // question is whether they *should*.
+
+    function stopStream(promise) {
+      promise.then(stream => stream.getTracks().forEach(t => t.stop()), () => {});
+    }
+
+    document.getElementById('btn-pip-then-gdm').onclick = () => {
+      entry('#261: requestPictureInPicture() then getDisplayMedia(), one click', 'info');
+      video.requestPictureInPicture().then(
+        () => entry('  requestPictureInPicture() resolved', 'event'),
+        err => entry(`  requestPictureInPicture() rejected: ${err}`, 'error'));
+      const gdm = navigator.mediaDevices.getDisplayMedia();
+      gdm.then(
+        () => entry('  getDisplayMedia() resolved', 'event'),
+        err => entry(`  getDisplayMedia() rejected: ${err}`, 'error'));
+      stopStream(gdm);
+    };
+
+    document.getElementById('btn-gdm-then-pip').onclick = () => {
+      entry('#261: getDisplayMedia() then requestPictureInPicture(), one click', 'info');
+      const gdm = navigator.mediaDevices.getDisplayMedia();
+      gdm.then(
+        () => entry('  getDisplayMedia() resolved', 'event'),
+        err => entry(`  getDisplayMedia() rejected: ${err}`, 'error'));
+      stopStream(gdm);
+      video.requestPictureInPicture().then(
+        () => entry('  requestPictureInPicture() resolved', 'event'),
+        err => entry(`  requestPictureInPicture() rejected: ${err}`, 'error'));
     };
 
     // ---- Navigate this document ----
