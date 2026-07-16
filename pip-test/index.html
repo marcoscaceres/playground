@@ -84,6 +84,8 @@
       <div class="btn-group">
         <button id="btn-enter-pip" class="primary">Enter PiP</button>
         <button id="btn-exit-pip" disabled>Exit PiP</button>
+        <button id="btn-exit-inactive">Exit while inactive</button>
+        <button id="btn-double-exit" disabled>Double exit (race)</button>
       </div>
 
       <h2 style="margin-top:1rem">Destruction Scenarios</h2>
@@ -137,6 +139,21 @@
         <div class="btn-group">
           <button id="btn-pip-then-gdm">requestPiP → getDisplayMedia</button>
           <button id="btn-gdm-then-pip">getDisplayMedia → requestPiP</button>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <label>Fullscreen while in PiP (<a style="color:#4af" href="https://github.com/w3c/picture-in-picture/pull/260">#260</a> §7)</label>
+        <div class="btn-group">
+          <button id="btn-fullscreen-video" disabled>Fullscreen the video</button>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <label>Exit interrupted by iframe destruction (<a style="color:#4af" href="https://github.com/w3c/picture-in-picture/pull/260">#260</a> unresolved)</label>
+        <div class="btn-group">
+          <button id="btn-exit-then-remove" disabled class="danger">iframe: exit + remove frame</button>
+          <button id="btn-exit-then-navigate" disabled class="danger">iframe: exit + navigate away</button>
         </div>
       </div>
     </section>
@@ -199,6 +216,8 @@
       pipStatus.textContent = active ? 'PiP: ACTIVE' : 'PiP: inactive';
       pipStatus.className = active ? 'active' : '';
       document.getElementById('btn-exit-pip').disabled = !active;
+      document.getElementById('btn-double-exit').disabled = !active;
+      document.getElementById('btn-fullscreen-video').disabled = !active;
     }
 
     function updateInfo() {
@@ -242,6 +261,32 @@
       } catch (err) {
         entry(`exitPictureInPicture() rejected: ${err}`, 'error');
       }
+    };
+
+    // #260 §3: call-time guard should reject with InvalidStateError when
+    // pictureInPictureElement is null. The Exit button is disabled when
+    // inactive, so this dedicated button reaches that path.
+    document.getElementById('btn-exit-inactive').onclick = async () => {
+      entry('exitPictureInPicture() while inactive (expect InvalidStateError)', 'info');
+      try {
+        await document.exitPictureInPicture();
+        entry('  resolved (spec §3 says it should reject)', 'warn');
+      } catch (err) {
+        entry(`  rejected: ${err.name}: ${err.message}`, 'event');
+      }
+    };
+
+    // #260 §1/§4: exit is now async (parallel queue + queued task). Two
+    // back-to-back calls race the teardown — does the 2nd reject, resolve, or
+    // hang? No await between them, so both run before teardown completes.
+    document.getElementById('btn-double-exit').onclick = () => {
+      entry('exitPictureInPicture() x2, back-to-back (race)', 'info');
+      document.exitPictureInPicture().then(
+        () => entry('  call #1 resolved', 'event'),
+        err => entry(`  call #1 rejected: ${err.name}`, 'error'));
+      document.exitPictureInPicture().then(
+        () => entry('  call #2 resolved', 'event'),
+        err => entry(`  call #2 rejected: ${err.name}`, 'error'));
     };
 
     // ---- Popup window scenario ----
@@ -315,8 +360,11 @@
       if (e.data.type === 'enterpip') {
         entry('[iframe video] enterpictureinpicture', 'event');
         document.getElementById('btn-grab-ref').disabled = false;
+        document.getElementById('btn-exit-then-remove').disabled = false;
+        document.getElementById('btn-exit-then-navigate').disabled = false;
       }
       if (e.data.type === 'leavepip') entry('[iframe video] leavepictureinpicture', 'event');
+      if (e.data.type === 'exit-result') entry(`[iframe] exit promise ${e.data.outcome}`, e.data.outcome.startsWith('rejected') ? 'warn' : 'event');
       if (e.data.type === 'error') entry(`[iframe] error: ${e.data.msg}`, 'error');
     });
 
@@ -411,6 +459,43 @@
       video.requestPictureInPicture().then(
         () => entry('  requestPictureInPicture() resolved', 'event'),
         err => entry(`  requestPictureInPicture() rejected: ${err}`, 'error'));
+    };
+
+    // ---- Fullscreen while in PiP (#260 §7) ----
+    // Spec RECOMMENDs exiting PiP when an element enters fullscreen. Observe
+    // whether PiP closes and leavepictureinpicture fires when we fullscreen
+    // the (in-PiP) video.
+    document.getElementById('btn-fullscreen-video').onclick = async () => {
+      entry('#260 §7: video.requestFullscreen() while in PiP', 'info');
+      try {
+        await video.requestFullscreen();
+        entry('  requestFullscreen() resolved — watch for leavepictureinpicture', 'event');
+      } catch (err) {
+        entry(`  requestFullscreen() rejected: ${err}`, 'error');
+      }
+    };
+
+    // ---- Exit interrupted by iframe destruction (#260, unresolved) ----
+    // Ask the iframe to call exitPictureInPicture() then immediately destroy
+    // itself. Does the promise reject (InvalidStateError/AbortError), resolve,
+    // or never settle? No engine agrees; the spec is open on this.
+    document.getElementById('btn-exit-then-remove').onclick = () => {
+      if (!testIframe || !testIframe.contentWindow) { entry('No iframe', 'error'); return; }
+      entry('#260: iframe exit + parent removes frame', 'info');
+      testIframe.contentWindow.postMessage({ type: 'exit-then-destroy' }, '*');
+      // Remove the frame right after, racing the exit promise.
+      setTimeout(() => {
+        if (testIframe) { testIframe.remove(); testIframe = null; entry('  parent removed iframe', 'warn'); }
+      }, 0);
+    };
+
+    document.getElementById('btn-exit-then-navigate').onclick = () => {
+      if (!testIframe || !testIframe.contentWindow) { entry('No iframe', 'error'); return; }
+      entry('#260: iframe exit + navigate frame away', 'info');
+      testIframe.contentWindow.postMessage({ type: 'exit-then-destroy' }, '*');
+      setTimeout(() => {
+        if (testIframe) { testIframe.src = 'about:blank'; entry('  parent navigated iframe to about:blank', 'warn'); }
+      }, 0);
     };
 
     // ---- Navigate this document ----

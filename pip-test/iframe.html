@@ -24,11 +24,21 @@
     });
 
     window.addEventListener('message', async e => {
-      if (e.data.type !== 'enter-pip') return;
-      try {
-        await v.requestPictureInPicture();
-      } catch (err) {
-        parent.postMessage({ type: 'error', msg: String(err) }, '*');
+      if (e.data.type === 'enter-pip') {
+        try {
+          await v.requestPictureInPicture();
+        } catch (err) {
+          parent.postMessage({ type: 'error', msg: String(err) }, '*');
+        }
+        return;
+      }
+      // #260 unresolved: call exit, then the parent destroys us. Report how the
+      // promise settles — or, if the frame dies first, no exit-result arrives.
+      if (e.data.type === 'exit-then-destroy') {
+        document.exitPictureInPicture().then(
+          () => parent.postMessage({ type: 'exit-result', outcome: 'resolved' }, '*'),
+          err => parent.postMessage({ type: 'exit-result', outcome: 'rejected: ' + err.name }, '*'));
+        return;
       }
     });
   </script>
